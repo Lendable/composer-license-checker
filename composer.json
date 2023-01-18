@@ -24,5 +24,6 @@
             "php": "8.1.13"
         },
         "sort-packages": true
-    }
+    },
+    "bin": ["bin/composer-license-checker"]
 }
