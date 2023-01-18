@@ -4,6 +4,7 @@
 declare(strict_types=1);
 
 use Lendable\ComposerLicenseChecker\LicenseConfiguration;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -35,9 +36,9 @@ require_once $_composer_autoload_path ?? __DIR__.'/../vendor/autoload.php';
             }
 
             $process = Process::fromShellCommandline('composer licenses --format=json');
-            $statusCode = $process->run();
+            $process->run();
 
-            if ($statusCode !== 0) {
+            if (!$process->isSuccessful()) {
                 throw new \RuntimeException('Failed to run "composer licenses --format=json".');
             }
 
@@ -73,7 +74,7 @@ require_once $_composer_autoload_path ?? __DIR__.'/../vendor/autoload.php';
 
             }
 
-            return $violation ? 1 : 0;
+            return $violation ? Command::SUCCESS : Command::FAILURE;
         }
     )
     ->run();
