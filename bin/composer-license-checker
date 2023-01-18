@@ -77,7 +77,7 @@ require_once $_composer_autoload_path ?? __DIR__.'/../vendor/autoload.php';
 
             }
 
-            return $violation ? Command::SUCCESS : Command::FAILURE;
+            return $violation ? Command::FAILURE : Command::SUCCESS;
         }
     )
     ->run();
