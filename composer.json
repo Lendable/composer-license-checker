@@ -14,10 +14,10 @@
         }
     ],
     "require": {
-        "composer-runtime-api": "^2.2",
         "php": "8.1.*",
-        "symfony/console": "^6.2",
-        "symfony/process": "^6.2"
+        "composer-runtime-api": "^2.2",
+        "symfony/console": "^5.4|^6.0",
+        "symfony/process": "^5.4|^6.0"
     },
     "config": {
         "platform": {
