@@ -1,0 +1,28 @@
+{
+    "name": "lendable/composer-license-checker",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Lendable\\ComposerLicenseChecker\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Lendable Ltd",
+            "email": "contact@lendable.co.uk"
+        }
+    ],
+    "require": {
+        "composer-runtime-api": "^2.2",
+        "php": "8.1.*",
+        "symfony/console": "^6.2",
+        "symfony/process": "^6.2"
+    },
+    "config": {
+        "platform": {
+            "php": "8.1.13"
+        },
+        "sort-packages": true
+    }
+}

@@ -1,0 +1,77 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Lendable\ComposerLicenseChecker\LicenseConfiguration;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\SingleCommandApplication;
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Process\Process;
+
+require_once $_composer_autoload_path ?? __DIR__.'/../vendor/autoload.php';
+
+(new SingleCommandApplication())
+    ->setName('Composer License Checker')
+    ->setVersion('0.0.1')
+    ->addOption('allow-file', 'a', InputOption::VALUE_OPTIONAL, '', '.allowed-licenses.php')
+    ->setCode(
+        function (InputInterface $input, OutputInterface $output): int {
+            $style = new SymfonyStyle($input, $output);
+            $style->title('Composer License Checker');
+
+            $config = require $input->getOption('allow-file');
+
+            if (!$config instanceof LicenseConfiguration) {
+                throw new \RuntimeException(
+                    \sprintf(
+                        'File "%s" must return an instance of %s.',
+                        $input->getOption('allow-file'),
+                        LicenseConfiguration::class,
+                    )
+                );
+            }
+
+            $process = Process::fromShellCommandline('composer licenses --format=json');
+            $statusCode = $process->run();
+
+            if ($statusCode !== 0) {
+                throw new \RuntimeException('Failed to run "composer licenses --format=json".');
+            }
+
+            $rawData = $process->getOutput();
+
+            $data = \json_decode($rawData, true, flags: JSON_THROW_ON_ERROR);
+            \assert(\is_array($data));
+
+            /** @var array{
+             *       name: string,
+             *       version: string,
+             *       license: list{string},
+             *       dependencies: array<string, array{version: string, license: list<string}>
+             *     } $data
+             */
+
+            $violation = false;
+
+            foreach ($data['dependencies'] as $package => $packageData) {
+                foreach ($packageData['license'] as $license) {
+                    if (!$config->allowsLicense($license) && !$config->allowsPackage($package)) {
+                        $violation = true;
+
+                        $style->error(\sprintf('Dependency "%s" has license "%s" which is not in the allowed list.', $package, $license));
+                    }
+                }
+            }
+
+            if (!$violation) {
+                $style->success('Allow dependencies have allowed licenses.');
+
+            }
+
+            return $violation ? 1 : 0;
+        }
+    )
+    ->run();
