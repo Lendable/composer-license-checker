@@ -57,11 +57,13 @@ require_once $_composer_autoload_path ?? __DIR__.'/../vendor/autoload.php';
             $violation = false;
 
             foreach ($data['dependencies'] as $package => $packageData) {
-                foreach ($packageData['license'] as $license) {
-                    if (!$config->allowsLicense($license) && !$config->allowsPackage($package)) {
-                        $violation = true;
+                if (!$config->allowsPackage($package)) {
+                    foreach ($packageData['license'] as $license) {
+                        if (!$config->allowsLicense($license)) {
+                            $violation = true;
 
-                        $style->error(\sprintf('Dependency "%s" has license "%s" which is not in the allowed list.', $package, $license));
+                            $style->error(\sprintf('Dependency "%s" has license "%s" which is not in the allowed list.', $package, $license));
+                        }
                     }
                 }
             }
