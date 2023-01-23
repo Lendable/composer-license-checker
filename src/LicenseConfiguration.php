@@ -22,7 +22,7 @@ final class LicenseConfiguration
     public function allowsPackage(string $package): bool
     {
         foreach ($this->allowedPackagePatterns as $pattern) {
-            if (preg_match($pattern, $package) === 1) {
+            if (\preg_match($pattern, $package) === 1) {
                 return true;
             }
         }

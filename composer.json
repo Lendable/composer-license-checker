@@ -7,6 +7,12 @@
             "Lendable\\ComposerLicenseChecker\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\E2E\\Lendable\\ComposerLicenseChecker\\": "tests/e2e/",
+            "Tests\\Support\\Lendable\\ComposerLicenseChecker\\": "tests/support/"
+        }
+    },
     "authors": [
         {
             "name": "Lendable Ltd",
@@ -18,6 +24,9 @@
         "composer-runtime-api": "^2.2",
         "symfony/console": "^5.4|^6.0",
         "symfony/process": "^5.4|^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5.28"
     },
     "config": {
         "platform": {

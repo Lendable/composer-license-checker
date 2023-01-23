@@ -1,0 +1,37 @@
+{
+    "packages": [
+        {
+            "name": "lendable/apache",
+            "version": "0.1.0",
+            "license": [
+                "Apache-2.0"
+            ]
+        },
+        {
+            "name": "lendable/bsd3_mit",
+            "version": "1.2.3",
+            "license": [
+                "BSD-3-Clause",
+                "MIT"
+            ]
+        },
+        {
+            "name": "package/mit",
+            "version": "1.2.1",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "package/bsd3",
+            "version": "1.11.0",
+            "license": [
+                "BSD-3-Clause"
+            ]
+        }
+    ],
+    "dev": true,
+    "dev-package-names": [
+        "package/bsd3"
+    ]
+}
