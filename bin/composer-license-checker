@@ -73,7 +73,7 @@ require_once $_composer_autoload_path ?? __DIR__.'/../vendor/autoload.php';
             }
 
             if (!$violation) {
-                $style->success('Allow dependencies have allowed licenses.');
+                $style->success('All dependencies have allowed licenses.');
 
             }
 
