@@ -34,5 +34,13 @@
         },
         "sort-packages": true
     },
+    "scripts": {
+        "phpunit:e2e": [
+            "phpunit --colors --testsuite e2e"
+        ],
+        "tests:e2e": [
+            "@phpunit:e2e"
+        ]
+    },
     "bin": ["bin/composer-license-checker"]
 }

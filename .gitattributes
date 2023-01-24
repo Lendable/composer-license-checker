@@ -1,3 +1,4 @@
+.github/              export-ignore
 tests/                export-ignore
 .allowed-licenses.php export-ignore
 .gitattributes        export-ignore
