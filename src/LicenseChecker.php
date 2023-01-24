@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lendable\ComposerLicenseChecker;
 
+use Psl\Json;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -62,7 +63,7 @@ final class LicenseChecker extends SingleCommandApplication
          *       dependencies: array<string, array{version: string, license: list<string}>
          * }|false $data
          */
-        $data = \json_decode($rawData, true, flags: \JSON_THROW_ON_ERROR);
+        $data = Json\decode($rawData);
         \assert(\is_array($data));
 
         $violation = false;

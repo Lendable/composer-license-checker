@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lendable\ComposerLicenseChecker;
 
+use Psl\Regex;
+
 final class LicenseConfiguration
 {
     /**
@@ -22,7 +24,7 @@ final class LicenseConfiguration
     public function allowsPackage(string $package): bool
     {
         foreach ($this->allowedPackagePatterns as $pattern) {
-            if (\preg_match($pattern, $package) === 1) {
+            if (Regex\matches($package, $pattern)) {
                 return true;
             }
         }
