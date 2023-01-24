@@ -18,7 +18,7 @@ final class LicenseChecker extends SingleCommandApplication
         $this
             ->setName('Composer License Checker')
             ->setVersion('0.0.1')
-            ->addOption('allow-file', 'a', InputOption::VALUE_OPTIONAL, 'Path to the allowed licenses configuration file', '.allowed-licenses.php');
+            ->addOption('allow-file', 'a', InputOption::VALUE_REQUIRED, 'Path to the allowed licenses configuration file', '.allowed-licenses.php');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
