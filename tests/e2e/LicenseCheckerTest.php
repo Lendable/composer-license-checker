@@ -19,7 +19,7 @@ final class LicenseCheckerTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         self::$previousCwd = \getcwd();
-        \chdir(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'data');
+        \chdir(__DIR__.\DIRECTORY_SEPARATOR.'..'.\DIRECTORY_SEPARATOR.'data');
     }
 
     public static function tearDownAfterClass(): void

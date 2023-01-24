@@ -27,6 +27,7 @@
         "symfony/process": "^5.4|^6.0"
     },
     "require-dev": {
+        "php-cs-fixer/shim": "^3.13.2",
         "phpunit/phpunit": "^9.5.28"
     },
     "config": {
@@ -36,6 +37,12 @@
         "sort-packages": true
     },
     "scripts": {
+        "code-style:fix": [
+            "PHP_CS_FIXER_FUTURE_MODE=1 php-cs-fixer fix --diff --ansi"
+        ],
+        "code-style:check": [
+            "PHP_CS_FIXER_FUTURE_MODE=1 php-cs-fixer fix --dry-run --diff --ansi"
+        ],
         "license:check": [
             "composer-license-checker"
         ],
