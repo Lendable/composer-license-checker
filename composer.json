@@ -42,6 +42,9 @@
         "phpunit:e2e": [
             "phpunit --colors --testsuite e2e"
         ],
+        "security:check": [
+            "@composer audit --no-dev"
+        ],
         "tests:e2e": [
             "@phpunit:e2e"
         ]

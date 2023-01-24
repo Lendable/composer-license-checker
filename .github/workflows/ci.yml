@@ -41,6 +41,9 @@ jobs:
       - name: "Validate Composer dependencies"
         run: "composer validate"
 
+      - name: "Run security check"
+        run: "composer security:check"
+
       - name: "Check licenses"
         run: "composer license:check"
 
