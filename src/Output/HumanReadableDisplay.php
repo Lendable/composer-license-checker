@@ -24,6 +24,7 @@ final class HumanReadableDisplay implements Display
 
     public function onFatalError(string $message): void
     {
+        $this->style->error($message);
     }
 
     public function onOverallFailure(): void
