@@ -41,7 +41,7 @@ jobs:
       - name: "Validate Composer dependencies"
         run: "composer validate"
 
-      - name: "Check composer.json normalisation"
+      - name: "Check composer.json normalization"
         run: "composer normalize --dry-run"
 
       - name: "Run security check"
