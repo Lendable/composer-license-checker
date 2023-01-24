@@ -1,5 +1,6 @@
 {
     "name": "lendable/composer-license-checker",
+    "description": "Composer license checker",
     "type": "project",
     "license": "MIT",
     "autoload": {
