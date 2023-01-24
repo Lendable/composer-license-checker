@@ -13,7 +13,7 @@ use Symfony\Component\Process\Process;
 
 final class LicenseChecker extends SingleCommandApplication
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('Composer License Checker')
