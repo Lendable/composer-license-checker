@@ -12,7 +12,7 @@ final class LicenseConfigurationBuilder
     private array $licenses = [];
 
     /**
-     * @var array<string, true.
+     * @var array<string, true>
      */
     private array $packagePatterns = [];
 
@@ -20,9 +20,6 @@ final class LicenseConfigurationBuilder
     {
     }
 
-    /**
-     * @return $this
-     */
     public function addLicenses(string ...$licenses): self
     {
         foreach ($licenses as $license) {

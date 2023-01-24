@@ -28,6 +28,10 @@
     },
     "require-dev": {
         "php-cs-fixer/shim": "^3.13.2",
+        "phpstan/phpstan": "^1.9",
+        "phpstan/phpstan-deprecation-rules": "^1.1",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "phpstan/phpstan-strict-rules": "^1.4",
         "phpunit/phpunit": "^9.5.28"
     },
     "config": {
@@ -43,11 +47,20 @@
         "code-style:check": [
             "PHP_CS_FIXER_FUTURE_MODE=1 php-cs-fixer fix --dry-run --diff --ansi"
         ],
+        "static-analysis":[
+            "composer validate",
+            "@license:check",
+            "@code-style:check",
+            "@phpstan"
+        ],
         "license:check": [
             "composer-license-checker"
         ],
         "phpunit:e2e": [
             "phpunit --colors --testsuite e2e"
+        ],
+        "phpstan": [
+            "phpstan --memory-limit=-1 --ansi"
         ],
         "security:check": [
             "@composer audit --no-dev"
