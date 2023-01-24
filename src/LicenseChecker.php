@@ -23,7 +23,7 @@ final class LicenseChecker extends SingleCommandApplication
             ->addOption(
                 'allow-file',
                 'a',
-                InputOption::VALUE_OPTIONAL,
+                InputOption::VALUE_REQUIRED,
                 'Path to the allowed licenses configuration file',
                 '.allowed-licenses.php',
             )
