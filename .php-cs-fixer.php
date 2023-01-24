@@ -109,6 +109,7 @@ return (new PhpCsFixer\Config())
         'whitespace_after_comma_in_array' => true,
         'yoda_style' => false,
     ])
+    ->setCacheFile(__DIR__.'/tmp/.php-cs-fixer.cache')
     ->setRiskyAllowed(true)
     ->setIndent('    ')
     ->setLineEnding("\n")

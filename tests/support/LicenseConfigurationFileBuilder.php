@@ -16,12 +16,17 @@ final class LicenseConfigurationFileBuilder
      */
     private array $allowedVendors = [];
 
-    private function __construct(private mixed $resource)
+    /**
+     * @param resource $resource
+     */
+    private function __construct(private readonly mixed $resource)
     {
-        \assert(\is_resource($this->resource));
     }
 
-    public static function create($resource): self
+    /**
+     * @param resource $resource
+     */
+    public static function create(mixed $resource): self
     {
         return new self($resource);
     }

@@ -18,7 +18,13 @@ final class LicenseCheckerTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
-        self::$previousCwd = \getcwd();
+        $cwd = \getcwd();
+
+        if ($cwd === false) {
+            throw new \RuntimeException('Could not determine current working directory.');
+        }
+
+        self::$previousCwd = $cwd;
         \chdir(__DIR__.\DIRECTORY_SEPARATOR.'..'.\DIRECTORY_SEPARATOR.'data');
     }
 
@@ -58,7 +64,7 @@ final class LicenseCheckerTest extends TestCase
 
     public function test_no_licenses_allowed(): void
     {
-        $handle = \tmpfile();
+        $handle = $this->createTempFile();
         $allowFile = LicenseConfigurationFileBuilder::create($handle)->build();
 
         $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile]);
@@ -86,7 +92,7 @@ final class LicenseCheckerTest extends TestCase
 
     public function test_report_not_allowed_licenses(): void
     {
-        $handle = \tmpfile();
+        $handle = $this->createTempFile();
         $allowFile = LicenseConfigurationFileBuilder::create($handle)
             ->withLicense('MIT')
             ->build();
@@ -112,7 +118,7 @@ final class LicenseCheckerTest extends TestCase
 
     public function test_report_not_allowed_vendor_licenses(): void
     {
-        $handle = \tmpfile();
+        $handle = $this->createTempFile();
         $allowFile = LicenseConfigurationFileBuilder::create($handle)
             ->withAllowedVendor('lendable')
             ->build();
@@ -134,7 +140,7 @@ final class LicenseCheckerTest extends TestCase
 
     public function test_all_licenses_allowed(): void
     {
-        $handle = \tmpfile();
+        $handle = $this->createTempFile();
         $allowFile = LicenseConfigurationFileBuilder::create($handle)
             ->withLicense('Apache-2.0')
             ->withLicense('BSD-3-Clause')
@@ -151,7 +157,7 @@ final class LicenseCheckerTest extends TestCase
 
     public function test_all_licenses_allowed_through_vendors(): void
     {
-        $handle = \tmpfile();
+        $handle = $this->createTempFile();
         $allowFile = LicenseConfigurationFileBuilder::create($handle)
             ->withAllowedVendor('lendable')
             ->withAllowedVendor('package')
@@ -165,8 +171,25 @@ final class LicenseCheckerTest extends TestCase
         self::assertSame('[OK] All dependencies have allowed licenses.', $output[3]);
     }
 
+    /**
+     * @return list<string>
+     */
     private function getOutputLines(): array
     {
         return \array_map(\trim(...), \explode(\PHP_EOL, \trim($this->commandTester->getDisplay())));
+    }
+
+    /**
+     * @return resource
+     */
+    private function createTempFile(): mixed
+    {
+        $handle = \tmpfile();
+
+        if ($handle === false) {
+            throw new \RuntimeException('Failed to create temp file.');
+        }
+
+        return $handle;
     }
 }

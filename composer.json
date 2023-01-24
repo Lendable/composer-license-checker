@@ -1,8 +1,29 @@
 {
     "name": "lendable/composer-license-checker",
     "description": "Composer license checker",
-    "type": "project",
     "license": "MIT",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Lendable Ltd",
+            "email": "contact@lendable.co.uk"
+        }
+    ],
+    "require": {
+        "php": "8.1.*",
+        "composer-runtime-api": "^2.2",
+        "symfony/console": "^5.4 || ^6.0",
+        "symfony/process": "^5.4 || ^6.0"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.29",
+        "php-cs-fixer/shim": "^3.13.2",
+        "phpstan/phpstan": "^1.9",
+        "phpstan/phpstan-deprecation-rules": "^1.1",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "phpstan/phpstan-strict-rules": "^1.4",
+        "phpunit/phpunit": "^9.5.28"
+    },
     "autoload": {
         "psr-4": {
             "Lendable\\ComposerLicenseChecker\\": "src/"
@@ -14,37 +35,30 @@
             "Tests\\Support\\Lendable\\ComposerLicenseChecker\\": "tests/support/"
         }
     },
-    "authors": [
-        {
-            "name": "Lendable Ltd",
-            "email": "contact@lendable.co.uk"
-        }
+    "bin": [
+        "bin/composer-license-checker"
     ],
-    "require": {
-        "php": "8.1.*",
-        "composer-runtime-api": "^2.2",
-        "symfony/console": "^5.4|^6.0",
-        "symfony/process": "^5.4|^6.0"
-    },
-    "require-dev": {
-        "php-cs-fixer/shim": "^3.13.2",
-        "phpunit/phpunit": "^9.5.28"
-    },
     "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        },
         "platform": {
             "php": "8.1.13"
         },
         "sort-packages": true
     },
     "scripts": {
-        "code-style:fix": [
-            "PHP_CS_FIXER_FUTURE_MODE=1 php-cs-fixer fix --diff --ansi"
-        ],
         "code-style:check": [
             "PHP_CS_FIXER_FUTURE_MODE=1 php-cs-fixer fix --dry-run --diff --ansi"
         ],
+        "code-style:fix": [
+            "PHP_CS_FIXER_FUTURE_MODE=1 php-cs-fixer fix --diff --ansi"
+        ],
         "license:check": [
             "composer-license-checker"
+        ],
+        "phpstan": [
+            "phpstan --memory-limit=-1 --ansi"
         ],
         "phpunit:e2e": [
             "phpunit --colors --testsuite e2e"
@@ -52,9 +66,14 @@
         "security:check": [
             "@composer audit --no-dev"
         ],
+        "static-analysis": [
+            "composer validate",
+            "@license:check",
+            "@code-style:check",
+            "@phpstan"
+        ],
         "tests:e2e": [
             "@phpunit:e2e"
         ]
-    },
-    "bin": ["bin/composer-license-checker"]
+    }
 }

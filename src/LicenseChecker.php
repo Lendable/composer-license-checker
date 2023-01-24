@@ -58,8 +58,8 @@ final class LicenseChecker extends SingleCommandApplication
         /** @var array{
          *       name: string,
          *       version: string,
-         *       license: list{string},
-         *       dependencies: array<string, array{version: string, license: list<string}>
+         *       license: list<string>,
+         *       dependencies: array<string, array{version: string, license: list<string>}>
          * }|false $data
          */
         $data = \json_decode($rawData, true, flags: \JSON_THROW_ON_ERROR);
