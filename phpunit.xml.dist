@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         bootstrap="tests/bootstrap.php">
+
+    <php>
+        <env name="COLUMNS" value="120" />
+
+        <ini name="error_reporting" value="E_ALL" />
+    </php>
+
+    <testsuites>
+        <testsuite name="e2e">
+            <directory>./tests/e2e/</directory>
+        </testsuite>
+    </testsuites>
+
+    <coverage>
+        <include>
+            <directory>./src/</directory>
+        </include>
+    </coverage>
+</phpunit>
