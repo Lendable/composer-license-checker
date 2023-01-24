@@ -167,6 +167,6 @@ final class LicenseCheckerTest extends TestCase
 
     private function getOutputLines(): array
     {
-        return \array_map('trim', \explode(\PHP_EOL, \trim($this->commandTester->getDisplay())));
+        return \array_map(\trim(...), \explode(\PHP_EOL, \trim($this->commandTester->getDisplay())));
     }
 }
