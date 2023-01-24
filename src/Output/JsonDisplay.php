@@ -24,7 +24,7 @@ final class JsonDisplay implements Display
 
     public function onFatalError(string $message): void
     {
-        $this->output->writeln(\json_encode(['result' => 'error', 'message' => $message], \JSON_THROW_ON_ERROR));
+        $this->output->writeln(\json_encode(['result' => 'error', 'message' => $message], \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT));
     }
 
     public function onPackageWithViolatingLicense(string $package, string $license): void
@@ -37,13 +37,13 @@ final class JsonDisplay implements Display
         $this->output->writeln(
             \json_encode(
                 ['result' => 'failure', 'violations' => $this->packagesWithViolatingLicenses],
-                \JSON_THROW_ON_ERROR,
+                \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT,
             )
         );
     }
 
     public function onOverallSuccess(): void
     {
-        $this->output->writeln(\json_encode(['result' => 'success'], \JSON_THROW_ON_ERROR));
+        $this->output->writeln(\json_encode(['result' => 'success'], \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT));
     }
 }
