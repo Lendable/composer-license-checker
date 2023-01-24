@@ -13,13 +13,12 @@ use Symfony\Component\Process\Process;
 
 final class LicenseChecker extends SingleCommandApplication
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('Composer License Checker')
             ->setVersion('0.0.1')
-            ->addOption('allow-file', 'a', InputOption::VALUE_OPTIONAL, '', '.allowed-licenses.php')
-        ;
+            ->addOption('allow-file', 'a', InputOption::VALUE_OPTIONAL, '', '.allowed-licenses.php');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -63,7 +62,7 @@ final class LicenseChecker extends SingleCommandApplication
          *       dependencies: array<string, array{version: string, license: list<string}>
          * }|false $data
          */
-        $data = \json_decode($rawData, true, flags: JSON_THROW_ON_ERROR);
+        $data = \json_decode($rawData, true, flags: \JSON_THROW_ON_ERROR);
         \assert(\is_array($data));
 
         $violation = false;
@@ -85,7 +84,6 @@ final class LicenseChecker extends SingleCommandApplication
 
         if (!$violation) {
             $style->success('All dependencies have allowed licenses.');
-
         }
 
         return $violation ? self::FAILURE : self::SUCCESS;

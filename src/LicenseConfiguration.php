@@ -16,7 +16,7 @@ final class LicenseConfiguration
 
     public function allowsLicense(string $license): bool
     {
-        return \in_array($license, $this->allowedLicenses);
+        return \in_array($license, $this->allowedLicenses, true);
     }
 
     public function allowsPackage(string $package): bool

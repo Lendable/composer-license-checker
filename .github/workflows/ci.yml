@@ -47,5 +47,9 @@ jobs:
       - name: "Check licenses"
         run: "composer license:check"
 
+      - name: "Run coding style"
+        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.1' }}
+        run: "composer code-style:check"
+
       - name: "End-to-End tests"
         run: "composer tests:e2e"

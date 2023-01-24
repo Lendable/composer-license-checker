@@ -50,14 +50,14 @@ final class LicenseConfigurationFileBuilder
     private function buildContent(): string
     {
         $content = <<<PHP
-<?php
+            <?php
 
-declare(strict_types=1);
+            declare(strict_types=1);
 
-use Lendable\ComposerLicenseChecker\LicenseConfigurationBuilder;
+            use Lendable\ComposerLicenseChecker\LicenseConfigurationBuilder;
 
-return (new LicenseConfigurationBuilder())
-PHP;
+            return (new LicenseConfigurationBuilder())
+            PHP;
 
         if ($this->allowedLicenses !== []) {
             $content .= \sprintf('->addLicenses(\'%s\')', \implode('\',\'', $this->allowedLicenses));

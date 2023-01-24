@@ -34,7 +34,7 @@ final class LicenseConfigurationBuilder
 
     public function addAllowedVendor(string $vendor): self
     {
-        $this->packagePatterns[\sprintf('~^%s/.+$~', preg_quote($vendor, '~'))] = true;
+        $this->packagePatterns[\sprintf('~^%s/.+$~', \preg_quote($vendor, '~'))] = true;
 
         return $this;
     }
