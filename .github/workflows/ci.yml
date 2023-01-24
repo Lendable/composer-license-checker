@@ -41,5 +41,8 @@ jobs:
       - name: "Validate Composer dependencies"
         run: "composer validate"
 
+      - name: "Check licenses"
+        run: "composer license:check"
+
       - name: "End-to-End tests"
         run: "composer tests:e2e"

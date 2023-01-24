@@ -36,6 +36,9 @@
         "sort-packages": true
     },
     "scripts": {
+        "license:check": [
+            "composer-license-checker"
+        ],
         "phpunit:e2e": [
             "phpunit --colors --testsuite e2e"
         ],
