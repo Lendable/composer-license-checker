@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 $finder = PhpCsFixer\Finder::create()
     ->in(['bin', 'src', 'tests'])
-    ->name('composer-license-checker')
-    ->notName('Configuration.php');
+    ->name('composer-license-checker');
 
 return (new PhpCsFixer\Config())
     ->setRules([
