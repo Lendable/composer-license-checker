@@ -1,5 +1,9 @@
 # Composer License Checker
 
+[![Latest Stable Version](https://poser.pugx.org/lendable/composer-license-checker/v/stable)](https://packagist.org/packages/lendable/composer-license-checker)
+[![License](https://poser.pugx.org/lendable/composer-license-checker/license)](https://packagist.org/packages/lendable/composer-license-checker)
+[![Continuous Integration](https://github.com/lendable/composer-license-checker/actions/workflows/ci.yml/badge.svg)](https://github.com/lendable/composer-license-checker/actions/workflows/ci.yml)
+
 **Unstable**
 
 ## TODO
