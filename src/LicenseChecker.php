@@ -65,7 +65,7 @@ final class LicenseChecker extends SingleCommandApplication
             return self::FAILURE;
         }
 
-        $process = Process::fromShellCommandline('composer licenses --format=json', $path);
+        $process = Process::fromShellCommandline('SHELL_VERBOSITY=0 composer licenses --format=json', $path);
         $process->run();
         if (!$process->isSuccessful()) {
             $style->error(\sprintf('Failed to run "composer licenses --format=json" (%d).', $process->getExitCode()));
