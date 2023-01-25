@@ -22,7 +22,8 @@
         "phpstan/phpstan-deprecation-rules": "^1.1.1",
         "phpstan/phpstan-phpunit": "^1.3.3",
         "phpstan/phpstan-strict-rules": "^1.4.5",
-        "phpunit/phpunit": "^9.5.28"
+        "phpunit/phpunit": "^9.5.28",
+        "rector/rector": "^0.15.10"
     },
     "autoload": {
         "psr-4": {
@@ -63,6 +64,12 @@
         "phpunit:e2e": [
             "phpunit --colors --testsuite e2e"
         ],
+        "rector:check": [
+            "rector --dry-run --ansi --no-progress-bar"
+        ],
+        "rector:fix": [
+            "rector --ansi --no-progress-bar"
+        ],
         "security:check": [
             "@composer audit --no-dev"
         ],
@@ -70,7 +77,8 @@
             "composer validate",
             "@license:check",
             "@code-style:check",
-            "@phpstan"
+            "@phpstan",
+            "@rector:check"
         ],
         "tests:e2e": [
             "@phpunit:e2e"

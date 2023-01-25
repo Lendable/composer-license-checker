@@ -57,5 +57,8 @@ jobs:
       - name: "Run PHPStan"
         run: "composer phpstan"
 
+      - name: "Run Rector"
+        run: "composer rector:check"
+
       - name: "End-to-End tests"
         run: "composer tests:e2e"
