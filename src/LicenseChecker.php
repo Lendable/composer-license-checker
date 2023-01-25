@@ -18,7 +18,19 @@ final class LicenseChecker extends SingleCommandApplication
         $this
             ->setName('Composer License Checker')
             ->setVersion('0.0.1')
-            ->addOption('allow-file', 'a', InputOption::VALUE_REQUIRED, 'Path to the allowed licenses configuration file', '.allowed-licenses.php');
+            ->addOption(
+                'allow-file',
+                'a',
+                InputOption::VALUE_REQUIRED,
+                'Path to the allowed licenses configuration file',
+                '.allowed-licenses.php',
+            )->addOption(
+                'path',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Path to project root, where composer.json lives',
+                null,
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -45,7 +57,15 @@ final class LicenseChecker extends SingleCommandApplication
             return self::FAILURE;
         }
 
-        $process = Process::fromShellCommandline('composer licenses --format=json');
+        /** @var string|null $path */
+        $path = $input->getOption('path');
+        if (\is_string($path) && !\is_dir($path)) {
+            $style->error(\sprintf('The provided path "%s" does not exist.', $path));
+
+            return self::FAILURE;
+        }
+
+        $process = Process::fromShellCommandline('composer licenses --format=json', $path);
         $process->run();
         if (!$process->isSuccessful()) {
             $style->error(\sprintf('Failed to run "composer licenses --format=json" (%d).', $process->getExitCode()));
