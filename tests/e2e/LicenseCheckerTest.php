@@ -14,24 +14,7 @@ final class LicenseCheckerTest extends TestCase
 {
     private CommandTester $commandTester;
 
-    private static string $previousCwd;
-
-    public static function setUpBeforeClass(): void
-    {
-        $cwd = \getcwd();
-
-        if ($cwd === false) {
-            throw new \RuntimeException('Could not determine current working directory.');
-        }
-
-        self::$previousCwd = $cwd;
-        \chdir(__DIR__.\DIRECTORY_SEPARATOR.'..'.\DIRECTORY_SEPARATOR.'data');
-    }
-
-    public static function tearDownAfterClass(): void
-    {
-        \chdir(self::$previousCwd);
-    }
+    private string $path = 'tests'.\DIRECTORY_SEPARATOR.'data'.\DIRECTORY_SEPARATOR;
 
     protected function setUp(): void
     {
@@ -51,14 +34,30 @@ final class LicenseCheckerTest extends TestCase
         self::assertSame('[ERROR] File "dont_have.pls" could not be read.', $output[3]);
     }
 
+    public function test_failure_with_non_existent_path(): void
+    {
+        $handle = $this->createTempFile();
+        $allowFile = LicenseConfigurationFileBuilder::create($handle)->build();
+
+        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => 'joke/path']);
+        $output = $this->getOutputLines();
+
+        self::assertSame(1, $exitCode);
+        self::assertCount(4, $output);
+        self::assertSame('[ERROR] The provided path "joke/path" does not exist.', $output[3]);
+    }
+
     public function test_failure_with_invalid_allowed_licenses_file(): void
     {
-        $exitCode = $this->commandTester->execute(['--allow-file' => 'invalid_allowed_licenses.php']);
+        $exitCode = $this->commandTester->execute([
+            '--allow-file' => 'tests/data/invalid_allowed_licenses.php',
+            '--path' => $this->path,
+        ]);
         $output = $this->getOutputLines();
 
         self::assertSame(1, $exitCode);
         self::assertCount(5, $output);
-        self::assertSame('[ERROR] File "invalid_allowed_licenses.php" must return an instance of', $output[3]);
+        self::assertSame('[ERROR] File "tests/data/invalid_allowed_licenses.php" must return an instance of', $output[3]);
         self::assertSame(LicenseConfiguration::class.'.', $output[4]);
     }
 
@@ -67,7 +66,7 @@ final class LicenseCheckerTest extends TestCase
         $handle = $this->createTempFile();
         $allowFile = LicenseConfigurationFileBuilder::create($handle)->build();
 
-        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile]);
+        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => $this->path]);
         $output = $this->getOutputLines();
 
         self::assertSame(1, $exitCode);
@@ -97,7 +96,7 @@ final class LicenseCheckerTest extends TestCase
             ->withLicense('MIT')
             ->build();
 
-        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile]);
+        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => $this->path]);
         $output = $this->getOutputLines();
 
         self::assertSame(1, $exitCode);
@@ -123,7 +122,7 @@ final class LicenseCheckerTest extends TestCase
             ->withAllowedVendor('lendable')
             ->build();
 
-        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile]);
+        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => $this->path]);
         $output = $this->getOutputLines();
 
         self::assertSame(1, $exitCode);
@@ -147,7 +146,7 @@ final class LicenseCheckerTest extends TestCase
             ->withLicense('MIT')
             ->build();
 
-        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile]);
+        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => $this->path]);
         $output = $this->getOutputLines();
 
         self::assertSame(0, $exitCode);
@@ -163,7 +162,7 @@ final class LicenseCheckerTest extends TestCase
             ->withAllowedVendor('package')
             ->build();
 
-        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile]);
+        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => $this->path]);
         $output = $this->getOutputLines();
 
         self::assertSame(0, $exitCode);
