@@ -1,0 +1,9 @@
+includes:
+  - vendor/phpstan/phpstan-phpunit/extension.neon
+  - phar://vendor/phpstan/phpstan/phpstan.phar/conf/bleedingEdge.neon
+
+parameters:
+    level: max
+    paths:
+        - src
+        - tests
