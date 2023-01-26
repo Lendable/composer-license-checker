@@ -4,15 +4,20 @@ declare(strict_types=1);
 
 namespace Lendable\ComposerLicenseChecker;
 
+use Lendable\ComposerLicenseChecker\Exception\PackagesProviderNotLocated;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\SingleCommandApplication;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Process\Process;
 
 final class LicenseChecker extends SingleCommandApplication
 {
+    public function __construct(private readonly PackagesProviderLocator $locator)
+    {
+        parent::__construct();
+    }
+
     protected function configure(): void
     {
         $this
@@ -30,6 +35,12 @@ final class LicenseChecker extends SingleCommandApplication
                 InputOption::VALUE_REQUIRED,
                 'Path to project root, where composer.json lives',
                 null,
+            )->addOption(
+                'provider-id',
+                null,
+                InputOption::VALUE_REQUIRED,
+                \sprintf('Which packages data provider to use, one of: %s', \implode(', ', $ids = $this->locator->ids())),
+                $ids[0] ?? null,
             );
     }
 
@@ -65,43 +76,42 @@ final class LicenseChecker extends SingleCommandApplication
             return self::FAILURE;
         }
 
-        $process = Process::fromShellCommandline('SHELL_VERBOSITY=0 composer licenses --format=json', $path);
-        $process->run();
-        if (!$process->isSuccessful()) {
-            $style->error(\sprintf('Failed to run "composer licenses --format=json" (%d).', $process->getExitCode()));
+        $path = (string) \realpath($path ?? \dirname(__DIR__));
+        /** @var string $providerId */
+        $providerId = $input->getOption('provider-id');
+
+        $style->writeln(\sprintf('Checking project at: %s', $path), OutputInterface::VERBOSITY_VERBOSE);
+        $style->writeln(\sprintf('Using allow file: %s', \realpath($allowFile)), OutputInterface::VERBOSITY_VERBOSE);
+        $style->writeln(\sprintf('Using provider with id: %s', $providerId), OutputInterface::VERBOSITY_VERBOSE);
+
+        try {
+            $provider = $this->locator->locate($providerId);
+        } catch (PackagesProviderNotLocated $e) {
+            $style->error($e->getMessage());
 
             return self::FAILURE;
         }
 
-        $style->writeln(\sprintf('Checking project at: %s', \realpath($path ?? \dirname(__DIR__))), OutputInterface::VERBOSITY_VERBOSE);
-        $style->writeln(\sprintf('Using allow file: %s', \realpath($allowFile)), OutputInterface::VERBOSITY_VERBOSE);
-
-        $rawData = $process->getOutput();
-
-        /** @var array{
-         *       name: string,
-         *       version: string,
-         *       license: list<string>,
-         *       dependencies: array<string, array{version: string, license: list<string>}>
-         * }|false $data
-         */
-        $data = \json_decode($rawData, true, flags: \JSON_THROW_ON_ERROR);
-        \assert(\is_array($data));
-
         $violation = false;
 
-        foreach ($data['dependencies'] as $package => $packageData) {
-            if ($config->allowsPackage($package)) {
+        foreach ($provider->provide($path) as $package) {
+            if ($config->allowsPackage($package->name->toString())) {
                 continue;
             }
 
-            foreach ($packageData['license'] as $license) {
+            foreach ($package->licenses as $license) {
                 if ($config->allowsLicense($license)) {
                     continue;
                 }
 
                 $violation = true;
-                $style->error(\sprintf('Dependency "%s" has license "%s" which is not in the allowed list.', $package, $license));
+                $style->error(
+                    \sprintf(
+                        'Dependency "%s" has license "%s" which is not in the allowed list.',
+                        $package->name->toString(),
+                        $license,
+                    ),
+                );
             }
         }
 

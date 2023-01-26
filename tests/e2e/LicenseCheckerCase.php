@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\E2E\Lendable\ComposerLicenseChecker;
 
+use Lendable\ComposerLicenseChecker\InMemoryPackagesProviderLocator;
 use Lendable\ComposerLicenseChecker\LicenseChecker;
 use Lendable\ComposerLicenseChecker\LicenseConfiguration;
+use Lendable\ComposerLicenseChecker\PackagesProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Support\Lendable\ComposerLicenseChecker\LicenseConfigurationFileBuilder;
 
-final class LicenseCheckerTest extends TestCase
+abstract class LicenseCheckerCase extends TestCase
 {
     private CommandTester $commandTester;
 
@@ -18,11 +20,17 @@ final class LicenseCheckerTest extends TestCase
 
     protected function setUp(): void
     {
-        $command = new LicenseChecker();
+        $command = new LicenseChecker(
+            new InMemoryPackagesProviderLocator([
+                'licenses' => $this->packagesProvider(),
+            ]),
+        );
         $command->setAutoExit(false);
 
         $this->commandTester = new CommandTester($command);
     }
+
+    abstract protected function packagesProvider(): PackagesProvider;
 
     public function test_failure_with_non_existent_allowed_licenses_file(): void
     {

@@ -3,8 +3,17 @@
 
 declare(strict_types=1);
 
+use Lendable\ComposerLicenseChecker\ComposerRunner\SymfonyProcessComposerRunner;
+use Lendable\ComposerLicenseChecker\InMemoryPackagesProviderLocator;
 use Lendable\ComposerLicenseChecker\LicenseChecker;
+use Lendable\ComposerLicenseChecker\PackagesProvider\ComposerInstalledJsonPackagesProvider;
+use Lendable\ComposerLicenseChecker\PackagesProvider\ComposerLicensesPackagesProvider;
 
 require_once $_composer_autoload_path ?? __DIR__.'/../vendor/autoload.php';
 
-(new LicenseChecker())->run();
+(new LicenseChecker(
+    new InMemoryPackagesProviderLocator([
+        'json' => new ComposerInstalledJsonPackagesProvider(),
+        'licenses' => new ComposerLicensesPackagesProvider(new SymfonyProcessComposerRunner()),
+    ]),
+))->run();
