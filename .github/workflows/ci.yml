@@ -59,7 +59,7 @@ jobs:
         run: "composer phpstan"
 
       - name: "Run Rector"
-        if: ${{ matrix.dependencies == 'locked' }}
+        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.1' }}
         run: "composer rector:check"
 
       - name: "End-to-End tests"
