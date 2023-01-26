@@ -55,9 +55,11 @@ jobs:
         run: "composer code-style:check"
 
       - name: "Run PHPStan"
+        if: ${{ matrix.dependencies == 'locked' }}
         run: "composer phpstan"
 
       - name: "Run Rector"
+        if: ${{ matrix.dependencies == 'locked' }}
         run: "composer rector:check"
 
       - name: "End-to-End tests"
