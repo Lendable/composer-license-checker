@@ -73,6 +73,9 @@ final class LicenseChecker extends SingleCommandApplication
             return self::FAILURE;
         }
 
+        $style->writeln(\sprintf('Checking project at: %s', \realpath($path ?? \dirname(__DIR__))), OutputInterface::VERBOSITY_VERBOSE);
+        $style->writeln(\sprintf('Using allow file: %s', \realpath($allowFile)), OutputInterface::VERBOSITY_VERBOSE);
+
         $rawData = $process->getOutput();
 
         /** @var array{
