@@ -62,5 +62,8 @@ jobs:
         if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.1' }}
         run: "composer rector:check"
 
+      - name: "Unit tests"
+        run: "composer tests:unit"
+
       - name: "End-to-End tests"
         run: "composer tests:e2e"

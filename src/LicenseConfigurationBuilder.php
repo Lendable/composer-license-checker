@@ -20,10 +20,19 @@ final class LicenseConfigurationBuilder
     {
     }
 
-    public function addLicenses(string ...$licenses): self
+    public function addLicenses(string $license, string ...$rest): self
     {
-        foreach ($licenses as $license) {
-            $this->licenses[$license] = true;
+        foreach ([$license, ...$rest] as $entry) {
+            $this->licenses[$entry] = true;
+        }
+
+        return $this;
+    }
+
+    public function removeLicenses(string $license, string ...$rest): self
+    {
+        foreach ([$license, ...$rest] as $entry) {
+            unset($this->licenses[$entry]);
         }
 
         return $this;
