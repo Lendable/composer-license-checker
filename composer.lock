@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "286f6c28622ab632bd1fc1524c55bf7f",
+    "content-hash": "60b9b01a9f4a17a0a3e7990d6ca2fb7f",
     "packages": [
         {
             "name": "psr/container",
@@ -1476,16 +1476,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.13.2",
+            "version": "v3.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "086298cee7ff11c13abb68c64da2d657f9de3da0"
+                "reference": "f5097f1228ebb73faba2ced9f802b9575cce939c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/086298cee7ff11c13abb68c64da2d657f9de3da0",
-                "reference": "086298cee7ff11c13abb68c64da2d657f9de3da0",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/f5097f1228ebb73faba2ced9f802b9575cce939c",
+                "reference": "f5097f1228ebb73faba2ced9f802b9575cce939c",
                 "shasum": ""
             },
             "require": {
@@ -1501,7 +1501,8 @@
                 "ext-mbstring": "For handling non-UTF8 characters."
             },
             "bin": [
-                "php-cs-fixer"
+                "php-cs-fixer",
+                "php-cs-fixer.phar"
             ],
             "type": "application",
             "notification-url": "https://packagist.org/downloads/",
@@ -1521,9 +1522,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.13.2"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.14.3"
             },
-            "time": "2023-01-03T00:00:24+00:00"
+            "time": "2023-01-30T00:25:16+00:00"
         },
         {
             "name": "phpstan/phpstan",
