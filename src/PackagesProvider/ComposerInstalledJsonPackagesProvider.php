@@ -12,12 +12,14 @@ use Lendable\ComposerLicenseChecker\PackagesProvider;
 
 final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
 {
-    private const DS = \DIRECTORY_SEPARATOR;
-
     public function provide(string $projectPath): Packages
     {
         $installedJson = (string) \realpath(
-            \sprintf('%s%2$svendor%2$scomposer%2$sinstalled.json', \rtrim($projectPath, self::DS), self::DS)
+            \sprintf(
+                '%s%2$svendor%2$scomposer%2$sinstalled.json',
+                \rtrim($projectPath, \DIRECTORY_SEPARATOR),
+                \DIRECTORY_SEPARATOR,
+            )
         );
 
         if (!\file_exists($installedJson)) {
