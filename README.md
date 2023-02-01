@@ -10,7 +10,7 @@
 
 - [ ] Composer plugin to auto-run licensing checks on install/updates. 
 - [ ] Configuration improvements to allow licensing to differ per package name and package vendor.
-- [ ] Tests, static analysis, general refactor of inlined `symfony/console` code to ease this. 
+- [x] Tests, static analysis, general refactor of inlined `symfony/console` code to ease this. 
 
 ## Installation
 
