@@ -21,6 +21,8 @@ final class PackageNameTest extends TestCase
 
     /**
      * @dataProvider invalidPackageNamesProvider
+     *
+     * @param non-empty-string $packageName
      */
     public function test_throws_on_invalid_package_name(string $packageName): void
     {
@@ -30,7 +32,7 @@ final class PackageNameTest extends TestCase
     }
 
     /**
-     * @return iterable<array{string}>
+     * @return iterable<array{non-empty-string}>
      */
     public static function invalidPackageNamesProvider(): iterable
     {

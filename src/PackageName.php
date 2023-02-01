@@ -13,6 +13,8 @@ final class PackageName
     public readonly string $project;
 
     /**
+     * @param non-empty-string $packageName
+     *
      * @throws InvalidPackageName
      */
     public function __construct(string $packageName)

@@ -77,7 +77,7 @@ final class LicenseChecker extends SingleCommandApplication
         }
 
         $path = (string) \realpath($path ?? \dirname(__DIR__));
-        /** @var string $providerId */
+        /** @var non-empty-string $providerId */
         $providerId = $input->getOption('provider-id');
 
         $style->writeln(\sprintf('Checking project at: %s', $path), OutputInterface::VERBOSITY_VERBOSE);
