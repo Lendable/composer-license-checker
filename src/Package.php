@@ -7,7 +7,7 @@ namespace Lendable\ComposerLicenseChecker;
 final class Package
 {
     /**
-     * @param list<string> $licenses
+     * @param list<non-empty-string> $licenses
      */
     public function __construct(
         public readonly PackageName $name,

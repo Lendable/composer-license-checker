@@ -28,10 +28,10 @@ final class ComposerLicensesPackagesProvider implements PackagesProvider
 
         try {
             /** @var array{
-             *      name: string,
-             *      version: string,
-             *      license: list<string>,
-             *      dependencies: array<string, array{version: string, license: list<string>}>
+             *      name: non-empty-string,
+             *      version: non-empty-string,
+             *      license: list<non-empty-string>,
+             *      dependencies: array<non-empty-string, array{version: non-empty-string, license: list<non-empty-string>}>
              * }|false $data
              */
             $data = \json_decode($composerOutput, true, flags: \JSON_THROW_ON_ERROR);

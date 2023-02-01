@@ -9,14 +9,14 @@ use Lendable\ComposerLicenseChecker\Exception\PackagesProviderNotLocated;
 final class InMemoryPackagesProviderLocator implements PackagesProviderLocator
 {
     /**
-     * @param array<string, PackagesProvider> $providers
+     * @param array<non-empty-string, PackagesProvider> $providers
      */
     public function __construct(private readonly array $providers)
     {
     }
 
     /**
-     * @return list<string>
+     * @return list<non-empty-string>
      */
     public function ids(): array
     {
