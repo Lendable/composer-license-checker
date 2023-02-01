@@ -16,7 +16,7 @@ final class SymfonyProcessComposerRunner implements ComposerRunner
         $process->run();
         if (!$process->isSuccessful()) {
             throw FailedRunningComposer::withReason(
-                \sprintf('Failed to run "%s" (%d)', $process->getCommandLine(), $process->getExitCode()),
+                \sprintf('Failed to run "%s" (%d)', \addcslashes($process->getCommandLine(), '"'), $process->getExitCode()),
             );
         }
 
