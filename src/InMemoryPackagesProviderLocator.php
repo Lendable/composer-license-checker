@@ -9,22 +9,14 @@ use Lendable\ComposerLicenseChecker\Exception\PackagesProviderNotLocated;
 final class InMemoryPackagesProviderLocator implements PackagesProviderLocator
 {
     /**
-     * @param array<non-empty-string, PackagesProvider> $providers
+     * @param array<value-of<PackagesProviderType>, PackagesProvider> $providers
      */
     public function __construct(private readonly array $providers)
     {
     }
 
-    /**
-     * @return list<non-empty-string>
-     */
-    public function ids(): array
+    public function locate(PackagesProviderType $type): PackagesProvider
     {
-        return \array_keys($this->providers);
-    }
-
-    public function locate(string $id): PackagesProvider
-    {
-        return $this->providers[$id] ?? throw PackagesProviderNotLocated::withId($id);
+        return $this->providers[$type->value] ?? throw PackagesProviderNotLocated::withType($type);
     }
 }

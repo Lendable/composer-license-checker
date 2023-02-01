@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lendable\ComposerLicenseChecker\Exception;
 
+use Lendable\ComposerLicenseChecker\PackagesProviderType;
+
 final class PackagesProviderNotLocated extends \RuntimeException
 {
     /**
@@ -14,11 +16,8 @@ final class PackagesProviderNotLocated extends \RuntimeException
         parent::__construct($message, 0, $previous);
     }
 
-    /**
-     * @param non-empty-string $id
-     */
-    public static function withId(string $id): self
+    public static function withType(PackagesProviderType $type): self
     {
-        return new self(\sprintf('Could not locate packages provider with id "%s"', $id));
+        return new self(\sprintf('Could not locate packages provider with type "%s"', $type->value));
     }
 }

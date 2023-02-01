@@ -36,11 +36,20 @@ final class LicenseChecker extends SingleCommandApplication
                 'Path to project root, where composer.json lives',
                 null,
             )->addOption(
-                'provider-id',
+                'provider',
                 null,
                 InputOption::VALUE_REQUIRED,
-                \sprintf('Which packages data provider to use, one of: %s', \implode(', ', $ids = $this->locator->ids())),
-                $ids[0] ?? null,
+                \sprintf(
+                    'Which packages data provider to use, one of: %s',
+                    \implode(
+                        ', ',
+                        \array_map(
+                            static fn (string $v): string => \sprintf('"%s"', $v),
+                            PackagesProviderType::values(),
+                        )
+                    )
+                ),
+                PackagesProviderType::COMPOSER_LICENSES->value,
             );
     }
 
@@ -59,11 +68,13 @@ final class LicenseChecker extends SingleCommandApplication
 
         $config = require $input->getOption('allow-file');
         if (!$config instanceof LicenseConfiguration) {
-            $style->error(\sprintf(
-                'File "%s" must return an instance of %s.',
-                $allowFile,
-                LicenseConfiguration::class,
-            ));
+            $style->error(
+                \sprintf(
+                    'File "%s" must return an instance of %s.',
+                    $allowFile,
+                    LicenseConfiguration::class,
+                )
+            );
 
             return self::FAILURE;
         }
@@ -78,15 +89,16 @@ final class LicenseChecker extends SingleCommandApplication
 
         /** @var non-empty-string $path */
         $path = (string) \realpath($path ?? \dirname(__DIR__));
-        /** @var non-empty-string $providerId */
-        $providerId = $input->getOption('provider-id');
+        $providerInputValue = $input->getOption('provider');
+        \assert(\is_string($providerInputValue));
+        $providerType = PackagesProviderType::from($providerInputValue);
 
         $style->writeln(\sprintf('Checking project at: %s', $path), OutputInterface::VERBOSITY_VERBOSE);
         $style->writeln(\sprintf('Using allow file: %s', \realpath($allowFile)), OutputInterface::VERBOSITY_VERBOSE);
-        $style->writeln(\sprintf('Using provider with id: %s', $providerId), OutputInterface::VERBOSITY_VERBOSE);
+        $style->writeln(\sprintf('Using provider with id: %s', $providerType->value), OutputInterface::VERBOSITY_VERBOSE);
 
         try {
-            $provider = $this->locator->locate($providerId);
+            $provider = $this->locator->locate($providerType);
         } catch (PackagesProviderNotLocated $e) {
             $style->error($e->getMessage());
 

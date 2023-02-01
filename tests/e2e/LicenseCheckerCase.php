@@ -8,6 +8,7 @@ use Lendable\ComposerLicenseChecker\InMemoryPackagesProviderLocator;
 use Lendable\ComposerLicenseChecker\LicenseChecker;
 use Lendable\ComposerLicenseChecker\LicenseConfiguration;
 use Lendable\ComposerLicenseChecker\PackagesProvider;
+use Lendable\ComposerLicenseChecker\PackagesProviderType;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Support\Lendable\ComposerLicenseChecker\LicenseConfigurationFileBuilder;
@@ -22,7 +23,7 @@ abstract class LicenseCheckerCase extends TestCase
     {
         $command = new LicenseChecker(
             new InMemoryPackagesProviderLocator([
-                'licenses' => $this->packagesProvider(),
+                PackagesProviderType::COMPOSER_LICENSES->value => $this->packagesProvider(),
             ]),
         );
         $command->setAutoExit(false);

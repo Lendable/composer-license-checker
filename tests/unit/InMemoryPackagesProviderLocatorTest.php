@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Lendable\ComposerLicenseChecker;
 
-use Lendable\ComposerLicenseChecker\Exception\PackagesProviderNotLocated;
 use Lendable\ComposerLicenseChecker\InMemoryPackagesProviderLocator;
 use Lendable\ComposerLicenseChecker\PackagesProvider;
+use Lendable\ComposerLicenseChecker\PackagesProviderType;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -24,29 +24,17 @@ final class InMemoryPackagesProviderLocatorTest extends TestCase
         $this->provider2 = $this->createMock(PackagesProvider::class);
 
         $this->locator = new InMemoryPackagesProviderLocator([
-            'first' => $this->provider1,
-            'second' => $this->provider2,
+            PackagesProviderType::COMPOSER_LICENSES->value => $this->provider1,
+            PackagesProviderType::INSTALLED_JSON->value => $this->provider2,
         ]);
-    }
-
-    public function test_exposes_ids(): void
-    {
-        self::assertSame(['first', 'second'], $this->locator->ids());
     }
 
     public function test_locates_provider_by_id(): void
     {
-        $located1 = $this->locator->locate('first');
-        $located2 = $this->locator->locate('second');
+        $located1 = $this->locator->locate(PackagesProviderType::COMPOSER_LICENSES);
+        $located2 = $this->locator->locate(PackagesProviderType::INSTALLED_JSON);
 
         self::assertSame($this->provider1, $located1);
         self::assertSame($this->provider2, $located2);
-    }
-
-    public function test_throws_on_locating_failure(): void
-    {
-        $this->expectExceptionObject(PackagesProviderNotLocated::withId('third'));
-
-        $this->locator->locate('third');
     }
 }

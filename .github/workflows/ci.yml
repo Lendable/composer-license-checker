@@ -48,10 +48,10 @@ jobs:
         run: "composer security:check"
 
       - name: "Check licenses (composer installed.json provider)"
-        run: "composer license:check -- --provider-id=json -v"
+        run: "composer license:check -- --provider=installed-json -v"
 
       - name: "Check licenses (composer licenses provider)"
-        run: "composer license:check -- --provider-id=licenses -v"
+        run: "composer license:check -- --provider=composer-licenses -v"
 
       - name: "Run coding style"
         if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.1' }}
