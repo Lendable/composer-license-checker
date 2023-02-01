@@ -14,10 +14,9 @@ interface PackagesProviderLocator
     public function ids(): array;
 
     /**
-     * @throws PackagesProviderNotLocated
-     */
-    /**
      * @param non-empty-string $id
+     *
+     * @throws PackagesProviderNotLocated
      */
     public function locate(string $id): PackagesProvider;
 }

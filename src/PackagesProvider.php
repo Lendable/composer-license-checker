@@ -9,6 +9,8 @@ use Lendable\ComposerLicenseChecker\Exception\FailedProvidingPackages;
 interface PackagesProvider
 {
     /**
+     * @param non-empty-string $projectPath
+     *
      * @throws FailedProvidingPackages
      */
     public function provide(string $projectPath): Packages;

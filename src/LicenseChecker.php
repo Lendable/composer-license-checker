@@ -76,6 +76,7 @@ final class LicenseChecker extends SingleCommandApplication
             return self::FAILURE;
         }
 
+        /** @var non-empty-string $path */
         $path = (string) \realpath($path ?? \dirname(__DIR__));
         /** @var non-empty-string $providerId */
         $providerId = $input->getOption('provider-id');
