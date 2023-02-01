@@ -73,6 +73,6 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
                     \array_values($package['license']),
                 );
             }, $dependencies)
-        ))->sorted();
+        ))->sort();
     }
 }

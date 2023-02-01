@@ -17,7 +17,7 @@ final class Packages implements \Countable, \IteratorAggregate
     ) {
     }
 
-    public function sorted(): self
+    public function sort(): self
     {
         $items = $this->items;
         \usort($items, static fn (Package $a, Package $b): int => $a->name->toString() <=> $b->name->toString());

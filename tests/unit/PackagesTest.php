@@ -19,7 +19,7 @@ final class PackagesTest extends TestCase
             new Package(new PackageName('c/b'), []),
         ]);
 
-        $sorted = $packages->sorted();
+        $sorted = $packages->sort();
         self::assertNotSame($packages, $sorted);
         self::assertSame([
             'c/b',
