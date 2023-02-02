@@ -22,7 +22,7 @@ abstract class LicenseCheckerCase extends TestCase
     {
         $command = new LicenseChecker(
             new InMemoryPackagesProviderLocator([
-                'licenses' => $this->packagesProvider(),
+                'id' => $this->packagesProvider(),
             ]),
         );
         $command->setAutoExit(false);
@@ -53,6 +53,18 @@ abstract class LicenseCheckerCase extends TestCase
         self::assertSame(1, $exitCode);
         self::assertCount(4, $output);
         self::assertSame('[ERROR] The provided path "joke/path" does not exist.', $output[3]);
+    }
+
+    public function test_failure_with_path_that_is_not_composer_project_root(): void
+    {
+        $handle = $this->createTempFile();
+        $allowFile = LicenseConfigurationFileBuilder::create($handle)->build();
+
+        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => '../']);
+        $output = $this->getOutputLines();
+
+        self::assertSame(1, $exitCode);
+        self::assertStringStartsWith('[ERROR] Failed to provide packages:', $output[3]);
     }
 
     public function test_failure_with_invalid_allowed_licenses_file(): void

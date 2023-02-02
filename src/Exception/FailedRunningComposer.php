@@ -14,11 +14,8 @@ final class FailedRunningComposer extends \RuntimeException
         parent::__construct($message, 0, $previous);
     }
 
-    /**
-     * @param non-empty-string $reason
-     */
-    public static function withReason(string $reason): self
+    public static function withCommand(string $command): self
     {
-        return new self(\sprintf('Failed to provide packages: %s', $reason));
+        return new self(\sprintf('Failed to run: %s', $command));
     }
 }
