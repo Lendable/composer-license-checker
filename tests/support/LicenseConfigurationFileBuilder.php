@@ -16,6 +16,8 @@ final class LicenseConfigurationFileBuilder
      */
     private array $allowedVendors = [];
 
+    private ?bool $ignoreDev = null;
+
     /**
      * @param resource $resource
      */
@@ -45,6 +47,13 @@ final class LicenseConfigurationFileBuilder
         return $this;
     }
 
+    public function withIgnoreDev(bool $ignore): self
+    {
+        $this->ignoreDev = $ignore;
+
+        return $this;
+    }
+
     public function build(): string
     {
         \fwrite($this->resource, $this->buildContent());
@@ -70,6 +79,10 @@ final class LicenseConfigurationFileBuilder
 
         foreach ($this->allowedVendors as $allowedVendor) {
             $content .= \sprintf('->addAllowedVendor(\'%s\')', $allowedVendor);
+        }
+
+        if ($this->ignoreDev !== null) {
+            $content .= \sprintf('->ignoreDev(%s)', $this->ignoreDev ? 'true' : 'false');
         }
 
         return $content.'->build();';

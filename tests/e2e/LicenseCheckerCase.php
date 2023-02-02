@@ -190,6 +190,39 @@ abstract class LicenseCheckerCase extends TestCase
         self::assertSame('[OK] All dependencies have allowed licenses.', $output[3]);
     }
 
+    public function test_ignores_dev_dependencies_when_requested_to_through_option(): void
+    {
+        $handle = $this->createTempFile();
+        $allowFile = LicenseConfigurationFileBuilder::create($handle)
+            ->withLicense('MIT')
+            ->withLicense('BSD-3-Clause')
+            ->build();
+
+        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => $this->path, '--no-dev' => true]);
+        $output = $this->getOutputLines();
+
+        self::assertSame(0, $exitCode);
+        self::assertCount(4, $output);
+        self::assertSame('[OK] All dependencies have allowed licenses.', $output[3]);
+    }
+
+    public function test_ignores_dev_dependencies_when_requested_to_through_config(): void
+    {
+        $handle = $this->createTempFile();
+        $allowFile = LicenseConfigurationFileBuilder::create($handle)
+            ->withLicense('MIT')
+            ->withLicense('BSD-3-Clause')
+            ->withIgnoreDev(true)
+            ->build();
+
+        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => $this->path]);
+        $output = $this->getOutputLines();
+
+        self::assertSame(0, $exitCode);
+        self::assertCount(4, $output);
+        self::assertSame('[OK] All dependencies have allowed licenses.', $output[3]);
+    }
+
     /**
      * @return list<string>
      */

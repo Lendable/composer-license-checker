@@ -16,6 +16,8 @@ final class LicenseConfigurationBuilder
      */
     private array $packagePatterns = [];
 
+    private bool $ignoreDev = false;
+
     public function __construct()
     {
     }
@@ -38,6 +40,13 @@ final class LicenseConfigurationBuilder
         return $this;
     }
 
+    public function addAllowedPackage(string $package): self
+    {
+        $this->packagePatterns[\sprintf('~^%s$~', \preg_quote($package, '~'))] = true;
+
+        return $this;
+    }
+
     public function addAllowedVendor(string $vendor): self
     {
         $this->packagePatterns[\sprintf('~^%s/.+$~', \preg_quote($vendor, '~'))] = true;
@@ -45,15 +54,19 @@ final class LicenseConfigurationBuilder
         return $this;
     }
 
-    public function build(): LicenseConfiguration
+    public function ignoreDev(bool $ignore = true): self
     {
-        return new LicenseConfiguration(\array_keys($this->licenses), \array_keys($this->packagePatterns));
-    }
-
-    public function addAllowedPackage(string $package): self
-    {
-        $this->packagePatterns[\sprintf('~^%s$~', \preg_quote($package, '~'))] = true;
+        $this->ignoreDev = $ignore;
 
         return $this;
+    }
+
+    public function build(): LicenseConfiguration
+    {
+        return new LicenseConfiguration(
+            \array_keys($this->licenses),
+            \array_keys($this->packagePatterns),
+            $this->ignoreDev,
+        );
     }
 }

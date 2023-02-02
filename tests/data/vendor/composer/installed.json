@@ -32,6 +32,6 @@
     ],
     "dev": true,
     "dev-package-names": [
-        "package/bsd3"
+        "lendable/apache"
     ]
 }

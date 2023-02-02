@@ -13,5 +13,5 @@ interface ComposerRunner
      *
      * @throws FailedRunningComposer
      */
-    public function licenses(string $projectPath): string;
+    public function licenses(string $projectPath, bool $ignoreDev): string;
 }
