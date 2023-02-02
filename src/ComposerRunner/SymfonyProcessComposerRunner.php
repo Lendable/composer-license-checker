@@ -15,9 +15,7 @@ final class SymfonyProcessComposerRunner implements ComposerRunner
         $process = Process::fromShellCommandline('SHELL_VERBOSITY=0 composer licenses --format=json', $projectPath);
         $process->run();
         if (!$process->isSuccessful()) {
-            throw FailedRunningComposer::withReason(
-                \sprintf('Failed to run "%s" (%d)', \addcslashes($process->getCommandLine(), '"'), $process->getExitCode()),
-            );
+            throw FailedRunningComposer::withCommand($process->getCommandLine());
         }
 
         return $process->getOutput();

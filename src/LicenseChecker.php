@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lendable\ComposerLicenseChecker;
 
+use Lendable\ComposerLicenseChecker\Exception\FailedProvidingPackages;
 use Lendable\ComposerLicenseChecker\Exception\PackagesProviderNotLocated;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -76,8 +77,13 @@ final class LicenseChecker extends SingleCommandApplication
             return self::FAILURE;
         }
 
-        /** @var non-empty-string $path */
-        $path = (string) \realpath($path ?? \dirname(__DIR__));
+        $path = $path === null ? \getcwd() : \realpath($path);
+        if ($path === false) {
+            $style->error('Could not resolve project path.');
+
+            return self::FAILURE;
+        }
+
         /** @var non-empty-string $providerId */
         $providerId = $input->getOption('provider-id');
 
@@ -95,7 +101,20 @@ final class LicenseChecker extends SingleCommandApplication
 
         $violation = false;
 
-        foreach ($provider->provide($path) as $package) {
+        try {
+            $packages = $provider->provide($path);
+        } catch (FailedProvidingPackages $e) {
+            $message = $e->getMessage();
+            if (null !== $cause = $e->getPrevious()) {
+                $message .= ': '.$cause->getMessage();
+            }
+
+            $style->error($message);
+
+            return self::FAILURE;
+        }
+
+        foreach ($packages as $package) {
             if ($config->allowsPackage($package->name->toString())) {
                 continue;
             }

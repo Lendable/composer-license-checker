@@ -19,7 +19,7 @@ final class StubComposerRunner implements ComposerRunner
     public function licenses(string $projectPath): string
     {
         if ($this->willThrow) {
-            throw FailedRunningComposer::withReason($this->output === '' ? 'unknown' : $this->output);
+            throw FailedRunningComposer::withCommand($this->output === '' ? 'unknown' : $this->output);
         }
 
         return $this->output;

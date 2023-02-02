@@ -14,12 +14,10 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
 {
     public function provide(string $projectPath): Packages
     {
-        $installedJson = (string) \realpath(
-            \sprintf(
-                '%s%2$svendor%2$scomposer%2$sinstalled.json',
-                \rtrim($projectPath, \DIRECTORY_SEPARATOR),
-                \DIRECTORY_SEPARATOR,
-            )
+        $installedJson = \sprintf(
+            '%s%2$svendor%2$scomposer%2$sinstalled.json',
+            \realpath(\rtrim($projectPath, \DIRECTORY_SEPARATOR)),
+            \DIRECTORY_SEPARATOR,
         );
 
         if (!\file_exists($installedJson)) {
