@@ -114,6 +114,8 @@ final class LicenseChecker extends SingleCommandApplication
             return self::FAILURE;
         }
 
+        $output->writeln(\sprintf('Packages found: %d', \count($packages)), OutputInterface::VERBOSITY_VERBOSE);
+
         foreach ($packages as $package) {
             if ($config->allowsPackage($package->name->toString())) {
                 continue;
