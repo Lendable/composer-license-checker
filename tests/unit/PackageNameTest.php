@@ -6,6 +6,7 @@ namespace Tests\Unit\Lendable\ComposerLicenseChecker;
 
 use Lendable\ComposerLicenseChecker\Exception\InvalidPackageName;
 use Lendable\ComposerLicenseChecker\PackageName;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class PackageNameTest extends TestCase
@@ -20,10 +21,9 @@ final class PackageNameTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidPackageNamesProvider
-     *
      * @param non-empty-string $packageName
      */
+    #[DataProvider('invalidPackageNamesProvider')]
     public function test_throws_on_invalid_package_name(string $packageName): void
     {
         $this->expectExceptionObject(InvalidPackageName::for($packageName));

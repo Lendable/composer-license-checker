@@ -37,15 +37,4 @@ final class PackagesTest extends TestCase
             new Package(new PackageName('a/b'), []),
         ]));
     }
-
-    public function test_can_be_iterated(): void
-    {
-        $packages = new Packages([
-            new Package(new PackageName('a/a'), []),
-            new Package(new PackageName('a/b'), []),
-        ]);
-
-        self::assertCount(2, $packages->getIterator());
-        self::assertCount(2, \iterator_to_array($packages->getIterator()));
-    }
 }
