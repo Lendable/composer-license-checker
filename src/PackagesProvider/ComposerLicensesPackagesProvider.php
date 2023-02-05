@@ -18,10 +18,10 @@ final class ComposerLicensesPackagesProvider implements PackagesProvider
     {
     }
 
-    public function provide(string $projectPath): Packages
+    public function provide(string $projectPath, bool $ignoreDev): Packages
     {
         try {
-            $composerOutput = $this->composerRunner->licenses($projectPath);
+            $composerOutput = $this->composerRunner->licenses($projectPath, $ignoreDev);
         } catch (FailedRunningComposer $e) {
             throw FailedProvidingPackages::dueTo($e);
         }

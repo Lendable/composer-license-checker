@@ -10,8 +10,11 @@ final class LicenseConfiguration
      * @param list<string> $allowedLicenses
      * @param list<string> $allowedPackagePatterns
      */
-    public function __construct(public readonly array $allowedLicenses, public readonly array $allowedPackagePatterns)
-    {
+    public function __construct(
+        public readonly array $allowedLicenses,
+        public readonly array $allowedPackagePatterns,
+        public readonly bool $ignoreDev,
+    ) {
     }
 
     public function allowsLicense(string $license): bool

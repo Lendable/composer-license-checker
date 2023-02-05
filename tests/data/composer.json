@@ -3,11 +3,11 @@
   "type": "project",
   "license": "MIT",
   "require": {
-    "lendable/apache": "^0.1",
+    "package/bsd3": "^1.0",
     "lendable/bsd3_mit": "^1.0",
     "package/mit": "^1.0"
   },
   "require-dev": {
-    "package/bsd3": "^1.0"
+    "lendable/apache": "^0.1"
   }
 }

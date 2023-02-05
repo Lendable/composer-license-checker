@@ -31,7 +31,7 @@ final class ComposerLicensesPackagesProviderTest extends TestCase
             ],
         ]));
 
-        $packages = \iterator_to_array($this->provider->provide('path'));
+        $packages = \iterator_to_array($this->provider->provide('path', false));
 
         self::assertCount(2, $packages);
         self::assertSame('vendor/project', $packages[0]->name->toString());
@@ -48,7 +48,7 @@ final class ComposerLicensesPackagesProviderTest extends TestCase
         $exception = null;
 
         try {
-            $this->provider->provide('path');
+            $this->provider->provide('path', false);
         } catch (\Throwable $exception) {
         }
 
@@ -62,7 +62,7 @@ final class ComposerLicensesPackagesProviderTest extends TestCase
 
         $this->expectExceptionObject(FailedProvidingPackages::withReason('Decoding failed "Syntax error"'));
 
-        $this->provider->provide('path');
+        $this->provider->provide('path', false);
     }
 
     public function test_throws_when_decoded_json_is_not_an_array(): void
@@ -71,6 +71,6 @@ final class ComposerLicensesPackagesProviderTest extends TestCase
 
         $this->expectExceptionObject(FailedProvidingPackages::withReason('Decoded data in unexpected format'));
 
-        $this->provider->provide('path');
+        $this->provider->provide('path', false);
     }
 }

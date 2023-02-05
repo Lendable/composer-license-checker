@@ -42,6 +42,11 @@ final class LicenseChecker extends SingleCommandApplication
                 InputOption::VALUE_REQUIRED,
                 \sprintf('Which packages data provider to use, one of: %s', \implode(', ', $ids = $this->locator->ids())),
                 $ids[0] ?? null,
+            )->addOption(
+                'no-dev',
+                null,
+                InputOption::VALUE_NONE,
+                'Disables dev dependencies check',
             );
     }
 
@@ -86,10 +91,12 @@ final class LicenseChecker extends SingleCommandApplication
 
         /** @var non-empty-string $providerId */
         $providerId = $input->getOption('provider-id');
+        $noDev = $config->ignoreDev || $input->getOption('no-dev') === true;
 
         $style->writeln(\sprintf('Checking project at: %s', $path), OutputInterface::VERBOSITY_VERBOSE);
         $style->writeln(\sprintf('Using allow file: %s', \realpath($allowFile)), OutputInterface::VERBOSITY_VERBOSE);
         $style->writeln(\sprintf('Using provider with id: %s', $providerId), OutputInterface::VERBOSITY_VERBOSE);
+        $style->writeln(\sprintf('With dev dependencies: %s', $noDev ? 'no' : 'yes'), OutputInterface::VERBOSITY_VERBOSE);
 
         try {
             $provider = $this->locator->locate($providerId);
@@ -102,7 +109,7 @@ final class LicenseChecker extends SingleCommandApplication
         $violation = false;
 
         try {
-            $packages = $provider->provide($path);
+            $packages = $provider->provide($path, $noDev);
         } catch (FailedProvidingPackages $e) {
             $message = $e->getMessage();
             if (null !== $cause = $e->getPrevious()) {

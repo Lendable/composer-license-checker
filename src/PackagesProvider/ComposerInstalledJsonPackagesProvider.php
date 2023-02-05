@@ -12,7 +12,7 @@ use Lendable\ComposerLicenseChecker\PackagesProvider;
 
 final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
 {
-    public function provide(string $projectPath): Packages
+    public function provide(string $projectPath, bool $ignoreDev): Packages
     {
         $installedJson = \sprintf(
             '%s%2$svendor%2$scomposer%2$sinstalled.json',
@@ -43,34 +43,54 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
             throw FailedProvidingPackages::withReason('Decoded data in unexpected format');
         }
 
+        $skipPackages = [];
+        if ($ignoreDev) {
+            $devDependencies = $data['dev-package-names'] ?? FailedProvidingPackages::withReason('Missing "dev-package-names" key');
+            if (!\is_array($devDependencies) || !\array_is_list($devDependencies)) {
+                throw FailedProvidingPackages::withReason('Decoded dev dependencies data in unexpected format');
+            }
+
+            /** @var list<string> $devDependencies */
+            $skipPackages = \array_flip($devDependencies);
+        }
+
         return (new Packages(
-            \array_map(static function (mixed $package): Package {
-                if (!\is_array($package)) {
-                    throw FailedProvidingPackages::withReason('Package data in unexpected format');
-                }
+            \array_filter(
+                \array_map(
+                    static function (mixed $package) use (&$skipPackages): ?Package {
+                        if (!\is_array($package)) {
+                            throw FailedProvidingPackages::withReason('Package data in unexpected format');
+                        }
 
-                if (!isset($package['name'])) {
-                    throw FailedProvidingPackages::withReason('Missing "name" key for package');
-                }
+                        if (!isset($package['name'])) {
+                            throw FailedProvidingPackages::withReason('Missing "name" key for package');
+                        }
 
-                if (!\is_string($package['name'])) {
-                    throw FailedProvidingPackages::withReason('Key "name" is not a string');
-                }
+                        if (isset($skipPackages[$package['name']])) {
+                            return null;
+                        }
 
-                if (!isset($package['license'])) {
-                    throw FailedProvidingPackages::withReason('Missing "license" key for package');
-                }
+                        if (!\is_string($package['name'])) {
+                            throw FailedProvidingPackages::withReason('Key "name" is not a string');
+                        }
 
-                if (!\is_array($package['license']) || !\array_is_list($package['license'])) {
-                    throw FailedProvidingPackages::withReason('Key "license" is not a list');
-                }
+                        if (!isset($package['license'])) {
+                            throw FailedProvidingPackages::withReason('Missing "license" key for package');
+                        }
 
-                /** @var array{name: non-empty-string, license: list<non-empty-string>} $package */
-                return new Package(
-                    new PackageName($package['name']),
-                    \array_values($package['license']),
-                );
-            }, $dependencies)
+                        if (!\is_array($package['license']) || !\array_is_list($package['license'])) {
+                            throw FailedProvidingPackages::withReason('Key "license" is not a list');
+                        }
+
+                        /** @var array{name: non-empty-string, license: list<non-empty-string>} $package */
+                        return new Package(
+                            new PackageName($package['name']),
+                            \array_values($package['license']),
+                        );
+                    },
+                    $dependencies,
+                )
+            )
         ))->sort();
     }
 }

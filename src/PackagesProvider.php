@@ -13,5 +13,5 @@ interface PackagesProvider
      *
      * @throws FailedProvidingPackages
      */
-    public function provide(string $projectPath): Packages;
+    public function provide(string $projectPath, bool $ignoreDev): Packages;
 }
