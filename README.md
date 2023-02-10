@@ -15,7 +15,7 @@
 ## Installation
 
 ```sh
-composer require --dev lendable/composer-license-checker:^0.1
+composer require --dev lendable/composer-license-checker
 ```
 
 ## Usage
