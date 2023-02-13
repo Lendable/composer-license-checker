@@ -138,6 +138,19 @@ abstract class LicenseCheckerCase extends TestCase
          self::assertSame('[OK] All dependencies have allowed licenses.', $output[3]);
      }
 
+     public function test_with_unlicensed_package_which_is_explicitly_allowed(): void
+     {
+         $handle = $this->createTempFile();
+         $allowFile = LicenseConfigurationFileBuilder::create($handle)->withAllowedPackage('lendable/unlicensed')->build();
+
+         $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => 'tests/data/with_unlicensed']);
+         $output = $this->getOutputLines();
+
+         self::assertSame(0, $exitCode);
+         self::assertCount(4, $output);
+         self::assertSame('[OK] All dependencies have allowed licenses.', $output[3]);
+     }
+
     public function test_report_not_allowed_licenses(): void
     {
         $handle = $this->createTempFile();
