@@ -42,3 +42,17 @@ return (new LicenseConfigurationBuilder())
 ```
 
 It is suggested you build this into your CI pipeline to automate checking it.
+
+## Licensing information providers
+
+This tool can use two different sources for retrieving licensing information: using the `composer licenses` command and parsing the `installed.json` file created by Composer.
+
+### Using the `installed.json` provider (*default*)
+Specify `--provider-id=json`. 
+
+The tool will parse the `installed.json` file created by Composer which has all the relevant information. This does not require Composer to be installed in the environment the tool is executed within. This file is internal to Composer however, so there is the potential that the schema may change in the future. If you experience issues, try using the `composer licenses` provider and report the issue.
+
+### Using `composer licenses` provider
+Specify `--provider-id=licenses`.
+
+The `composer licenses` command provides a (potentially) more stable API for retrieving licensing information. This however requires the tool to execute `composer` so it must be installed in environment executed within. 
