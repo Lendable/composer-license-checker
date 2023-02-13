@@ -6,6 +6,8 @@
 
 **Unstable**
 
+This library provides tooling to check licensing of dependencies against a set of rules to ensure compliance with open source licenses and minimize legal risk. It helps you to keep track of licenses of dependencies in use and make informed decisions on their usage.
+
 ## TODO
 
 - [ ] Composer plugin to auto-run licensing checks on install/updates. 
