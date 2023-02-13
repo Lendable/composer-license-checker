@@ -128,6 +128,18 @@ final class LicenseChecker extends SingleCommandApplication
                 continue;
             }
 
+            if ($package->licenses === []) {
+                $violation = true;
+                $style->error(
+                    \sprintf(
+                        'Dependency "%s" does not have a license and is not explicitly allowed.',
+                        $package->name->toString(),
+                    )
+                );
+
+                continue;
+            }
+
             foreach ($package->licenses as $license) {
                 if ($config->allowsLicense($license)) {
                     continue;

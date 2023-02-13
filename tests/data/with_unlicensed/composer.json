@@ -1,0 +1,8 @@
+{
+  "name": "composer-license-checker/data",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "lendable/unlicensed": "^1.0"
+  }
+}

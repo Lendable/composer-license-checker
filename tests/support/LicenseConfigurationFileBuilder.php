@@ -16,6 +16,11 @@ final class LicenseConfigurationFileBuilder
      */
     private array $allowedVendors = [];
 
+    /**
+     * @var list<string>
+     */
+    private array $allowedPackages = [];
+
     private ?bool $ignoreDev = null;
 
     /**
@@ -43,6 +48,13 @@ final class LicenseConfigurationFileBuilder
     public function withAllowedVendor(string $vendor): self
     {
         $this->allowedVendors[] = $vendor;
+
+        return $this;
+    }
+
+    public function withAllowedPackage(string $package): self
+    {
+        $this->allowedPackages[] = $package;
 
         return $this;
     }
@@ -79,6 +91,10 @@ final class LicenseConfigurationFileBuilder
 
         foreach ($this->allowedVendors as $allowedVendor) {
             $content .= \sprintf('->addAllowedVendor(\'%s\')', $allowedVendor);
+        }
+
+        foreach ($this->allowedPackages as $allowedPackage) {
+            $content .= \sprintf('->addAllowedPackage(\'%s\')', $allowedPackage);
         }
 
         if ($this->ignoreDev !== null) {
