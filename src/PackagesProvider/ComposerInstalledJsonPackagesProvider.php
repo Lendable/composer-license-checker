@@ -82,7 +82,6 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
 
                         /** @var list<non-empty-string> $licenses */
                         /** @var array{name: non-empty-string, license?: list<non-empty-string>} $package */
-
                         return new Package(
                             new PackageName($package['name']),
                             $licenses,
