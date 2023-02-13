@@ -4,15 +4,7 @@
 [![License](https://poser.pugx.org/lendable/composer-license-checker/license)](https://packagist.org/packages/lendable/composer-license-checker)
 [![Continuous Integration](https://github.com/lendable/composer-license-checker/actions/workflows/ci.yml/badge.svg)](https://github.com/lendable/composer-license-checker/actions/workflows/ci.yml)
 
-**Unstable**
-
 This library provides tooling to check licensing of dependencies against a set of rules to ensure compliance with open source licenses and minimize legal risk. It helps you to keep track of licenses of dependencies in use and make informed decisions on their usage.
-
-## TODO
-
-- [ ] Composer plugin to auto-run licensing checks on install/updates. 
-- [ ] Configuration improvements to allow licensing to differ per package name and package vendor.
-- [x] Tests, static analysis, general refactor of inlined `symfony/console` code to ease this. 
 
 ## Installation
 
