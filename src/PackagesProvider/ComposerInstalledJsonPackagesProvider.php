@@ -45,7 +45,7 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
 
         $skipPackages = [];
         if ($ignoreDev) {
-            $devDependencies = $data['dev-package-names'] ?? FailedProvidingPackages::withReason('Missing "dev-package-names" key');
+            $devDependencies = $data['dev-package-names'] ?? throw FailedProvidingPackages::withReason('Missing "dev-package-names" key');
             if (!\is_array($devDependencies) || !\array_is_list($devDependencies)) {
                 throw FailedProvidingPackages::withReason('Decoded dev dependencies data in unexpected format');
             }
@@ -57,7 +57,7 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
         return (new Packages(
             \array_filter(
                 \array_map(
-                    static function (mixed $package) use (&$skipPackages): ?Package {
+                    static function (mixed $package) use ($skipPackages): ?Package {
                         if (!\is_array($package)) {
                             throw FailedProvidingPackages::withReason('Package data in unexpected format');
                         }
