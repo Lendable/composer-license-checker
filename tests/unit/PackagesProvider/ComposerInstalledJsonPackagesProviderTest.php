@@ -6,19 +6,31 @@ namespace Tests\Unit\Lendable\ComposerLicenseChecker\PackagesProvider;
 
 use Lendable\ComposerLicenseChecker\Exception\FailedProvidingPackages;
 use Lendable\ComposerLicenseChecker\PackagesProvider\ComposerInstalledJsonPackagesProvider;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @todo Add happy path tests, including ignoring dev, license key being optional, etc.
  */
 final class ComposerInstalledJsonPackagesProviderTest extends TestCase
 {
+    /**
+     * @var non-empty-string
+     */
     private string $projectPath;
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        (new Filesystem())->remove($this->projectPath);
+    }
 
     public function test_throws_if_installed_json_missing(): void
     {
         $this->setUpTemporaryProjectWithInstalledJson([]);
-        \unlink($this->projectPath.'/vendor/composer/installed.json');
+        (new Filesystem())->remove($this->projectPath.'/vendor/composer/installed.json');
 
         $this->expectExceptionObject(
             FailedProvidingPackages::withReason(
@@ -33,7 +45,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
     {
         $this->setUpTemporaryProjectWithInstalledJson([]);
 
-        \chmod($this->projectPath.'/vendor/composer/installed.json', 0000);
+        (new Filesystem())->chmod($this->projectPath.'/vendor/composer/installed.json', 0o222);
 
         $this->expectExceptionObject(
             FailedProvidingPackages::withReason(
@@ -63,9 +75,9 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
     }
 
     /**
-     * @return iterable<array{array<mixed>, FailedProvidingPackages, ?bool}>
+     * @return iterable<array{array<mixed>, FailedProvidingPackages}>
      */
-    public function provideInstalledJsonDataWithErrorsAndExpectedExceptions(): iterable
+    public static function provideInstalledJsonDataWithErrorsAndExpectedExceptions(): iterable
     {
         yield 'Missing dev-package-names' => [
             [
@@ -79,7 +91,6 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
                 ],
             ],
             FailedProvidingPackages::withReason('Missing "dev-package-names" key'),
-            true,
         ];
         yield 'dev-package-names not an array' => [
             [
@@ -94,7 +105,6 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
                 'dev-package-names' => 'foo',
             ],
             FailedProvidingPackages::withReason('Decoded dev dependencies data in unexpected format'),
-            true,
         ];
         yield 'dev-package-names not a list' => [
             [
@@ -109,7 +119,6 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
                 'dev-package-names' => ['foo' => 'bar'],
             ],
             FailedProvidingPackages::withReason('Decoded dev dependencies data in unexpected format'),
-            true,
         ];
         yield 'packages key missing' => [
             [
@@ -118,7 +127,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
             ],
             FailedProvidingPackages::withReason('Missing "packages" key'),
         ];
-        yield 'packages not an array' => [
+        yield 'packages not an array (bool, only one element)' => [
             [
                 'dev' => true,
                 'dev-package-names' => ['foo/bar'],
@@ -126,7 +135,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
             ],
             FailedProvidingPackages::withReason('Decoded data in unexpected format'),
         ];
-        yield 'package not an array' => [
+        yield 'package not an array (bool)' => [
             [
                 'dev' => true,
                 'dev-package-names' => [],
@@ -169,25 +178,18 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
     }
 
     /**
-     * @dataProvider provideInstalledJsonDataWithErrorsAndExpectedExceptions
+     * @param array<mixed> $data
      */
+    #[DataProvider('provideInstalledJsonDataWithErrorsAndExpectedExceptions')]
     public function test_throws_when_installed_json_has_valid_json_but_unexpected_data(
         array $data,
         FailedProvidingPackages $expectedException,
-        bool $ignoreDev = false,
     ): void {
         $this->setUpTemporaryProjectWithInstalledJson($data);
 
         $this->expectExceptionObject($expectedException);
 
-        (new ComposerInstalledJsonPackagesProvider())->provide($this->projectPath, $ignoreDev);
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        \unlink($this->projectPath);
+        (new ComposerInstalledJsonPackagesProvider())->provide($this->projectPath, true);
     }
 
     /**
@@ -195,6 +197,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
      */
     private function setUpTemporaryProjectWithInstalledJson(string|array $data): void
     {
+        $fs = new Filesystem();
         $tempDir = \sys_get_temp_dir();
         $attempts = 0;
 
@@ -208,22 +211,13 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
 
             if (!\is_dir($projectPath)) {
                 $installedJsonDir = \sprintf('%s%2$svendor%2$scomposer', $projectPath, \DIRECTORY_SEPARATOR);
-                $dirCreated = \mkdir($installedJsonDir, recursive: true);
+                $fs->mkdir($installedJsonDir);
 
-                if ($dirCreated === false) {
-                    throw new \RuntimeException(\sprintf('Failed to create directory "%s".', $installedJsonDir));
-                }
 
-                $fileCreated = \file_put_contents(
+                $fs->dumpFile(
                     \sprintf('%s%sinstalled.json', $installedJsonDir, \DIRECTORY_SEPARATOR),
                     \is_string($data) ? $data : \json_encode($data, \JSON_THROW_ON_ERROR),
                 );
-
-                if (!$fileCreated) {
-                    throw new \RuntimeException(
-                        \sprintf('Failed to create installed.json file in %s.', $installedJsonDir),
-                    );
-                }
 
                 $this->projectPath = $projectPath;
 
