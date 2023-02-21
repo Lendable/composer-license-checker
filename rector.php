@@ -8,6 +8,7 @@ use Rector\Core\ValueObject\PhpVersion;
 use Rector\PHPUnit\Set\PHPUnitLevelSetList;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
+use Rector\Symfony\Set\SymfonyLevelSetList;
 
 return static function (RectorConfig $rector): void {
     $rector->parallel();
@@ -19,5 +20,6 @@ return static function (RectorConfig $rector): void {
         SetList::CODE_QUALITY,
         LevelSetList::UP_TO_PHP_81,
         PHPUnitLevelSetList::UP_TO_PHPUNIT_100,
+        SymfonyLevelSetList::UP_TO_SYMFONY_54,
     ]);
 };
