@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace Tests\Unit\Lendable\ComposerLicenseChecker\PackagesProvider;
 
 use Lendable\ComposerLicenseChecker\Exception\FailedProvidingPackages;
+use Lendable\ComposerLicenseChecker\Package;
+use Lendable\ComposerLicenseChecker\PackageName;
+use Lendable\ComposerLicenseChecker\Packages;
 use Lendable\ComposerLicenseChecker\PackagesProvider\ComposerInstalledJsonPackagesProvider;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
+use Tests\Support\Lendable\ComposerLicenseChecker\PackagesAsserter;
 
 /**
  * @todo Add happy path tests, including ignoring dev, license key being optional, etc.
@@ -25,6 +29,105 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
         parent::tearDown();
 
         (new Filesystem())->remove($this->projectPath);
+    }
+
+    /**
+     * @return iterable<array{array<mixed>, Packages, bool}>
+     */
+    public static function provideInstalledJsonAndExpectedPackages(): iterable
+    {
+        yield 'empty' => [
+            [
+                'dev' => true,
+                'dev-package-names' => [],
+                'packages' => [],
+            ],
+            new Packages([]),
+            true,
+        ];
+        yield 'ignoring dev without any dev dependencies' => [
+            [
+                'dev' => true,
+                'dev-package-names' => [],
+                'packages' => [['name' => 'foo/bar', 'version' => '1.0.0', 'license' => ['MIT']]],
+            ],
+            new Packages([new Package(new PackageName('foo/bar'), ['MIT'])]),
+            true,
+        ];
+        yield 'ignoring dev with 1 dev dependency' => [
+            [
+                'dev' => true,
+                'dev-package-names' => ['foo/bar'],
+                'packages' => [['name' => 'foo/bar', 'version' => '1.0.0', 'license' => ['MIT']]],
+            ],
+            new Packages([]),
+            true,
+        ];
+        yield 'not ignoring dev with 1 dev dependency' => [
+            [
+                'dev' => true,
+                'dev-package-names' => ['foo/bar'],
+                'packages' => [['name' => 'foo/bar', 'version' => '1.0.0', 'license' => ['MIT']]],
+            ],
+            new Packages([new Package(new PackageName('foo/bar'), ['MIT'])]),
+            false,
+        ];
+        yield 'not ignoring dev with 1 dev dependency and 1 runtime' => [
+            [
+                'dev' => true,
+                'dev-package-names' => ['foo/bar'],
+                'packages' => [
+                    ['name' => 'foo/bar', 'version' => '1.0.0', 'license' => ['MIT']],
+                    ['name' => 'foo/baz', 'version' => '1.0.0', 'license' => ['MIT', 'Apache-2.0']],
+                ],
+            ],
+            new Packages([
+                new Package(new PackageName('foo/bar'), ['MIT']),
+                new Package(new PackageName('foo/baz'), ['MIT', 'Apache-2.0']),
+            ]),
+            false,
+        ];
+        yield 'ignoring dev with 1 dev dependency and 1 runtime' => [
+            [
+                'dev' => true,
+                'dev-package-names' => ['foo/bar'],
+                'packages' => [
+                    ['name' => 'foo/bar', 'version' => '1.0.0', 'license' => ['MIT']],
+                    ['name' => 'foo/baz', 'version' => '1.0.0', 'license' => ['MIT', 'Apache-2.0']],
+                ],
+            ],
+            new Packages([
+                new Package(new PackageName('foo/baz'), ['MIT', 'Apache-2.0']),
+            ]),
+            true,
+        ];
+        yield 'ignoring dev with 1 dev dependency and 1 runtime without licensing info' => [
+            [
+                'dev' => true,
+                'dev-package-names' => ['foo/baz'],
+                'packages' => [
+                    ['name' => 'foo/bar', 'version' => '1.0.0'],
+                    ['name' => 'foo/baz', 'version' => '1.0.0', 'license' => ['MIT', 'Apache-2.0']],
+                ],
+            ],
+            new Packages([
+                new Package(new PackageName('foo/bar'), []),
+            ]),
+            true,
+        ];
+    }
+
+    /**
+     * @param array<mixed> $data
+     */
+    #[DataProvider('provideInstalledJsonAndExpectedPackages')]
+    public function test_providing_from_installed_json_contents(array $data, Packages $expected, bool $ignoreDev): void
+    {
+        $this->setUpTemporaryProjectWithInstalledJson($data);
+
+        $actual = (new ComposerInstalledJsonPackagesProvider())->provide($this->projectPath, $ignoreDev);
+
+        PackagesAsserter::assertThat($actual)->equals($expected);
     }
 
     public function test_throws_if_installed_json_missing(): void
