@@ -10,6 +10,7 @@ parameters:
         - bin/composer-license-checker
         - src
         - tests
+        - rector.php
     reportUnmatchedIgnoredErrors: true
     checkExplicitMixed: true
     tmpDir: tmp/phpstan
