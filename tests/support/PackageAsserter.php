@@ -40,7 +40,7 @@ final class PackageAsserter
     /**
      * @param list<string> $licenses
      */
-    public function hasExactLicense(array $licenses): self
+    public function hasExactLicenses(array $licenses): self
     {
         Assert::assertSameSize($licenses, $this->package->licenses);
 
@@ -54,7 +54,7 @@ final class PackageAsserter
     public function equals(Package $package): self
     {
         $this->hasName($package->name);
-        $this->hasExactLicense($package->licenses);
+        $this->hasExactLicenses($package->licenses);
 
         return $this;
     }
