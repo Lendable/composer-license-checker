@@ -55,4 +55,4 @@ The tool will parse the `installed.json` file created by Composer which has all 
 ### Using `composer licenses` provider
 Specify `--provider-id=licenses`.
 
-The `composer licenses` command provides a (potentially) more stable API for retrieving licensing information. This however requires the tool to execute `composer` so it must be installed in environment executed within. 
+The `composer licenses` command provides a (potentially) more stable API for retrieving licensing information. This however requires the tool to execute `composer` so it must be installed in the environment the tool is run within. 
