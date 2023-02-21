@@ -32,7 +32,16 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
     }
 
     /**
-     * @return iterable<array{array<mixed>, Packages, bool}>
+     * @return iterable<array{
+     *     array{
+     *       dev: bool,
+     *       dev-package-names: list<non-empty-string>,
+     *       packages: list<array{
+     *         name: non-empty-string,
+     *         version: non-empty-string,
+     *         license?: list<non-empty-string>
+     *       }>
+     *     }, Packages, bool}>
      */
     public static function provideInstalledJsonAndExpectedPackages(): iterable
     {
