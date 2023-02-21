@@ -15,7 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Tests\Support\Lendable\ComposerLicenseChecker\PackagesAsserter;
 
 /**
- * @todo Add happy path tests, including ignoring dev, license key being optional, etc.
+ * @phpstan-import-type InstalledData from ComposerInstalledJsonPackagesProvider
  */
 final class ComposerInstalledJsonPackagesProviderTest extends TestCase
 {
@@ -32,16 +32,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
     }
 
     /**
-     * @return iterable<array{
-     *     array{
-     *       dev: bool,
-     *       dev-package-names: list<non-empty-string>,
-     *       packages: list<array{
-     *         name: non-empty-string,
-     *         version: non-empty-string,
-     *         license?: list<non-empty-string>
-     *       }>
-     *     }, Packages, bool}>
+     * @return iterable<array{InstalledData, Packages, bool}>
      */
     public static function provideInstalledJsonAndExpectedPackages(): iterable
     {
