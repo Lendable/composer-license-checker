@@ -34,7 +34,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
     /**
      * @return iterable<array{array<mixed>, Packages, bool}>
      */
-    public function provideInstalledJsonAndExpectedPackages(): iterable
+    public static function provideInstalledJsonAndExpectedPackages(): iterable
     {
         yield 'empty' => [
             [
