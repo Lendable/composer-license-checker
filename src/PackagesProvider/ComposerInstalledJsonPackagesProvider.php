@@ -10,6 +10,10 @@ use Lendable\ComposerLicenseChecker\PackageName;
 use Lendable\ComposerLicenseChecker\Packages;
 use Lendable\ComposerLicenseChecker\PackagesProvider;
 
+/**
+ * @phpstan-type PackageData array{name: non-empty-string, version: non-empty-string, license?: list<non-empty-string>}
+ * @phpstan-type InstalledData array{dev: bool, dev-package-names: list<non-empty-string>, packages: list<PackageData>}
+ */
 final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
 {
     public function provide(string $projectPath, bool $ignoreDev): Packages
@@ -81,7 +85,7 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
                         }
 
                         /** @var list<non-empty-string> $licenses */
-                        /** @var array{name: non-empty-string, license?: list<non-empty-string>} $package */
+                        /** @var PackageData $package */
                         return new Package(
                             new PackageName($package['name']),
                             $licenses,
