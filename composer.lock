@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6220f1c77f16d0ce877c43575e8bf4c",
+    "content-hash": "ed1dae6941ace81a5bcf51521a0ca847",
     "packages": [
         {
             "name": "psr/container",
@@ -1458,16 +1458,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.0",
+            "version": "1.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "71b28a67f01ac231f9a8f1ce242270bf4ec1f99c"
+                "reference": "1cd5fc530a8b68702f3733ad64294b2a39564198"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/71b28a67f01ac231f9a8f1ce242270bf4ec1f99c",
-                "reference": "71b28a67f01ac231f9a8f1ce242270bf4ec1f99c",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/1cd5fc530a8b68702f3733ad64294b2a39564198",
+                "reference": "1cd5fc530a8b68702f3733ad64294b2a39564198",
                 "shasum": ""
             },
             "require": {
@@ -1497,7 +1497,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.10.0"
+                "source": "https://github.com/phpstan/phpstan/tree/1.10.1"
             },
             "funding": [
                 {
@@ -1513,25 +1513,25 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-21T13:50:49+00:00"
+            "time": "2023-02-21T21:57:23+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-deprecation-rules.git",
-                "reference": "2c6792eda026d9c474c14aa018aed312686714db"
+                "reference": "bcc1e8cdf81c3da1a2ba9188ee94cd7e2a62e865"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-deprecation-rules/zipball/2c6792eda026d9c474c14aa018aed312686714db",
-                "reference": "2c6792eda026d9c474c14aa018aed312686714db",
+                "url": "https://api.github.com/repos/phpstan/phpstan-deprecation-rules/zipball/bcc1e8cdf81c3da1a2ba9188ee94cd7e2a62e865",
+                "reference": "bcc1e8cdf81c3da1a2ba9188ee94cd7e2a62e865",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.9.3"
+                "phpstan/phpstan": "^1.10"
             },
             "require-dev": {
                 "php-parallel-lint/php-parallel-lint": "^1.2",
@@ -1559,27 +1559,27 @@
             "description": "PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-deprecation-rules/issues",
-                "source": "https://github.com/phpstan/phpstan-deprecation-rules/tree/1.1.1"
+                "source": "https://github.com/phpstan/phpstan-deprecation-rules/tree/1.1.2"
             },
-            "time": "2022-12-13T14:26:20+00:00"
+            "time": "2023-01-17T16:14:21+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "1.3.4",
+            "version": "1.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "d77af96c1aaec28f7c0293677132eaaad079e01b"
+                "reference": "7e43c8f77c7e419730ead01c8dc787c6bcbe0e15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/d77af96c1aaec28f7c0293677132eaaad079e01b",
-                "reference": "d77af96c1aaec28f7c0293677132eaaad079e01b",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/7e43c8f77c7e419730ead01c8dc787c6bcbe0e15",
+                "reference": "7e43c8f77c7e419730ead01c8dc787c6bcbe0e15",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.9.3"
+                "phpstan/phpstan": "^1.10"
             },
             "conflict": {
                 "phpunit/phpunit": "<7.0"
@@ -1611,9 +1611,9 @@
             "description": "PHPUnit extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
-                "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.3.4"
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.3.7"
             },
-            "time": "2023-02-09T08:05:29+00:00"
+            "time": "2023-02-21T18:40:15+00:00"
         },
         {
             "name": "phpstan/phpstan-strict-rules",
@@ -2084,21 +2084,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.15.17",
+            "version": "0.15.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "7f6ee7974175138864d3b50c28ea73a7b0fd4e2d"
+                "reference": "2c4708affb035af01f6b4a3b4a82f75cc306b039"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/7f6ee7974175138864d3b50c28ea73a7b0fd4e2d",
-                "reference": "7f6ee7974175138864d3b50c28ea73a7b0fd4e2d",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/2c4708affb035af01f6b4a3b4a82f75cc306b039",
+                "reference": "2c4708affb035af01f6b4a3b4a82f75cc306b039",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2|^8.0",
-                "phpstan/phpstan": "^1.9.14"
+                "phpstan/phpstan": "^1.10.1"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -2127,7 +2127,7 @@
             "description": "Instant Upgrade and Automated Refactoring of any PHP code",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.15.17"
+                "source": "https://github.com/rectorphp/rector/tree/0.15.18"
             },
             "funding": [
                 {
@@ -2135,7 +2135,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-17T20:34:07+00:00"
+            "time": "2023-02-22T12:06:55+00:00"
         },
         {
             "name": "sebastian/cli-parser",
