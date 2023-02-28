@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "04017e1bc7e0f7b8505b0b7a96a6d13e",
+    "content-hash": "a8fac2906a21eb821492ff6403f1286b",
     "packages": [
         {
             "name": "psr/container",
@@ -788,22 +788,22 @@
     "packages-dev": [
         {
             "name": "ergebnis/composer-normalize",
-            "version": "2.30.1",
+            "version": "2.30.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/composer-normalize.git",
-                "reference": "df51cc46e00523e6d2e4e34c9c4f49862d519fdb"
+                "reference": "54d58f7dc5517ae183ac2c06f1dcbd616876673c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/df51cc46e00523e6d2e4e34c9c4f49862d519fdb",
-                "reference": "df51cc46e00523e6d2e4e34c9c4f49862d519fdb",
+                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/54d58f7dc5517ae183ac2c06f1dcbd616876673c",
+                "reference": "54d58f7dc5517ae183ac2c06f1dcbd616876673c",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^2.0.0",
                 "ergebnis/json": "^1.0.1",
-                "ergebnis/json-normalizer": "^4.0.1",
+                "ergebnis/json-normalizer": "^4.0.2",
                 "ergebnis/json-printer": "^3.3.0",
                 "ext-json": "*",
                 "justinrainbow/json-schema": "^5.2.12",
@@ -857,7 +857,7 @@
                 "issues": "https://github.com/ergebnis/composer-normalize/issues",
                 "source": "https://github.com/ergebnis/composer-normalize"
             },
-            "time": "2023-02-27T11:37:13+00:00"
+            "time": "2023-02-27T17:23:42+00:00"
         },
         {
             "name": "ergebnis/json",
@@ -923,16 +923,16 @@
         },
         {
             "name": "ergebnis/json-normalizer",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/json-normalizer.git",
-                "reference": "d4a3ea5fdd281eda106b8c07dac236b31ae54d36"
+                "reference": "15df99fbf454da13b31008795a7397d3d7d73bb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/json-normalizer/zipball/d4a3ea5fdd281eda106b8c07dac236b31ae54d36",
-                "reference": "d4a3ea5fdd281eda106b8c07dac236b31ae54d36",
+                "url": "https://api.github.com/repos/ergebnis/json-normalizer/zipball/15df99fbf454da13b31008795a7397d3d7d73bb4",
+                "reference": "15df99fbf454da13b31008795a7397d3d7d73bb4",
                 "shasum": ""
             },
             "require": {
@@ -987,7 +987,7 @@
                 "issues": "https://github.com/ergebnis/json-normalizer/issues",
                 "source": "https://github.com/ergebnis/json-normalizer"
             },
-            "time": "2023-02-27T11:32:19+00:00"
+            "time": "2023-02-27T17:17:30+00:00"
         },
         {
             "name": "ergebnis/json-pointer",
@@ -1693,16 +1693,16 @@
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "1.3.8",
+            "version": "1.3.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "4a19a3cb5b2d28b143f350e45e9f6e17e2cb81b5"
+                "reference": "34ee324a2b8fcab680fbb3f3f3d6c86389df35ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/4a19a3cb5b2d28b143f350e45e9f6e17e2cb81b5",
-                "reference": "4a19a3cb5b2d28b143f350e45e9f6e17e2cb81b5",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/34ee324a2b8fcab680fbb3f3f3d6c86389df35ba",
+                "reference": "34ee324a2b8fcab680fbb3f3f3d6c86389df35ba",
                 "shasum": ""
             },
             "require": {
@@ -1739,9 +1739,9 @@
             "description": "PHPUnit extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
-                "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.3.8"
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.3.9"
             },
-            "time": "2023-02-25T15:14:31+00:00"
+            "time": "2023-02-28T13:04:23+00:00"
         },
         {
             "name": "phpstan/phpstan-strict-rules",
@@ -2212,16 +2212,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.15.18",
+            "version": "0.15.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "2c4708affb035af01f6b4a3b4a82f75cc306b039"
+                "reference": "4b3a85382e890963a6d00e0ace8d09465f96e370"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/2c4708affb035af01f6b4a3b4a82f75cc306b039",
-                "reference": "2c4708affb035af01f6b4a3b4a82f75cc306b039",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/4b3a85382e890963a6d00e0ace8d09465f96e370",
+                "reference": "4b3a85382e890963a6d00e0ace8d09465f96e370",
                 "shasum": ""
             },
             "require": {
@@ -2255,7 +2255,7 @@
             "description": "Instant Upgrade and Automated Refactoring of any PHP code",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.15.18"
+                "source": "https://github.com/rectorphp/rector/tree/0.15.19"
             },
             "funding": [
                 {
@@ -2263,7 +2263,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-22T12:06:55+00:00"
+            "time": "2023-02-28T10:47:53+00:00"
         },
         {
             "name": "sebastian/cli-parser",
