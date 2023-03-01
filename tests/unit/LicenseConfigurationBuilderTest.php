@@ -15,7 +15,7 @@ final class LicenseConfigurationBuilderTest extends TestCase
 
         self::assertSame([], $configuration->allowedLicenses);
         self::assertSame([], $configuration->allowedPackagePatterns);
-        self::assertSame(false, $configuration->ignoreDev);
+        self::assertFalse($configuration->ignoreDev);
     }
 
     public function test_builds_expected_configuration(): void
