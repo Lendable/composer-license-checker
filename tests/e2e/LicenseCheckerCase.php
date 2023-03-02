@@ -66,11 +66,10 @@ abstract class LicenseCheckerCase extends TestCase
 
     public function test_failure_with_invalid_allowed_licenses_file(): void
     {
-        $exitCode = $this->commandTester->execute([
+        $this->commandTester->execute([
             '--allow-file' => 'tests/data/default/invalid_allowed_licenses.php',
             '--path' => $this->path,
         ]);
-        $output = $this->getOutputLines();
 
         CommandTesterAsserter::assertThat($this->commandTester)
             ->encounteredError(
@@ -79,11 +78,6 @@ abstract class LicenseCheckerCase extends TestCase
                     LicenseConfiguration::class,
                 )
             );
-
-        self::assertSame(1, $exitCode);
-        self::assertCount(5, $output);
-        self::assertSame('[ERROR] File "tests/data/default/invalid_allowed_licenses.php" must return an instance of', $output[3]);
-        self::assertSame(LicenseConfiguration::class.'.', $output[4]);
     }
 
     public function test_no_licenses_allowed(): void
@@ -196,12 +190,7 @@ abstract class LicenseCheckerCase extends TestCase
             ->withAllowedVendor('package')
             ->build();
 
-        $exitCode = $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => $this->path]);
-        $output = $this->getOutputLines();
-
-        self::assertSame(0, $exitCode);
-        self::assertCount(4, $output);
-        self::assertSame('[OK] All dependencies have allowed licenses.', $output[3]);
+        $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => $this->path]);
 
         CommandTesterAsserter::assertThat($this->commandTester)
             ->foundNoLicensingIssues();
