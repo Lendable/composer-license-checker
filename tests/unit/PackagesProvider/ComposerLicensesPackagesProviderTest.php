@@ -24,12 +24,12 @@ final class ComposerLicensesPackagesProviderTest extends TestCase
 
     public function test_returns_parsed_packages(): void
     {
-        $this->composerRunner->setOutput((string) \json_encode([
+        $this->composerRunner->setOutput(\json_encode([
             'dependencies' => [
                 'vendor/project' => ['license' => ['MIT', 'LGPL']],
                 'vendor2/project' => ['license' => ['WTFPL']],
             ],
-        ]));
+        ], \JSON_THROW_ON_ERROR));
 
         $packages = \iterator_to_array($this->provider->provide('path', false));
 
