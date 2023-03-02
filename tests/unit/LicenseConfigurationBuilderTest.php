@@ -15,7 +15,7 @@ final class LicenseConfigurationBuilderTest extends TestCase
 
         self::assertSame([], $configuration->allowedLicenses);
         self::assertSame([], $configuration->allowedPackagePatterns);
-        self::assertSame(false, $configuration->ignoreDev);
+        self::assertFalse($configuration->ignoreDev);
     }
 
     public function test_builds_expected_configuration(): void
@@ -30,7 +30,7 @@ final class LicenseConfigurationBuilderTest extends TestCase
 
         self::assertSame(['MIT', 'WTFPL'], $configuration->allowedLicenses);
         self::assertSame(['~^someone/.+$~', '~^other/person$~', '~^lenbadle/.+$~'], $configuration->allowedPackagePatterns);
-        self::assertSame(true, $configuration->ignoreDev);
+        self::assertTrue($configuration->ignoreDev);
     }
 
     public function test_license_can_be_removed(): void
