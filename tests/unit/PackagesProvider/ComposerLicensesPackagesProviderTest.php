@@ -29,7 +29,7 @@ final class ComposerLicensesPackagesProviderTest extends TestCase
                 'vendor/project' => ['license' => ['MIT', 'LGPL']],
                 'vendor2/project' => ['license' => ['WTFPL']],
             ],
-        ]));
+        ], \JSON_THROW_ON_ERROR));
 
         $packages = \iterator_to_array($this->provider->provide('path', false));
 
