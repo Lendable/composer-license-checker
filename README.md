@@ -32,7 +32,7 @@ return (new LicenseConfigurationBuilder())
         // And other licenses you wish to allow.
     )
     ->addAllowedVendor('vendor_name') // Allow any license from a specific vendor, i.e. your own company.
-    ->addAllowedPackage('vendor_name/foo_bar') // Allow a specific package regardless licensing.
+    ->addAllowedPackage('vendor_name/foo_bar') // Allow a specific package regardless of licensing.
     ->build();
 
 ```
