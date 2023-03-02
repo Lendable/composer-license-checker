@@ -24,7 +24,7 @@ final class ComposerLicensesPackagesProviderTest extends TestCase
 
     public function test_returns_parsed_packages(): void
     {
-        $this->composerRunner->setOutput((string) \json_encode([
+        $this->composerRunner->setOutput(\json_encode([
             'dependencies' => [
                 'vendor/project' => ['license' => ['MIT', 'LGPL']],
                 'vendor2/project' => ['license' => ['WTFPL']],
