@@ -139,7 +139,6 @@ abstract class LicenseCheckerCase extends TestCase
             ->build();
 
         $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => $this->path]);
-        $this->getOutputLines();
 
         CommandTesterAsserter::assertThat($this->commandTester)
             ->foundLicensingIssues(
@@ -223,14 +222,6 @@ abstract class LicenseCheckerCase extends TestCase
 
         CommandTesterAsserter::assertThat($this->commandTester)
             ->foundNoLicensingIssues();
-    }
-
-    /**
-     * @return list<string>
-     */
-    private function getOutputLines(): array
-    {
-        return \array_map(\trim(...), \explode(\PHP_EOL, \trim($this->commandTester->getDisplay())));
     }
 
     /**
