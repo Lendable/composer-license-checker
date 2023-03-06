@@ -9,15 +9,15 @@ use Lendable\ComposerLicenseChecker\LicenseChecker;
 use Lendable\ComposerLicenseChecker\LicenseConfiguration;
 use Lendable\ComposerLicenseChecker\PackagesProvider;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Support\Lendable\ComposerLicenseChecker\CommandTesterAsserter;
 use Tests\Support\Lendable\ComposerLicenseChecker\LicenseConfigurationFileBuilder;
+use Tests\Support\Lendable\ComposerLicenseChecker\SingleCommandApplicationTester;
 
 abstract class LicenseCheckerCase extends TestCase
 {
-    private CommandTester $commandTester;
+    protected SingleCommandApplicationTester $commandTester;
 
-    private string $path = 'tests'.\DIRECTORY_SEPARATOR.'data'.\DIRECTORY_SEPARATOR.'default'.\DIRECTORY_SEPARATOR;
+    protected string $path = 'tests'.\DIRECTORY_SEPARATOR.'data'.\DIRECTORY_SEPARATOR.'default'.\DIRECTORY_SEPARATOR;
 
     protected function setUp(): void
     {
@@ -28,7 +28,7 @@ abstract class LicenseCheckerCase extends TestCase
         );
         $command->setAutoExit(false);
 
-        $this->commandTester = new CommandTester($command);
+        $this->commandTester = new SingleCommandApplicationTester($command);
     }
 
     abstract protected function packagesProvider(): PackagesProvider;
@@ -227,7 +227,7 @@ abstract class LicenseCheckerCase extends TestCase
     /**
      * @return resource
      */
-    private function createTempFile(): mixed
+    final protected function createTempFile(): mixed
     {
         $handle = \tmpfile();
 
