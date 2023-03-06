@@ -10,11 +10,11 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 final class CommandTesterAsserter
 {
-    private function __construct(private readonly CommandTester $commandTester)
+    private function __construct(private readonly SingleCommandApplicationTester|CommandTester $commandTester)
     {
     }
 
-    public static function assertThat(CommandTester $commandTester): self
+    public static function assertThat(SingleCommandApplicationTester|CommandTester $commandTester): self
     {
         return new self($commandTester);
     }
