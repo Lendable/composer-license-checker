@@ -13,8 +13,9 @@ final class SymfonyProcessComposerRunner implements ComposerRunner
     public function licenses(string $projectPath, bool $ignoreDev): string
     {
         $process = Process::fromShellCommandline(
-            \sprintf('SHELL_VERBOSITY=0 composer licenses --format=json %s', $ignoreDev ? '--no-dev' : ''),
+            \sprintf('composer licenses --format=json %s', $ignoreDev ? '--no-dev' : ''),
             $projectPath,
+            ['SHELL_VERBOSITY' => '0'],
         );
         $process->run();
         if (!$process->isSuccessful()) {
