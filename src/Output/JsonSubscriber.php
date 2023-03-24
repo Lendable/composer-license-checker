@@ -16,6 +16,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class JsonSubscriber implements Subscriber
 {
+    private const ENCODING_FLAGS = \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT;
+
     /**
      * @var array<string, list<string>>
      */
@@ -47,7 +49,7 @@ final class JsonSubscriber implements Subscriber
         $this->output->writeln(
             \json_encode(
                 ['result' => 'error', 'message' => $event->message],
-                \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT
+                self::ENCODING_FLAGS
             )
         );
     }
@@ -67,7 +69,7 @@ final class JsonSubscriber implements Subscriber
         $this->output->writeln(
             \json_encode(
                 ['result' => 'failure', 'violations' => $this->packagesWithViolatingLicenses],
-                \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT,
+                self::ENCODING_FLAGS,
             )
         );
     }
@@ -77,7 +79,7 @@ final class JsonSubscriber implements Subscriber
         $this->output->writeln(
             \json_encode(
                 ['result' => 'success'],
-                \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT
+                self::ENCODING_FLAGS,
             )
         );
     }
