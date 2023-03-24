@@ -32,6 +32,11 @@ final class JsonDisplay implements Display
         $this->packagesWithViolatingLicenses[$package][] = $license;
     }
 
+    public function onPackageWithNoLicenseNotExplicitlyAllowed(string $package): void
+    {
+        $this->packagesWithViolatingLicenses[$package][] = 'UNLICENSED';
+    }
+
     public function onOverallFailure(): void
     {
         $this->output->writeln(
@@ -45,5 +50,9 @@ final class JsonDisplay implements Display
     public function onOverallSuccess(): void
     {
         $this->output->writeln(\json_encode(['result' => 'success'], \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT));
+    }
+
+    public function onDetail(string $message): void
+    {
     }
 }

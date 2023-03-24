@@ -22,4 +22,8 @@ interface Display
     public function onOverallFailure(): void;
 
     public function onOverallSuccess(): void;
+
+    public function onDetail(string $message): void;
+
+    public function onPackageWithNoLicenseNotExplicitlyAllowed(string $package): void;
 }

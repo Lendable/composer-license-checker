@@ -46,4 +46,19 @@ final class HumanReadableDisplay implements Display
             )
         );
     }
+
+    public function onPackageWithNoLicenseNotExplicitlyAllowed(string $package): void
+    {
+        $this->style->error(
+            \sprintf(
+                'Dependency "%s" does not have a license and is not explicitly allowed.',
+                $package,
+            )
+        );
+    }
+
+    public function onDetail(string $message): void
+    {
+        $this->style->writeln($message, OutputInterface::VERBOSITY_VERBOSE);
+    }
 }

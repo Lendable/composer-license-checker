@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lendable\ComposerLicenseChecker;
 
+use Lendable\ComposerLicenseChecker\Exception\FailedProvidingPackages;
+use Lendable\ComposerLicenseChecker\Exception\PackagesProviderNotLocated;
 use Lendable\ComposerLicenseChecker\Output\Display;
 use Lendable\ComposerLicenseChecker\Output\HumanReadableDisplay;
 use Lendable\ComposerLicenseChecker\Output\JsonDisplay;
@@ -11,10 +13,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\SingleCommandApplication;
-use Symfony\Component\Process\Process;
 
 final class LicenseChecker extends SingleCommandApplication
 {
+    public function __construct(private readonly PackagesProviderLocator $locator)
+    {
+        parent::__construct();
+    }
+
     protected function configure(): void
     {
         $this
@@ -26,6 +32,23 @@ final class LicenseChecker extends SingleCommandApplication
                 InputOption::VALUE_REQUIRED,
                 'Path to the allowed licenses configuration file',
                 '.allowed-licenses.php',
+            )->addOption(
+                'path',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Path to project root, where composer.json lives',
+                null,
+            )->addOption(
+                'provider-id',
+                null,
+                InputOption::VALUE_REQUIRED,
+                \sprintf('Which packages data provider to use, one of: %s', \implode(', ', $ids = $this->locator->ids())),
+                $ids[0] ?? null,
+            )->addOption(
+                'no-dev',
+                null,
+                InputOption::VALUE_NONE,
+                'Disables dev dependencies check',
             )
             ->addOption(
                 'format',
@@ -62,45 +85,74 @@ final class LicenseChecker extends SingleCommandApplication
             return self::FAILURE;
         }
 
-        $process = Process::fromShellCommandline('composer licenses --format=json');
-        $process->run();
-        if (!$process->isSuccessful()) {
-            $display->onFatalError(
-                \sprintf(
-                    'Failed to run "composer licenses --format=json" (%d).',
-                    $process->getExitCode(),
-                )
-            );
+        /** @var string|null $path */
+        $path = $input->getOption('path');
+        if (\is_string($path) && !\is_dir($path)) {
+            $display->onFatalError(\sprintf('The provided path "%s" does not exist.', $path));
 
             return self::FAILURE;
         }
 
-        $rawData = $process->getOutput();
+        $path = $path === null ? \getcwd() : \realpath($path);
+        if ($path === false) {
+            $display->onFatalError('Could not resolve project path.');
 
-        /** @var array{
-         *       name: string,
-         *       version: string,
-         *       license: list<non-empty-string>,
-         *       dependencies: array<non-empty-string, array{version: non-empty-string, license: list<non-empty-string>}>
-         * }|false $data
-         */
-        $data = \json_decode($rawData, true, flags: \JSON_THROW_ON_ERROR);
-        \assert(\is_array($data));
+            return self::FAILURE;
+        }
+
+        /** @var non-empty-string $providerId */
+        $providerId = $input->getOption('provider-id');
+        $noDev = $config->ignoreDev || $input->getOption('no-dev') === true;
+
+        $display->onDetail(\sprintf('Checking project at: %s', $path));
+        $display->onDetail(\sprintf('Using allow file: %s', \realpath($allowFile)));
+        $display->onDetail(\sprintf('Using provider with id: %s', $providerId));
+        $display->onDetail(\sprintf('With dev dependencies: %s', $noDev ? 'no' : 'yes'));
+
+        try {
+            $provider = $this->locator->locate($providerId);
+        } catch (PackagesProviderNotLocated $e) {
+            $display->onFatalError($e->getMessage());
+
+            return self::FAILURE;
+        }
 
         $violation = false;
 
-        foreach ($data['dependencies'] as $package => $packageData) {
-            if ($config->allowsPackage($package)) {
+        try {
+            $packages = $provider->provide($path, $noDev);
+        } catch (FailedProvidingPackages $e) {
+            $message = $e->getMessage();
+            if (null !== $cause = $e->getPrevious()) {
+                $message .= ': '.$cause->getMessage();
+            }
+
+            $display->onFatalError($message);
+
+            return self::FAILURE;
+        }
+
+        $display->onDetail(\sprintf('Packages found: %d', \count($packages)));
+
+        foreach ($packages as $package) {
+            if ($config->allowsPackage($package->name->toString())) {
                 continue;
             }
 
-            foreach ($packageData['license'] as $license) {
+            if ($package->licenses === []) {
+                $violation = true;
+                $display->onPackageWithNoLicenseNotExplicitlyAllowed($package->name->toString());
+
+                continue;
+            }
+
+            foreach ($package->licenses as $license) {
                 if ($config->allowsLicense($license)) {
                     continue;
                 }
 
                 $violation = true;
-                $display->onPackageWithViolatingLicense($package, $license);
+                $display->onPackageWithViolatingLicense($package->name->toString(), $license);
             }
         }
 

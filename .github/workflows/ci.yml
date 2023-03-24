@@ -47,15 +47,26 @@ jobs:
       - name: "Run security check"
         run: "composer security:check"
 
-      - name: "Check licenses"
-        run: "composer license:check"
+      - name: "Check licenses (composer installed.json provider)"
+        run: "composer license:check -- --provider-id=json -v"
+
+      - name: "Check licenses (composer licenses provider)"
+        run: "composer license:check -- --provider-id=licenses -v"
 
       - name: "Run coding style"
         if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.1' }}
         run: "composer code-style:check"
 
       - name: "Run PHPStan"
+        if: ${{ matrix.dependencies == 'locked' }}
         run: "composer phpstan"
+
+      - name: "Run Rector"
+        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.1' }}
+        run: "composer rector:check"
+
+      - name: "Unit tests"
+        run: "composer tests:unit"
 
       - name: "End-to-End tests"
         run: "composer tests:e2e"
