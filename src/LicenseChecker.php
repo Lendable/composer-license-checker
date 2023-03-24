@@ -25,6 +25,9 @@ use Symfony\Component\Console\SingleCommandApplication;
 
 final class LicenseChecker extends SingleCommandApplication
 {
+    protected static $defaultDescription = 'Checks licensing of dependencies against a set of rules '.
+    'to ensure compliance with open source licenses and minimize legal risk.';
+
     public function __construct(
         private readonly PackagesProviderLocator $locator,
         private readonly Dispatcher $dispatcher = new Dispatcher(),
@@ -36,7 +39,6 @@ final class LicenseChecker extends SingleCommandApplication
     {
         $this
             ->setName('Composer License Checker')
-            ->setDescription('Checks licensing of dependencies against a set of rules to ensure compliance with open source licenses and minimize legal risk.')
             ->setVersion('0.0.1')
             ->addOption(
                 'allow-file',
