@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class JsonDisplay implements Display
 {
-    public const ENCODING_FLAGS = \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT;
+    private const ENCODING_FLAGS = \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT;
 
     /**
      * @var array<non-empty-string, list<non-empty-string>>
