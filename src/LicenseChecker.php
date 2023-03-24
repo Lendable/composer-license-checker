@@ -69,7 +69,16 @@ final class LicenseChecker extends SingleCommandApplication
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $dispatcher = $this->createDispatcher($input, $output);
+        try {
+            $dispatcher = $this->createDispatcher($input, $output);
+        } catch (\InvalidArgumentException $exception) {
+            $display = new HumanReadableDisplay($input, $output);
+            $display->onStarted();
+            $display->onFatalError($exception->getMessage());
+
+            return self::FAILURE;
+        }
+
         $dispatcher->dispatch(new Started());
 
         /** @var string $allowFile */
