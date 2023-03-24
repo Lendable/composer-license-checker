@@ -30,12 +30,7 @@ final class PackageName
             throw InvalidPackageName::for($packageName);
         }
 
-        if ($data[0] === '' || $data[1] === '') {
-            throw InvalidPackageName::for($packageName);
-        }
-
-        $this->vendor = $data[0];
-        $this->project = $data[1];
+        [$this->vendor, $this->project] = $data;
     }
 
     /**
