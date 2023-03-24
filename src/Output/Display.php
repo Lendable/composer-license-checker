@@ -19,11 +19,17 @@ interface Display
      */
     public function onPackageWithViolatingLicense(string $package, string $license): void;
 
+    /**
+     * @param non-empty-string $package
+     */
+    public function onPackageWithNoLicenseNotExplicitlyAllowed(string $package): void;
+
     public function onOverallFailure(): void;
 
     public function onOverallSuccess(): void;
 
+    /**
+     * @param non-empty-string $message
+     */
     public function onDetail(string $message): void;
-
-    public function onPackageWithNoLicenseNotExplicitlyAllowed(string $package): void;
 }
