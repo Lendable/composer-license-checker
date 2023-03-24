@@ -39,26 +39,26 @@ final class HumanReadableSubscriber implements Subscriber
         ];
     }
 
-    public function onStarted(Started $event): void
+    private function onStarted(Started $event): void
     {
         $this->style->title('Composer License Checker');
     }
 
-    public function onFatalError(FatalError $event): void
+    private function onFatalError(FatalError $event): void
     {
         $this->style->error($event->message);
     }
 
-    public function onOutcomeFailure(OutcomeFailure $event): void
+    private function onOutcomeFailure(OutcomeFailure $event): void
     {
     }
 
-    public function onOutcomeSuccess(OutcomeSuccess $event): void
+    private function onOutcomeSuccess(OutcomeSuccess $event): void
     {
         $this->style->success('All dependencies have allowed licenses.');
     }
 
-    public function onPackageWithViolatingLicense(PackageWithViolatingLicense $event): void
+    private function onPackageWithViolatingLicense(PackageWithViolatingLicense $event): void
     {
         $this->style->error(
             \sprintf(
@@ -69,7 +69,7 @@ final class HumanReadableSubscriber implements Subscriber
         );
     }
 
-    public function onUnlicensedPackageNotExplicitlyAllowed(UnlicensedPackageNotExplicitlyAllowed $event): void
+    private function onUnlicensedPackageNotExplicitlyAllowed(UnlicensedPackageNotExplicitlyAllowed $event): void
     {
         $this->style->error(
             \sprintf(
@@ -79,7 +79,7 @@ final class HumanReadableSubscriber implements Subscriber
         );
     }
 
-    public function onTraceInformation(TraceInformation $event): void
+    private function onTraceInformation(TraceInformation $event): void
     {
         $this->style->writeln($event->message, OutputInterface::VERBOSITY_VERBOSE);
     }
