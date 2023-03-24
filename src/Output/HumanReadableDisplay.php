@@ -47,7 +47,7 @@ final class HumanReadableDisplay implements Display
         );
     }
 
-    public function onPackageWithNoLicenseNotExplicitlyAllowed(string $package): void
+    public function onUnlicensedPackageWhichIsNotExplicitlyAllowed(string $package): void
     {
         $this->style->error(
             \sprintf(

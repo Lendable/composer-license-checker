@@ -22,7 +22,7 @@ interface Display
     /**
      * @param non-empty-string $package
      */
-    public function onPackageWithNoLicenseNotExplicitlyAllowed(string $package): void;
+    public function onUnlicensedPackageWhichIsNotExplicitlyAllowed(string $package): void;
 
     public function onOverallFailure(): void;
 

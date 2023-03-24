@@ -32,7 +32,7 @@ final class JsonDisplay implements Display
         $this->packagesWithViolatingLicenses[$package][] = $license;
     }
 
-    public function onPackageWithNoLicenseNotExplicitlyAllowed(string $package): void
+    public function onUnlicensedPackageWhichIsNotExplicitlyAllowed(string $package): void
     {
         $this->packagesWithViolatingLicenses[$package][] = 'UNLICENSED';
     }

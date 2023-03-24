@@ -141,7 +141,7 @@ final class LicenseChecker extends SingleCommandApplication
 
             if ($package->licenses === []) {
                 $violation = true;
-                $display->onPackageWithNoLicenseNotExplicitlyAllowed($package->name->toString());
+                $display->onUnlicensedPackageWhichIsNotExplicitlyAllowed($package->name->toString());
 
                 continue;
             }
