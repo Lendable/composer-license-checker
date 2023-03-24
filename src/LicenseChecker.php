@@ -14,6 +14,7 @@ use Lendable\ComposerLicenseChecker\Event\TraceInformation;
 use Lendable\ComposerLicenseChecker\Event\UnlicensedPackageNotExplicitlyAllowed;
 use Lendable\ComposerLicenseChecker\Exception\FailedProvidingPackages;
 use Lendable\ComposerLicenseChecker\Exception\PackagesProviderNotLocated;
+use Lendable\ComposerLicenseChecker\Output\Display;
 use Lendable\ComposerLicenseChecker\Output\DisplayOutputSubscriber;
 use Lendable\ComposerLicenseChecker\Output\HumanReadableDisplay;
 use Lendable\ComposerLicenseChecker\Output\JsonDisplay;
@@ -24,8 +25,10 @@ use Symfony\Component\Console\SingleCommandApplication;
 
 final class LicenseChecker extends SingleCommandApplication
 {
-    public function __construct(private readonly PackagesProviderLocator $locator)
-    {
+    public function __construct(
+        private readonly PackagesProviderLocator $locator,
+        private readonly Dispatcher $dispatcher = new Dispatcher(),
+    ) {
         parent::__construct();
     }
 
@@ -70,7 +73,7 @@ final class LicenseChecker extends SingleCommandApplication
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $dispatcher = $this->createDispatcher($input, $output);
+            $display = $this->createDisplay($input, $output);
         } catch (\InvalidArgumentException $exception) {
             $display = new HumanReadableDisplay($input, $output);
             $display->onStarted();
@@ -81,19 +84,21 @@ final class LicenseChecker extends SingleCommandApplication
             return self::FAILURE;
         }
 
-        $dispatcher->dispatch(new Started());
+        $this->dispatcher->attach(new DisplayOutputSubscriber($display));
+
+        $this->dispatcher->dispatch(new Started());
 
         /** @var string $allowFile */
         $allowFile = $input->getOption('allow-file');
         if (!\is_file($allowFile) || !\is_readable($allowFile)) {
-            $dispatcher->dispatch(new FatalError(\sprintf('File "%s" could not be read.', $allowFile)));
+            $this->dispatcher->dispatch(new FatalError(\sprintf('File "%s" could not be read.', $allowFile)));
 
             return self::FAILURE;
         }
 
         $config = require $input->getOption('allow-file');
         if (!$config instanceof LicenseConfiguration) {
-            $dispatcher->dispatch(
+            $this->dispatcher->dispatch(
                 new FatalError(
                     \sprintf(
                         'File "%s" must return an instance of %s.',
@@ -109,14 +114,14 @@ final class LicenseChecker extends SingleCommandApplication
         /** @var string|null $path */
         $path = $input->getOption('path');
         if (\is_string($path) && !\is_dir($path)) {
-            $dispatcher->dispatch(new FatalError(\sprintf('The provided path "%s" does not exist.', $path)));
+            $this->dispatcher->dispatch(new FatalError(\sprintf('The provided path "%s" does not exist.', $path)));
 
             return self::FAILURE;
         }
 
         $path = $path === null ? \getcwd() : \realpath($path);
         if ($path === false) {
-            $dispatcher->dispatch(new FatalError('Could not resolve project path.'));
+            $this->dispatcher->dispatch(new FatalError('Could not resolve project path.'));
 
             return self::FAILURE;
         }
@@ -125,15 +130,15 @@ final class LicenseChecker extends SingleCommandApplication
         $providerId = $input->getOption('provider-id');
         $noDev = $config->ignoreDev || $input->getOption('no-dev') === true;
 
-        $dispatcher->dispatch(new TraceInformation(\sprintf('Checking project at: %s', $path)));
-        $dispatcher->dispatch(new TraceInformation(\sprintf('Using allow file: %s', \realpath($allowFile))));
-        $dispatcher->dispatch(new TraceInformation(\sprintf('Using provider with id: %s', $providerId)));
-        $dispatcher->dispatch(new TraceInformation(\sprintf('With dev dependencies: %s', $noDev ? 'no' : 'yes')));
+        $this->dispatcher->dispatch(new TraceInformation(\sprintf('Checking project at: %s', $path)));
+        $this->dispatcher->dispatch(new TraceInformation(\sprintf('Using allow file: %s', \realpath($allowFile))));
+        $this->dispatcher->dispatch(new TraceInformation(\sprintf('Using provider with id: %s', $providerId)));
+        $this->dispatcher->dispatch(new TraceInformation(\sprintf('With dev dependencies: %s', $noDev ? 'no' : 'yes')));
 
         try {
             $provider = $this->locator->locate($providerId);
         } catch (PackagesProviderNotLocated $e) {
-            $dispatcher->dispatch(new FatalError($e->getMessage()));
+            $this->dispatcher->dispatch(new FatalError($e->getMessage()));
 
             return self::FAILURE;
         }
@@ -148,12 +153,12 @@ final class LicenseChecker extends SingleCommandApplication
                 $message .= ': '.$cause->getMessage();
             }
 
-            $dispatcher->dispatch(new FatalError($message));
+            $this->dispatcher->dispatch(new FatalError($message));
 
             return self::FAILURE;
         }
 
-        $dispatcher->dispatch(new TraceInformation(\sprintf('Packages found: %d', \count($packages))));
+        $this->dispatcher->dispatch(new TraceInformation(\sprintf('Packages found: %d', \count($packages))));
 
         foreach ($packages as $package) {
             if ($config->allowsPackage($package->name->toString())) {
@@ -162,7 +167,7 @@ final class LicenseChecker extends SingleCommandApplication
 
             if ($package->licenses === []) {
                 $violation = true;
-                $dispatcher->dispatch(new UnlicensedPackageNotExplicitlyAllowed($package));
+                $this->dispatcher->dispatch(new UnlicensedPackageNotExplicitlyAllowed($package));
 
                 continue;
             }
@@ -173,29 +178,27 @@ final class LicenseChecker extends SingleCommandApplication
                 }
 
                 $violation = true;
-                $dispatcher->dispatch(new PackageWithViolatingLicense($package, $license));
+                $this->dispatcher->dispatch(new PackageWithViolatingLicense($package, $license));
             }
         }
 
         if ($violation) {
-            $dispatcher->dispatch(new OutcomeFailure());
+            $this->dispatcher->dispatch(new OutcomeFailure());
 
             return self::FAILURE;
         }
 
-        $dispatcher->dispatch(new OutcomeSuccess());
+        $this->dispatcher->dispatch(new OutcomeSuccess());
 
         return self::SUCCESS;
     }
 
-    private function createDispatcher(InputInterface $input, OutputInterface $output): Dispatcher
+    private function createDisplay(InputInterface $input, OutputInterface $output): Display
     {
-        $dispatcher = new Dispatcher();
-
         $format = $input->getOption('format');
         \assert(\is_string($format));
 
-        $display = match ($format) {
+        return match ($format) {
             'human' => new HumanReadableDisplay($input, $output),
             'json' => new JsonDisplay($output),
             default => throw new \InvalidArgumentException(
@@ -205,9 +208,5 @@ final class LicenseChecker extends SingleCommandApplication
                 )
             )
         };
-
-        $dispatcher->attach(new DisplayOutputSubscriber($display));
-
-        return $dispatcher;
     }
 }
