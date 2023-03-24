@@ -39,5 +39,8 @@ final class PackageNameTest extends TestCase
         yield 'empty' => [' '];
         yield 'vendor only' => ['vendor'];
         yield 'too many parts' => ['vendor/name/subname'];
+        yield 'only a /' => ['/'];
+        yield 'vendor/' => ['vendor/'];
+        yield '/package' => ['/package'];
     }
 }
