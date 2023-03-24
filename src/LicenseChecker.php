@@ -74,7 +74,9 @@ final class LicenseChecker extends SingleCommandApplication
         } catch (\InvalidArgumentException $exception) {
             $display = new HumanReadableDisplay($input, $output);
             $display->onStarted();
-            $display->onFatalError($exception->getMessage());
+            /** @var non-empty-string $message */
+            $message = $exception->getMessage();
+            $display->onFatalError($message);
 
             return self::FAILURE;
         }
