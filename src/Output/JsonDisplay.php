@@ -19,6 +19,11 @@ final class JsonDisplay implements Display
      */
     public array $violations = [];
 
+    /**
+     * @var list<non-empty-string>
+     */
+    private array $trace = [];
+
     public function __construct(public readonly OutputInterface $output)
     {
     }
@@ -50,9 +55,15 @@ final class JsonDisplay implements Display
 
     public function onOutcomeFailure(): void
     {
+        $data = ['result' => 'failure', 'violations' => $this->violations];
+
+        if ($this->output->isVerbose()) {
+            $data['trace'] = $this->trace;
+        }
+
         $this->output->writeln(
             \json_encode(
-                ['result' => 'failure', 'violations' => $this->violations],
+                $data,
                 self::ENCODING_FLAGS,
             )
         );
@@ -60,9 +71,15 @@ final class JsonDisplay implements Display
 
     public function onOutcomeSuccess(): void
     {
+        $data = ['result' => 'success'];
+
+        if ($this->output->isVerbose()) {
+            $data['trace'] = $this->trace;
+        }
+
         $this->output->writeln(
             \json_encode(
-                ['result' => 'success'],
+                $data,
                 self::ENCODING_FLAGS,
             )
         );
@@ -70,5 +87,6 @@ final class JsonDisplay implements Display
 
     public function onTraceInformation(string $message): void
     {
+        $this->trace[] = $message;
     }
 }
