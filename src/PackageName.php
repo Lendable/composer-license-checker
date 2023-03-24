@@ -26,7 +26,7 @@ final class PackageName
     public function __construct(string $packageName)
     {
         $data = \explode('/', $packageName);
-        if (\count($data) !== 2) {
+        if (\count($data) !== 2 || $data[0] === '' || $data[1] === '') {
             throw InvalidPackageName::for($packageName);
         }
 
