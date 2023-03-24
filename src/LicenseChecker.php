@@ -150,7 +150,7 @@ final class LicenseChecker extends SingleCommandApplication
 
             if ($package->licenses === []) {
                 $violation = true;
-                $dispatcher->dispatch(new UnlicensedPackageNotExplicitlyAllowed($package->name->toString()));
+                $dispatcher->dispatch(new UnlicensedPackageNotExplicitlyAllowed($package));
 
                 continue;
             }
@@ -161,7 +161,7 @@ final class LicenseChecker extends SingleCommandApplication
                 }
 
                 $violation = true;
-                $dispatcher->dispatch(new PackageWithViolatingLicense($package->name->toString(), $license));
+                $dispatcher->dispatch(new PackageWithViolatingLicense($package, $license));
             }
         }
 

@@ -56,12 +56,12 @@ final class JsonSubscriber implements Subscriber
 
     private function onPackageWithViolatingLicense(PackageWithViolatingLicense $event): void
     {
-        $this->packagesWithViolatingLicenses[$event->package][] = $event->license;
+        $this->packagesWithViolatingLicenses[$event->package->name->toString()][] = $event->license;
     }
 
     private function onUnlicensedPackageNotExplicitlyAllowed(UnlicensedPackageNotExplicitlyAllowed $event): void
     {
-        $this->packagesWithViolatingLicenses[$event->package][] = 'UNLICENSED';
+        $this->packagesWithViolatingLicenses[$event->package->name->toString()][] = 'UNLICENSED';
     }
 
     private function onOutcomeFailure(OutcomeFailure $event): void

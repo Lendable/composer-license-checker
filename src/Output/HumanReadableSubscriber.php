@@ -63,7 +63,7 @@ final class HumanReadableSubscriber implements Subscriber
         $this->style->error(
             \sprintf(
                 'Dependency "%s" has license "%s" which is not in the allowed list.',
-                $event->package,
+                $event->package->name->toString(),
                 $event->license,
             )
         );
@@ -74,7 +74,7 @@ final class HumanReadableSubscriber implements Subscriber
         $this->style->error(
             \sprintf(
                 'Dependency "%s" does not have a license and is not explicitly allowed.',
-                $event->package,
+                $event->package->name->toString(),
             )
         );
     }
