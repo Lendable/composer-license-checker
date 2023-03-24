@@ -13,17 +13,11 @@ use Lendable\ComposerLicenseChecker\Event\Subscriber;
 use Lendable\ComposerLicenseChecker\Event\Subscription;
 use Lendable\ComposerLicenseChecker\Event\TraceInformation;
 use Lendable\ComposerLicenseChecker\Event\UnlicensedPackageNotExplicitlyAllowed;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class HumanReadableSubscriber implements Subscriber
+final class DisplayOutputSubscriber implements Subscriber
 {
-    private readonly SymfonyStyle $style;
-
-    public function __construct(InputInterface $input, OutputInterface $output)
+    public function __construct(private readonly Display $display)
     {
-        $this->style = new SymfonyStyle($input, $output);
     }
 
     public function subscriptions(): array
@@ -41,46 +35,36 @@ final class HumanReadableSubscriber implements Subscriber
 
     private function onStarted(Started $event): void
     {
-        $this->style->title('Composer License Checker');
+        $this->display->onStarted();
     }
 
     private function onFatalError(FatalError $event): void
     {
-        $this->style->error($event->message);
+        $this->display->onFatalError($event->message);
     }
 
     private function onOutcomeFailure(OutcomeFailure $event): void
     {
+        $this->display->onOutcomeFailure();
     }
 
     private function onOutcomeSuccess(OutcomeSuccess $event): void
     {
-        $this->style->success('All dependencies have allowed licenses.');
+        $this->display->onOutcomeSuccess();
     }
 
     private function onPackageWithViolatingLicense(PackageWithViolatingLicense $event): void
     {
-        $this->style->error(
-            \sprintf(
-                'Dependency "%s" has license "%s" which is not in the allowed list.',
-                $event->package->name->toString(),
-                $event->license,
-            )
-        );
+        $this->display->onPackageWithViolatingLicense($event->package, $event->license);
     }
 
     private function onUnlicensedPackageNotExplicitlyAllowed(UnlicensedPackageNotExplicitlyAllowed $event): void
     {
-        $this->style->error(
-            \sprintf(
-                'Dependency "%s" does not have a license and is not explicitly allowed.',
-                $event->package->name->toString(),
-            )
-        );
+        $this->display->onUnlicensedPackageNotExplicitlyAllowed($event->package);
     }
 
     private function onTraceInformation(TraceInformation $event): void
     {
-        $this->style->writeln($event->message, OutputInterface::VERBOSITY_VERBOSE);
+        $this->display->onTraceInformation($event->message);
     }
 }

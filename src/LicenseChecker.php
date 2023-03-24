@@ -14,8 +14,9 @@ use Lendable\ComposerLicenseChecker\Event\TraceInformation;
 use Lendable\ComposerLicenseChecker\Event\UnlicensedPackageNotExplicitlyAllowed;
 use Lendable\ComposerLicenseChecker\Exception\FailedProvidingPackages;
 use Lendable\ComposerLicenseChecker\Exception\PackagesProviderNotLocated;
-use Lendable\ComposerLicenseChecker\Output\HumanReadableSubscriber;
-use Lendable\ComposerLicenseChecker\Output\JsonSubscriber;
+use Lendable\ComposerLicenseChecker\Output\DisplayOutputSubscriber;
+use Lendable\ComposerLicenseChecker\Output\HumanReadableDisplay;
+use Lendable\ComposerLicenseChecker\Output\JsonDisplay;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -183,9 +184,9 @@ final class LicenseChecker extends SingleCommandApplication
         $format = $input->getOption('format');
         \assert(\is_string($format));
 
-        $outputSubscriber = match ($format) {
-            'human' => new HumanReadableSubscriber($input, $output),
-            'json' => new JsonSubscriber($output),
+        $display = match ($format) {
+            'human' => new HumanReadableDisplay($input, $output),
+            'json' => new JsonDisplay($output),
             default => throw new \InvalidArgumentException(
                 \sprintf(
                     'Format must be one of [human, json], "%s" is invalid.',
@@ -194,7 +195,7 @@ final class LicenseChecker extends SingleCommandApplication
             )
         };
 
-        $dispatcher->attach($outputSubscriber);
+        $dispatcher->attach(new DisplayOutputSubscriber($display));
 
         return $dispatcher;
     }
