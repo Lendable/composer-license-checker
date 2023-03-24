@@ -12,7 +12,7 @@ final class JsonDisplay implements Display
     public const ENCODING_FLAGS = \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT;
 
     /**
-     * @var array<string, list<string>>
+     * @var array<non-empty-string, list<non-empty-string>>
      */
     public array $packagesWithViolatingLicenses = [];
 
