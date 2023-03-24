@@ -7,7 +7,7 @@ namespace Lendable\ComposerLicenseChecker\Event;
 interface Subscriber
 {
     /**
-     * @return non-empty-list<Subscription>
+     * @return iterable<Subscription>
      */
-    public function subscriptions(): array;
+    public function subscriptions(): iterable;
 }

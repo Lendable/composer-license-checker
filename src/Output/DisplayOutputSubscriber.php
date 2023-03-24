@@ -20,17 +20,15 @@ final class DisplayOutputSubscriber implements Subscriber
     {
     }
 
-    public function subscriptions(): array
+    public function subscriptions(): iterable
     {
-        return [
-            new Subscription(Started::class, $this->onStarted(...)),
-            new Subscription(FatalError::class, $this->onFatalError(...)),
-            new Subscription(PackageWithViolatingLicense::class, $this->onPackageWithViolatingLicense(...)),
-            new Subscription(UnlicensedPackageNotExplicitlyAllowed::class, $this->onUnlicensedPackageNotExplicitlyAllowed(...)),
-            new Subscription(OutcomeFailure::class, $this->onOutcomeFailure(...)),
-            new Subscription(OutcomeSuccess::class, $this->onOutcomeSuccess(...)),
-            new Subscription(TraceInformation::class, $this->onTraceInformation(...)),
-        ];
+        yield new Subscription(Started::class, $this->onStarted(...));
+        yield new Subscription(FatalError::class, $this->onFatalError(...));
+        yield new Subscription(PackageWithViolatingLicense::class, $this->onPackageWithViolatingLicense(...));
+        yield new Subscription(UnlicensedPackageNotExplicitlyAllowed::class, $this->onUnlicensedPackageNotExplicitlyAllowed(...));
+        yield new Subscription(OutcomeFailure::class, $this->onOutcomeFailure(...));
+        yield new Subscription(OutcomeSuccess::class, $this->onOutcomeSuccess(...));
+        yield new Subscription(TraceInformation::class, $this->onTraceInformation(...));
     }
 
     private function onStarted(Started $event): void
