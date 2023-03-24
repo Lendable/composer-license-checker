@@ -80,6 +80,17 @@ abstract class LicenseCheckerCase extends TestCase
             );
     }
 
+    public function test_failure_with_invalid_output_format(): void
+    {
+        $handle = $this->createTempFile();
+        $allowFile = LicenseConfigurationFileBuilder::create($handle)->build();
+
+        $this->commandTester->execute(['--allow-file' => $allowFile, '--format' => 'foo']);
+
+        CommandTesterAsserter::assertThat($this->commandTester)
+            ->encounteredError('Format must be one of [human, json], "foo" is invalid.');
+    }
+
     public function test_no_licenses_allowed(): void
     {
         $handle = $this->createTempFile();

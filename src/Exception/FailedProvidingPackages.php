@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Lendable\ComposerLicenseChecker\Exception;
 
+/**
+ * @method non-empty-string getMessage()
+ */
 final class FailedProvidingPackages extends \RuntimeException
 {
     /**
