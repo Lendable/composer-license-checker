@@ -36,6 +36,7 @@ final class LicenseChecker extends SingleCommandApplication
     {
         $this
             ->setName('Composer License Checker')
+            ->setDescription('Checks licensing of dependencies against a set of rules to ensure compliance with open source licenses and minimize legal risk.')
             ->setVersion('0.0.1')
             ->addOption(
                 'allow-file',
