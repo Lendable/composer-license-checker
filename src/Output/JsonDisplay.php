@@ -17,7 +17,7 @@ final class JsonDisplay implements Display
     /**
      * @var array<non-empty-string, list<non-empty-string>>
      */
-    public array $packagesWithViolatingLicenses = [];
+    public array $violations = [];
 
     public function __construct(public readonly OutputInterface $output)
     {
@@ -25,7 +25,7 @@ final class JsonDisplay implements Display
 
     public function onStarted(): void
     {
-        $this->packagesWithViolatingLicenses = [];
+        $this->violations = [];
     }
 
     public function onFatalError(string $message): void
@@ -40,19 +40,19 @@ final class JsonDisplay implements Display
 
     public function onPackageWithViolatingLicense(Package $package, string $license): void
     {
-        $this->packagesWithViolatingLicenses[$package->name->toString()][] = $license;
+        $this->violations[$license][] = $package->name->toString();
     }
 
     public function onUnlicensedPackageNotExplicitlyAllowed(Package $package): void
     {
-        $this->packagesWithViolatingLicenses[$package->name->toString()][] = 'UNLICENSED';
+        $this->violations['UNLICENSED'][] = $package->name->toString();
     }
 
     public function onOutcomeFailure(): void
     {
         $this->output->writeln(
             \json_encode(
-                ['result' => 'failure', 'violations' => $this->packagesWithViolatingLicenses],
+                ['result' => 'failure', 'violations' => $this->violations],
                 self::ENCODING_FLAGS,
             )
         );
