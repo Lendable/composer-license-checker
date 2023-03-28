@@ -26,9 +26,9 @@ final class ComposerLicensesPackagesProviderTest extends TestCase
                             'vendor2/project' => ['license' => ['WTFPL']],
                         ],
                     ],
-                    \JSON_THROW_ON_ERROR
-                )
-            )
+                    \JSON_THROW_ON_ERROR,
+                ),
+            ),
         );
 
         $packages = \iterator_to_array($provider->provide('path', false));
@@ -44,7 +44,7 @@ final class ComposerLicensesPackagesProviderTest extends TestCase
     public function test_wraps_and_throws_composer_runner_failure(): void
     {
         $provider = $this->createProvider(
-            Throwing::exception(FailedRunningComposer::withCommand('composer licenses --format=json'))
+            Throwing::exception(FailedRunningComposer::withCommand('composer licenses --format=json')),
         );
 
         $this->expectExceptionObject(FailedProvidingPackages::dueTo(FailedRunningComposer::withCommand('composer licenses --format=json')));

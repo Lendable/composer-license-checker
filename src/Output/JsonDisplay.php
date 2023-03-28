@@ -38,8 +38,8 @@ final class JsonDisplay implements Display
         $this->output->writeln(
             \json_encode(
                 ['result' => 'error', 'message' => $message],
-                self::ENCODING_FLAGS
-            )
+                self::ENCODING_FLAGS,
+            ),
         );
     }
 
@@ -65,7 +65,7 @@ final class JsonDisplay implements Display
             \json_encode(
                 $data,
                 self::ENCODING_FLAGS,
-            )
+            ),
         );
     }
 
@@ -81,7 +81,7 @@ final class JsonDisplay implements Display
             \json_encode(
                 $data,
                 self::ENCODING_FLAGS,
-            )
+            ),
         );
     }
 

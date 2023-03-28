@@ -92,8 +92,8 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
                         );
                     },
                     $dependencies,
-                )
-            )
+                ),
+            ),
         ))->sort();
     }
 }
