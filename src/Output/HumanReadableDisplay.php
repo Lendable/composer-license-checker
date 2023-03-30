@@ -44,7 +44,7 @@ final class HumanReadableDisplay implements Display
                 'Dependency "%s" has license "%s" which is not in the allowed list.',
                 $package->name->toString(),
                 $license,
-            )
+            ),
         );
     }
 
@@ -54,7 +54,7 @@ final class HumanReadableDisplay implements Display
             \sprintf(
                 'Dependency "%s" does not have a license and is not explicitly allowed.',
                 $package->name->toString(),
-            )
+            ),
         );
     }
 

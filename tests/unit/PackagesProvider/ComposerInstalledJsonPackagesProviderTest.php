@@ -138,7 +138,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
         $this->expectExceptionObject(
             FailedProvidingPackages::withReason(
                 \sprintf('File "%s" not found', $this->projectPath.'/vendor/composer/installed.json'),
-            )
+            ),
         );
 
         (new ComposerInstalledJsonPackagesProvider())->provide($this->projectPath, false);
@@ -153,7 +153,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
         $this->expectExceptionObject(
             FailedProvidingPackages::withReason(
                 \sprintf('File "%s" is not readable', $this->projectPath.'/vendor/composer/installed.json'),
-            )
+            ),
         );
 
         (new ComposerInstalledJsonPackagesProvider())->provide($this->projectPath, false);
@@ -309,7 +309,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
                 '%s%s%s',
                 $tempDir,
                 \DIRECTORY_SEPARATOR,
-                'license_checker_tests_project_'.\random_int(1, 5000)
+                'license_checker_tests_project_'.\random_int(1, 5000),
             );
 
             if (!\is_dir($projectPath)) {

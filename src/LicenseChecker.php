@@ -106,8 +106,8 @@ final class LicenseChecker extends SingleCommandApplication
                         'File "%s" must return an instance of %s.',
                         $allowFile,
                         LicenseConfiguration::class,
-                    )
-                )
+                    ),
+                ),
             );
 
             return self::FAILURE;
@@ -207,8 +207,8 @@ final class LicenseChecker extends SingleCommandApplication
                 \sprintf(
                     'Format must be one of [human, json], "%s" is invalid.',
                     $format,
-                )
-            )
+                ),
+            ),
         };
     }
 }

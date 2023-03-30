@@ -53,7 +53,7 @@ final class PackagesAsserter
                 'Failed to find a package with name "%s" and licenses [%s].',
                 $package->name->toString(),
                 \implode(', ', $package->licenses),
-            )
+            ),
         );
     }
 

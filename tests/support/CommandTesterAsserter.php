@@ -147,7 +147,7 @@ final class CommandTesterAsserter
                 "Output did not contain \"%s\". Output\n: %s",
                 $fragment,
                 $this->normalizedStdout(),
-            )
+            ),
         );
     }
 

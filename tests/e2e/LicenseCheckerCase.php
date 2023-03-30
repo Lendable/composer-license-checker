@@ -76,7 +76,7 @@ abstract class LicenseCheckerCase extends TestCase
                 \sprintf(
                     "File \"tests/data/default/invalid_allowed_licenses.php\" must return an instance of\n         %s.",
                     LicenseConfiguration::class,
-                )
+                ),
             );
     }
 
@@ -105,7 +105,7 @@ abstract class LicenseCheckerCase extends TestCase
                     'lendable/bsd3_mit' => ['BSD-3-Clause', 'MIT'],
                     'package/bsd3' => 'BSD-3-Clause',
                     'package/mit' => 'MIT',
-                ]
+                ],
             );
     }
 
@@ -157,7 +157,7 @@ abstract class LicenseCheckerCase extends TestCase
                     'lendable/apache' => 'Apache-2.0',
                     'lendable/bsd3_mit' => 'BSD-3-Clause',
                     'package/bsd3' => 'BSD-3-Clause',
-                ]
+                ],
             );
     }
 

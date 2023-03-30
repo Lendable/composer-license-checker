@@ -104,6 +104,7 @@ return (new PhpCsFixer\Config())
         'strict_comparison' => true,
         'strict_param' => true,
         'ternary_operator_spaces' => true,
+        'trailing_comma_in_multiline' => ['elements' => ['arguments', 'arrays', 'match', 'parameters']],
         'trim_array_spaces' => true,
         'unary_operator_spaces' => true,
         'void_return' => true,
