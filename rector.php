@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Rector\CodeQuality\Rector\Identical\FlipTypeControlToUseExclusiveTypeRector;
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\PHPUnit\Set\PHPUnitLevelSetList;
@@ -20,5 +21,8 @@ return static function (RectorConfig $rector): void {
         LevelSetList::UP_TO_PHP_81,
         PHPUnitLevelSetList::UP_TO_PHPUNIT_100,
         SymfonyLevelSetList::UP_TO_SYMFONY_54,
+    ]);
+    $rector->skip([
+        FlipTypeControlToUseExclusiveTypeRector::class,
     ]);
 };
