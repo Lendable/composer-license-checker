@@ -8,8 +8,8 @@ on:
 
 jobs:
   ci:
-    name: "Execute"
-    runs-on: ${{ matrix.operating-system }}
+    name: "Execute (PHP ${{ matrix.php-version }} with ${{ matrix.dependencies }} deps, composer v${{ matrix.composer-version}}.x)"
+    runs-on: "ubuntu-22.04"
 
     strategy:
       matrix:
@@ -20,8 +20,13 @@ jobs:
         php-version:
           - "8.1"
           - "8.2"
-        operating-system:
-          - "ubuntu-latest"
+        composer-version:
+          - "2.0"
+          - "2.1"
+          - "2.2"
+          - "2.3"
+          - "2.4"
+          - "2.5"
 
     steps:
       - name: "Checkout"
@@ -33,6 +38,7 @@ jobs:
           coverage: "pcov"
           php-version: "${{ matrix.php-version }}"
           ini-values: memory_limit=-1
+          tools: "composer:${{ matrix.composer-version }}"
 
       - uses: "ramsey/composer-install@v2"
         with:
