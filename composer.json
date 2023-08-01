@@ -16,7 +16,7 @@
         "symfony/process": "^5.4 || ^6.0"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.33.0",
+        "ergebnis/composer-normalize": "^2.34.0",
         "php-cs-fixer/shim": "^3.22.0",
         "phpstan/phpstan": "^1.10.26",
         "phpstan/phpstan-deprecation-rules": "^1.1.3",
