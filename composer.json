@@ -17,8 +17,8 @@
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.35.0",
-        "php-cs-fixer/shim": "^3.22.0",
-        "phpstan/phpstan": "^1.10.28",
+        "php-cs-fixer/shim": "^3.23.0",
+        "phpstan/phpstan": "^1.10.29",
         "phpstan/phpstan-deprecation-rules": "^1.1.4",
         "phpstan/phpstan-phpunit": "^1.3.13",
         "phpstan/phpstan-strict-rules": "^1.5.1",
