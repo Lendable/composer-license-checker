@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e022e2381d3d25d2c74dc52cdfdd125",
+    "content-hash": "9e683453826c218837d7ece2a517a8b1",
     "packages": [
         {
             "name": "psr/container",
@@ -1529,16 +1529,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.23.0",
+            "version": "v3.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "ddca9b342374087121e44cca3b7d8aca8f121fa7"
+                "reference": "ce695745169124967e18392b7324c80d59251ac1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/ddca9b342374087121e44cca3b7d8aca8f121fa7",
-                "reference": "ddca9b342374087121e44cca3b7d8aca8f121fa7",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/ce695745169124967e18392b7324c80d59251ac1",
+                "reference": "ce695745169124967e18392b7324c80d59251ac1",
                 "shasum": ""
             },
             "require": {
@@ -1575,9 +1575,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.23.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.24.0"
             },
-            "time": "2023-08-14T12:28:46+00:00"
+            "time": "2023-08-29T23:24:57+00:00"
         },
         {
             "name": "phpstan/phpstan",
