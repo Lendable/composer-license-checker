@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lendable\ComposerLicenseChecker;
 
+use ArrayIterator;
+
 /**
  * @implements \IteratorAggregate<int, string>
  */
@@ -29,6 +31,6 @@ final class Licenses implements \IteratorAggregate
 
     public function getIterator(): \Traversable
     {
-        yield from $this->licenses;
+        return new ArrayIterator($this->licenses);
     }
 }

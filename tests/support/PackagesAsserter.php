@@ -18,17 +18,10 @@ final class PackagesAsserter
         return new self($packages);
     }
 
-    public function hasCount(int $count): self
-    {
-        Assert::assertCount($count, $this->packages);
-
-        return $this;
-    }
-
     /**
      * @param \Countable|array<mixed> $countable
      */
-    public function sameSize(\Countable|array $countable): self
+    private function sameSize(\Countable|array $countable): self
     {
         Assert::assertSameSize($countable, $this->packages);
 
