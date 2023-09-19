@@ -45,7 +45,9 @@ final class JsonDisplay implements Display
 
     public function onPackageWithViolatingLicense(Package $package): void
     {
-        $this->violations[$package->licenses->toString()][] = $package->name->toString();
+        /** @var non-empty-string $licences */
+        $licences = $package->licenses->toString();
+        $this->violations[$licences][] = $package->name->toString();
     }
 
     public function onUnlicensedPackageNotExplicitlyAllowed(Package $package): void
