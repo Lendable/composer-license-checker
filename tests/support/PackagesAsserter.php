@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Support\Lendable\ComposerLicenseChecker;
 
-use Lendable\ComposerLicenseChecker\Package;
 use Lendable\ComposerLicenseChecker\Packages;
 use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\AssertionFailedError;
 
 final class PackagesAsserter
 {
@@ -35,26 +33,6 @@ final class PackagesAsserter
         Assert::assertSameSize($countable, $this->packages);
 
         return $this;
-    }
-
-    public function containsPackage(Package $package): self
-    {
-        foreach ($this->packages as $existing) {
-            try {
-                PackageAsserter::assertThat($existing)->equals($package);
-
-                return $this;
-            } catch (AssertionFailedError) {
-            }
-        }
-
-        Assert::fail(
-            \sprintf(
-                'Failed to find a package with name "%s" and licenses [%s].',
-                $package->name->toString(),
-                \implode(', ', $package->licenses),
-            ),
-        );
     }
 
     public function equals(Packages $packages): self

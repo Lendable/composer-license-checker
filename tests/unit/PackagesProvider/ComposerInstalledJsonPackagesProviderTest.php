@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Lendable\ComposerLicenseChecker\PackagesProvider;
 
 use Lendable\ComposerLicenseChecker\Exception\FailedProvidingPackages;
+use Lendable\ComposerLicenseChecker\Licenses;
 use Lendable\ComposerLicenseChecker\Package;
 use Lendable\ComposerLicenseChecker\PackageName;
 use Lendable\ComposerLicenseChecker\Packages;
@@ -51,7 +52,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
                 'dev-package-names' => [],
                 'packages' => [['name' => 'foo/bar', 'version' => '1.0.0', 'license' => ['MIT']]],
             ],
-            new Packages([new Package(new PackageName('foo/bar'), ['MIT'])]),
+            new Packages([new Package(new PackageName('foo/bar'), new Licenses(['MIT']))]),
             true,
         ];
         yield 'ignoring dev with 1 dev dependency' => [
@@ -69,7 +70,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
                 'dev-package-names' => ['foo/bar'],
                 'packages' => [['name' => 'foo/bar', 'version' => '1.0.0', 'license' => ['MIT']]],
             ],
-            new Packages([new Package(new PackageName('foo/bar'), ['MIT'])]),
+            new Packages([new Package(new PackageName('foo/bar'), new Licenses(['MIT']))]),
             false,
         ];
         yield 'not ignoring dev with 1 dev dependency and 1 runtime' => [
@@ -82,8 +83,8 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
                 ],
             ],
             new Packages([
-                new Package(new PackageName('foo/bar'), ['MIT']),
-                new Package(new PackageName('foo/baz'), ['MIT', 'Apache-2.0']),
+                new Package(new PackageName('foo/bar'), new Licenses(['MIT'])),
+                new Package(new PackageName('foo/baz'), new Licenses(['MIT', 'Apache-2.0'])),
             ]),
             false,
         ];
@@ -97,7 +98,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
                 ],
             ],
             new Packages([
-                new Package(new PackageName('foo/baz'), ['MIT', 'Apache-2.0']),
+                new Package(new PackageName('foo/baz'), new Licenses(['MIT', 'Apache-2.0'])),
             ]),
             true,
         ];
@@ -111,7 +112,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
                 ],
             ],
             new Packages([
-                new Package(new PackageName('foo/bar'), []),
+                new Package(new PackageName('foo/bar'), new Licenses([])),
             ]),
             true,
         ];

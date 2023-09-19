@@ -8,10 +8,7 @@ use Lendable\ComposerLicenseChecker\Package;
 
 final class PackageWithViolatingLicense implements Event
 {
-    /**
-     * @param non-empty-string $license
-     */
-    public function __construct(public readonly Package $package, public readonly string $license)
+    public function __construct(public readonly Package $package)
     {
     }
 }

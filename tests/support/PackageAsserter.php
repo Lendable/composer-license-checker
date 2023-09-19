@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Support\Lendable\ComposerLicenseChecker;
 
+use Lendable\ComposerLicenseChecker\Licenses;
 use Lendable\ComposerLicenseChecker\Package;
 use Lendable\ComposerLicenseChecker\PackageName;
 use PHPUnit\Framework\Assert;
@@ -30,32 +31,25 @@ final class PackageAsserter
         return $this;
     }
 
-    public function hasLicense(string $license): self
-    {
-        Assert::assertContains($license, $this->package->licenses);
-
-        return $this;
-    }
-
-    /**
-     * @param list<string> $licenses
-     */
-    public function hasExactLicenses(array $licenses): self
-    {
-        Assert::assertSameSize($licenses, $this->package->licenses);
-
-        foreach ($licenses as $license) {
-            $this->hasLicense($license);
-        }
-
-        return $this;
-    }
-
     public function equals(Package $package): self
     {
         $this->hasName($package->name);
         $this->hasExactLicenses($package->licenses);
 
         return $this;
+    }
+
+    private function hasExactLicenses(Licenses $licenses): void
+    {
+        Assert::assertSameSize($licenses, $this->package->licenses);
+
+        foreach ($licenses as $license) {
+            $this->hasLicense($license);
+        }
+    }
+
+    private function hasLicense(string $license): void
+    {
+        Assert::assertContains($license, \explode(', ', $this->package->licenses->toString()));
     }
 }

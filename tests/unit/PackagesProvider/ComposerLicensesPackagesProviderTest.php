@@ -35,10 +35,10 @@ final class ComposerLicensesPackagesProviderTest extends TestCase
 
         self::assertCount(2, $packages);
         self::assertSame('vendor/project', $packages[0]->name->toString());
-        self::assertSame(['MIT', 'LGPL'], $packages[0]->licenses);
+        self::assertSame('MIT, LGPL', $packages[0]->licenses->toString());
 
         self::assertSame('vendor2/project', $packages[1]->name->toString());
-        self::assertSame(['WTFPL'], $packages[1]->licenses);
+        self::assertSame('WTFPL', $packages[1]->licenses->toString());
     }
 
     public function test_wraps_and_throws_composer_runner_failure(): void

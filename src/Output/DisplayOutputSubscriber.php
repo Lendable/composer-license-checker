@@ -53,7 +53,7 @@ final class DisplayOutputSubscriber implements Subscriber
 
     private function onPackageWithViolatingLicense(PackageWithViolatingLicense $event): void
     {
-        $this->display->onPackageWithViolatingLicense($event->package, $event->license);
+        $this->display->onPackageWithViolatingLicense($event->package);
     }
 
     private function onUnlicensedPackageNotExplicitlyAllowed(UnlicensedPackageNotExplicitlyAllowed $event): void

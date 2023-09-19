@@ -17,9 +17,15 @@ final class LicenseConfiguration
     ) {
     }
 
-    public function allowsLicense(string $license): bool
+    public function allowsLicenseOfPackage(Package $package): bool
     {
-        return \in_array($license, $this->allowedLicenses, true);
+        foreach ($package->licenses as $license) {
+            if ($this->allowsLicense($license)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function allowsPackage(string $package): bool
@@ -31,5 +37,10 @@ final class LicenseConfiguration
         }
 
         return false;
+    }
+
+    private function allowsLicense(string $license): bool
+    {
+        return \in_array($license, $this->allowedLicenses, true);
     }
 }

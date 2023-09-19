@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Lendable\ComposerLicenseChecker;
 
+use Lendable\ComposerLicenseChecker\Licenses;
 use Lendable\ComposerLicenseChecker\Package;
 use Lendable\ComposerLicenseChecker\PackageName;
 use Lendable\ComposerLicenseChecker\Packages;
@@ -14,9 +15,9 @@ final class PackagesTest extends TestCase
     public function test_returns_instance_with_sorted_packages(): void
     {
         $packages = new Packages([
-            new Package(new PackageName('c/d'), []),
-            new Package(new PackageName('x/y'), []),
-            new Package(new PackageName('c/b'), []),
+            new Package(new PackageName('c/d'), new Licenses([])),
+            new Package(new PackageName('x/y'), new Licenses([])),
+            new Package(new PackageName('c/b'), new Licenses([])),
         ]);
 
         $sorted = $packages->sort();
@@ -31,10 +32,10 @@ final class PackagesTest extends TestCase
     public function test_returns_count(): void
     {
         self::assertCount(0, new Packages([]));
-        self::assertCount(1, new Packages([new Package(new PackageName('a/b'), [])]));
+        self::assertCount(1, new Packages([new Package(new PackageName('a/b'), new Licenses([]))]));
         self::assertCount(2, new Packages([
-            new Package(new PackageName('a/a'), []),
-            new Package(new PackageName('a/b'), []),
+            new Package(new PackageName('a/a'), new Licenses([])),
+            new Package(new PackageName('a/b'), new Licenses([])),
         ]));
     }
 }

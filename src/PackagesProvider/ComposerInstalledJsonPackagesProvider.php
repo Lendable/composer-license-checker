@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lendable\ComposerLicenseChecker\PackagesProvider;
 
 use Lendable\ComposerLicenseChecker\Exception\FailedProvidingPackages;
+use Lendable\ComposerLicenseChecker\Licenses;
 use Lendable\ComposerLicenseChecker\Package;
 use Lendable\ComposerLicenseChecker\PackageName;
 use Lendable\ComposerLicenseChecker\Packages;
@@ -78,17 +79,16 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
                             throw FailedProvidingPackages::withReason('Key "name" is not a string');
                         }
 
-                        $licenses = $package['license'] ?? [];
+                        $licensesArray = $package['license'] ?? [];
 
-                        if (!\is_array($licenses) || !\array_is_list($licenses)) {
+                        if (!\is_array($licensesArray) || !\array_is_list($licensesArray)) {
                             throw FailedProvidingPackages::withReason('Key "license" is not a list');
                         }
 
-                        /** @var list<non-empty-string> $licenses */
                         /** @var PackageData $package */
                         return new Package(
                             new PackageName($package['name']),
-                            $licenses,
+                            new Licenses($licensesArray),
                         );
                     },
                     $dependencies,

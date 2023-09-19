@@ -37,13 +37,13 @@ final class HumanReadableDisplay implements Display
         $this->style->success('All dependencies have allowed licenses.');
     }
 
-    public function onPackageWithViolatingLicense(Package $package, string $license): void
+    public function onPackageWithViolatingLicense(Package $package): void
     {
         $this->style->error(
             \sprintf(
-                'Dependency "%s" has license "%s" which is not in the allowed list.',
+                'Dependency "%s" is licensed under "%s" which is not in the allowed list.',
                 $package->name->toString(),
-                $license,
+                $package->licenses->toString(),
             ),
         );
     }

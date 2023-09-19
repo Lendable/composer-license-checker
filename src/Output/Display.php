@@ -19,10 +19,7 @@ interface Display
 
     public function onOutcomeSuccess(): void;
 
-    /**
-     * @param non-empty-string $license
-     */
-    public function onPackageWithViolatingLicense(Package $package, string $license): void;
+    public function onPackageWithViolatingLicense(Package $package): void;
 
     public function onUnlicensedPackageNotExplicitlyAllowed(Package $package): void;
 
