@@ -167,7 +167,7 @@ final class LicenseChecker extends SingleCommandApplication
                 continue;
             }
 
-            if ($package->licenses->isEmpty()) {
+            if ($package->isUnlicensed()) {
                 $violation = true;
                 $this->dispatcher->dispatch(new UnlicensedPackageNotExplicitlyAllowed($package));
 

@@ -11,4 +11,9 @@ final class Package
         public readonly Licenses $licenses,
     ) {
     }
+
+    public function isUnlicensed(): bool
+    {
+        return $this->licenses->isEmpty();
+    }
 }
