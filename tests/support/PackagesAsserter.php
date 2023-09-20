@@ -18,16 +18,6 @@ final class PackagesAsserter
         return new self($packages);
     }
 
-    /**
-     * @param \Countable|array<mixed> $countable
-     */
-    private function sameSize(\Countable|array $countable): self
-    {
-        Assert::assertSameSize($countable, $this->packages);
-
-        return $this;
-    }
-
     public function equals(Packages $packages): self
     {
         $this->sameSize($packages);
@@ -39,6 +29,16 @@ final class PackagesAsserter
         foreach ($iterator as [$expected, $actual]) {
             PackageAsserter::assertThat($actual)->equals($expected);
         }
+
+        return $this;
+    }
+
+    /**
+     * @param \Countable|array<mixed> $countable
+     */
+    private function sameSize(\Countable|array $countable): self
+    {
+        Assert::assertSameSize($countable, $this->packages);
 
         return $this;
     }
