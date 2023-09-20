@@ -57,7 +57,7 @@ abstract class LicenseCheckerCase extends TestCase
         $handle = $this->createTempFile();
         $allowFile = LicenseConfigurationFileBuilder::create($handle)->build();
 
-        $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => __DIR__]);
+        $this->commandTester->execute(['--allow-file' => $allowFile, '--path' => '../']);
 
         CommandTesterAsserter::assertThat($this->commandTester)
             ->hasStatusCode(1)

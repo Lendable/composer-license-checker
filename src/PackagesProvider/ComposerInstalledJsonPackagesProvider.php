@@ -79,16 +79,16 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
                             throw FailedProvidingPackages::withReason('Key "name" is not a string');
                         }
 
-                        $licensesArray = $package['license'] ?? [];
+                        $licenses = $package['license'] ?? [];
 
-                        if (!\is_array($licensesArray) || !\array_is_list($licensesArray)) {
+                        if (!\is_array($licenses) || !\array_is_list($licenses)) {
                             throw FailedProvidingPackages::withReason('Key "license" is not a list');
                         }
 
                         /** @var PackageData $package */
                         return new Package(
                             new PackageName($package['name']),
-                            new Licenses($licensesArray),
+                            new Licenses($licenses),
                         );
                     },
                     $dependencies,
