@@ -81,12 +81,21 @@ final class CommandTesterAsserter
             }
 
             if (\is_array($license)) {
-                $expectedOutput[] = \sprintf(
-                    ' [ERROR] Dependency "%s" is licensed under "%s" which is not in the allowed list.',
-                    $package,
-                    \implode(', ', $license),
-                );
-                $expectedOutput[] = '';
+                if (\count($license) > 1) {
+                    $expectedOutput[] = \sprintf(
+                        ' [ERROR] Dependency "%s" is licensed under any of "%s", none of which are allowed.',
+                        $package,
+                        \implode(', ', $license),
+                    );
+                    $expectedOutput[] = '';
+                } else {
+                    $expectedOutput[] = \sprintf(
+                        ' [ERROR] Dependency "%s" is licensed under "%s" which is not in the allowed list.',
+                        $package,
+                        \implode(', ', $license),
+                    );
+                    $expectedOutput[] = '';
+                }
             } else {
                 $expectedOutput[] = \sprintf(
                     ' [ERROR] Dependency "%s" does not have a license and is not explicitly allowed.',

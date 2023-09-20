@@ -31,4 +31,9 @@ final class Licenses implements \IteratorAggregate
     {
         return new \ArrayIterator($this->licenses);
     }
+
+    public function isDisjunctive(): bool
+    {
+        return \count($this->licenses) > 1;
+    }
 }
