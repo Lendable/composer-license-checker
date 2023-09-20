@@ -81,11 +81,18 @@ final class CommandTesterAsserter
             }
 
             if (\is_array($license)) {
-                foreach ($license as $element) {
+                if (\count($license) > 1) {
                     $expectedOutput[] = \sprintf(
-                        ' [ERROR] Dependency "%s" has license "%s" which is not in the allowed list.',
+                        ' [ERROR] Dependency "%s" is licensed under any of "%s", none of which are allowed.',
                         $package,
-                        $element,
+                        \implode(', ', $license),
+                    );
+                    $expectedOutput[] = '';
+                } else {
+                    $expectedOutput[] = \sprintf(
+                        ' [ERROR] Dependency "%s" is licensed under "%s" which is not in the allowed list.',
+                        $package,
+                        \implode(', ', $license),
                     );
                     $expectedOutput[] = '';
                 }

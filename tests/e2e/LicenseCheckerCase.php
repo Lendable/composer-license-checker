@@ -155,7 +155,6 @@ abstract class LicenseCheckerCase extends TestCase
             ->foundLicensingIssues(
                 [
                     'lendable/apache' => 'Apache-2.0',
-                    'lendable/bsd3_mit' => 'BSD-3-Clause',
                     'package/bsd3' => 'BSD-3-Clause',
                 ],
             );

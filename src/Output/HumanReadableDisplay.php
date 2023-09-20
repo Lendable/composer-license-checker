@@ -37,15 +37,25 @@ final class HumanReadableDisplay implements Display
         $this->style->success('All dependencies have allowed licenses.');
     }
 
-    public function onPackageWithViolatingLicense(Package $package, string $license): void
+    public function onPackageWithViolatingLicense(Package $package): void
     {
-        $this->style->error(
-            \sprintf(
-                'Dependency "%s" has license "%s" which is not in the allowed list.',
-                $package->name->toString(),
-                $license,
-            ),
-        );
+        if ($package->licenses->isDisjunctive()) {
+            $this->style->error(
+                \sprintf(
+                    'Dependency "%s" is licensed under any of "%s", none of which are allowed.',
+                    $package->name->toString(),
+                    $package->licenses->toString(),
+                ),
+            );
+        } else {
+            $this->style->error(
+                \sprintf(
+                    'Dependency "%s" is licensed under "%s" which is not in the allowed list.',
+                    $package->name->toString(),
+                    $package->licenses->toString(),
+                ),
+            );
+        }
     }
 
     public function onUnlicensedPackageNotExplicitlyAllowed(Package $package): void

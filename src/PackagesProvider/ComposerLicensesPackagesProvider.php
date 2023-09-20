@@ -7,6 +7,7 @@ namespace Lendable\ComposerLicenseChecker\PackagesProvider;
 use Lendable\ComposerLicenseChecker\ComposerRunner;
 use Lendable\ComposerLicenseChecker\Exception\FailedProvidingPackages;
 use Lendable\ComposerLicenseChecker\Exception\FailedRunningComposer;
+use Lendable\ComposerLicenseChecker\Licenses;
 use Lendable\ComposerLicenseChecker\Package;
 use Lendable\ComposerLicenseChecker\PackageName;
 use Lendable\ComposerLicenseChecker\Packages;
@@ -45,7 +46,7 @@ final class ComposerLicensesPackagesProvider implements PackagesProvider
 
         return new Packages(
             \array_map(
-                static fn (string $name, array $package): Package => new Package(new PackageName($name), $package['license']),
+                static fn (string $name, array $package): Package => new Package(new PackageName($name), new Licenses($package['license'])),
                 \array_keys($data['dependencies']),
                 $data['dependencies'],
             ),

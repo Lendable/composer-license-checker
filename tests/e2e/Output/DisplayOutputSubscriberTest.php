@@ -12,6 +12,7 @@ use Lendable\ComposerLicenseChecker\Event\PackageWithViolatingLicense;
 use Lendable\ComposerLicenseChecker\Event\Started;
 use Lendable\ComposerLicenseChecker\Event\TraceInformation;
 use Lendable\ComposerLicenseChecker\Event\UnlicensedPackageNotExplicitlyAllowed;
+use Lendable\ComposerLicenseChecker\Licenses;
 use Lendable\ComposerLicenseChecker\Output\Display;
 use Lendable\ComposerLicenseChecker\Output\DisplayOutputSubscriber;
 use Lendable\ComposerLicenseChecker\Package;
@@ -75,20 +76,19 @@ final class DisplayOutputSubscriberTest extends TestCase
 
     public function test_delegates_on_package_with_violating_license(): void
     {
-        $package = new Package(new PackageName('foo/bar'), ['MIT']);
-        $license = 'MIT';
+        $package = new Package(new PackageName('foo/bar'), new Licenses(['MIT']));
 
         $this->display
             ->expects(self::once())
             ->method('onPackageWithViolatingLicense')
-            ->with($package, $license);
+            ->with($package);
 
-        $this->dispatcher->dispatch(new PackageWithViolatingLicense($package, $license));
+        $this->dispatcher->dispatch(new PackageWithViolatingLicense($package));
     }
 
     public function test_delegates_on_unlicensed_package_not_explicitly_allowed(): void
     {
-        $package = new Package(new PackageName('foo/bar'), ['MIT']);
+        $package = new Package(new PackageName('foo/bar'), new Licenses(['MIT']));
 
         $this->display
             ->expects(self::once())
