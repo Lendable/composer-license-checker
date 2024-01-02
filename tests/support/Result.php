@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Support\Lendable\ComposerLicenseChecker;
 
 /**
- * @template T
+ * @template-covariant T
  */
 interface Result
 {
