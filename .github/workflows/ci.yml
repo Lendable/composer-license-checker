@@ -45,6 +45,11 @@ jobs:
           ini-values: memory_limit=-1
           tools: "composer:${{ matrix.composer-version }}"
 
+      - name: "Update Composer platform version"
+        if: ${{ matrix.dependencies != 'locked' && matrix.php-version != '8.1' }}
+        shell: bash
+        run: "composer config platform.php ${{ matrix.php-version }}"
+
       - uses: "ramsey/composer-install@v2"
         with:
           dependency-versions: "${{ matrix.dependencies }}"
