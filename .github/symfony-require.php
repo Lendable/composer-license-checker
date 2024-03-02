@@ -32,7 +32,7 @@ if ($resultCode !== 0) {
 }
 
 passthru(
-    'composer require -W --no-interaction --no-progress --ansi '.($lowest ? '--prefer-lowest --prefer-stable ' : '').implode(' ', array_map(fn ($name) => $name.':^'.$constraint, $names)),
+    'composer require -W --no-interaction --no-progress --ansi '.($lowest ? '--prefer-lowest --prefer-stable ' : '').implode(' ', array_map(static fn ($name) => $name.':^'.$constraint, $names)),
     $resultCode,
 );
 
