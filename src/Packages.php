@@ -7,13 +7,13 @@ namespace Lendable\ComposerLicenseChecker;
 /**
  * @implements \IteratorAggregate<int, Package>
  */
-final class Packages implements \Countable, \IteratorAggregate
+final readonly class Packages implements \Countable, \IteratorAggregate
 {
     /**
      * @param array<Package> $items
      */
     public function __construct(
-        private readonly array $items,
+        private array $items,
     ) {
     }
 

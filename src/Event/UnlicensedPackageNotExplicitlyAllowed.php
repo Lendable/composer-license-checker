@@ -6,9 +6,9 @@ namespace Lendable\ComposerLicenseChecker\Event;
 
 use Lendable\ComposerLicenseChecker\Package;
 
-final class UnlicensedPackageNotExplicitlyAllowed implements Event
+final readonly class UnlicensedPackageNotExplicitlyAllowed implements Event
 {
-    public function __construct(public readonly Package $package)
+    public function __construct(public Package $package)
     {
     }
 }

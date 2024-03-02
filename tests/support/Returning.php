@@ -9,12 +9,12 @@ namespace Tests\Support\Lendable\ComposerLicenseChecker;
  *
  * @template-implements Result<T>
  */
-final class Returning implements Result
+final readonly class Returning implements Result
 {
     /**
      * @param T $value
      */
-    private function __construct(private readonly mixed $value)
+    private function __construct(private mixed $value)
     {
     }
 

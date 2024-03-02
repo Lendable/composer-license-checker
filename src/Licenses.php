@@ -7,13 +7,13 @@ namespace Lendable\ComposerLicenseChecker;
 /**
  * @implements \IteratorAggregate<int, string>
  */
-final class Licenses implements \IteratorAggregate
+final readonly class Licenses implements \IteratorAggregate
 {
     /**
      * @param list<non-empty-string> $licenses
      */
     public function __construct(
-        private readonly array $licenses,
+        private array $licenses,
     ) {
     }
 

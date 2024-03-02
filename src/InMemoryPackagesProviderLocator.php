@@ -6,12 +6,12 @@ namespace Lendable\ComposerLicenseChecker;
 
 use Lendable\ComposerLicenseChecker\Exception\PackagesProviderNotLocated;
 
-final class InMemoryPackagesProviderLocator implements PackagesProviderLocator
+final readonly class InMemoryPackagesProviderLocator implements PackagesProviderLocator
 {
     /**
      * @param array<non-empty-string, PackagesProvider> $providers
      */
-    public function __construct(private readonly array $providers)
+    public function __construct(private array $providers)
     {
     }
 

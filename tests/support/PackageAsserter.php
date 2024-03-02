@@ -9,9 +9,9 @@ use Lendable\ComposerLicenseChecker\Package;
 use Lendable\ComposerLicenseChecker\PackageName;
 use PHPUnit\Framework\Assert;
 
-final class PackageAsserter
+final readonly class PackageAsserter
 {
-    private function __construct(private readonly Package $package)
+    private function __construct(private Package $package)
     {
     }
 

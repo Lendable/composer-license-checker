@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lendable\ComposerLicenseChecker\Event;
 
-final class Subscription
+final readonly class Subscription
 {
     /**
      * @template T of Event
@@ -12,7 +12,7 @@ final class Subscription
      * @param class-string<T> $eventClass
      * @param \Closure(T): void $handler
      */
-    public function __construct(public readonly string $eventClass, public readonly \Closure $handler)
+    public function __construct(public string $eventClass, public \Closure $handler)
     {
     }
 }

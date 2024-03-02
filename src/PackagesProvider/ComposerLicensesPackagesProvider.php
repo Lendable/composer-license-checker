@@ -13,9 +13,9 @@ use Lendable\ComposerLicenseChecker\PackageName;
 use Lendable\ComposerLicenseChecker\Packages;
 use Lendable\ComposerLicenseChecker\PackagesProvider;
 
-final class ComposerLicensesPackagesProvider implements PackagesProvider
+final readonly class ComposerLicensesPackagesProvider implements PackagesProvider
 {
-    public function __construct(private readonly ComposerRunner $composerRunner)
+    public function __construct(private ComposerRunner $composerRunner)
     {
     }
 
