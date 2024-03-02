@@ -31,6 +31,7 @@ final class JsonDisplay implements Display
     public function onStarted(): void
     {
         $this->violations = [];
+        $this->trace = [];
     }
 
     public function onFatalError(string $message): void
