@@ -46,7 +46,7 @@
             "ergebnis/composer-normalize": true
         },
         "platform": {
-            "php": "8.2.3"
+            "php": "8.2.13"
         },
         "sort-packages": true
     },

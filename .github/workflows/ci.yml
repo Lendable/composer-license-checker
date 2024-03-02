@@ -70,7 +70,7 @@ jobs:
         run: "composer license:check -- --provider-id=licenses -v"
 
       - name: "Run coding style"
-        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.' }}
+        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.2' }}
         run: "composer code-style:check"
 
       - name: "Run PHPStan"
