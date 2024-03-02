@@ -1,0 +1,19 @@
+name: Merge Gatekeeper
+
+on:
+  pull_request:
+  merge_group:
+    branches:
+      - main
+
+jobs:
+  merge-gatekeeper:
+    runs-on: ubuntu-22.04
+    permissions:
+      checks: read
+      statuses: read
+    steps:
+      - name: Run Merge Gatekeeper
+        uses: upsidr/merge-gatekeeper@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
