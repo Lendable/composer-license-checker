@@ -80,6 +80,40 @@ abstract class LicenseCheckerCase extends TestCase
             );
     }
 
+    public function test_failure_with_invalid_allowed_licenses_file_containing_only_text(): void
+    {
+        $this->commandTester->execute([
+            '--allow-file' => 'tests/data/default/invalid_allowed_licenses.txt',
+            '--path' => $this->path,
+        ]);
+
+        CommandTesterAsserter::assertThat($this->commandTester)
+            ->doesNotContainInStdout('ShouldNotAppearInOutput')
+            ->encounteredError(
+                \sprintf(
+                    "File \"tests/data/default/invalid_allowed_licenses.txt\" must return an instance of\n         %s.",
+                    LicenseConfiguration::class,
+                ),
+            );
+    }
+
+    public function test_failure_with_allowed_licenses_file_containing_config_and_text(): void
+    {
+        $this->commandTester->execute([
+            '--allow-file' => 'tests/data/default/allowed_licenses_with_text.php',
+            '--path' => $this->path,
+        ]);
+
+        CommandTesterAsserter::assertThat($this->commandTester)
+            ->doesNotContainInStdout('ShouldNotAppearInOutput')
+            ->encounteredError(
+                \sprintf(
+                    "File \"tests/data/default/allowed_licenses_with_text.php\" returned an instance of\n         %s, but also output plain text due to content outside PHP\n         tags.",
+                    LicenseConfiguration::class,
+                ),
+            );
+    }
+
     public function test_failure_with_invalid_output_format(): void
     {
         $handle = $this->createTempFile();

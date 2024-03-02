@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Support\Lendable\ComposerLicenseChecker;
 
 use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\AssertionFailedError;
 use Symfony\Component\Console\Tester\CommandTester;
 
 final class CommandTesterAsserter
@@ -141,11 +140,8 @@ final class CommandTesterAsserter
     public function containsInStdout(string $fragment): self
     {
         foreach ($this->normalizedStdoutLines() as $line) {
-            try {
-                Assert::assertStringContainsString($fragment, $line);
-
+            if (\str_contains($line, $fragment)) {
                 return $this;
-            } catch (AssertionFailedError) {
             }
         }
 
@@ -156,6 +152,26 @@ final class CommandTesterAsserter
                 $this->normalizedStdout(),
             ),
         );
+    }
+
+    /**
+     * @param non-empty-string $fragment
+     */
+    public function doesNotContainInStdout(string $fragment): self
+    {
+        foreach ($this->normalizedStdoutLines() as $line) {
+            if (\str_contains($line, $fragment)) {
+                Assert::fail(
+                    \sprintf(
+                        "Output contained unexpected \"%s\". Output\n: %s",
+                        $fragment,
+                        $this->normalizedStdout(),
+                    ),
+                );
+            }
+        }
+
+        return $this;
     }
 
     private function normalizedStdout(): string
