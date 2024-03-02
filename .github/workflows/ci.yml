@@ -13,7 +13,7 @@ on:
 
 jobs:
   ci:
-    name: "Execute (PHP ${{ matrix.php-version }} with ${{ matrix.dependencies }} deps, composer v${{ matrix.composer-version}}.x)"
+    name: "Execute (PHP ${{ matrix.php-version }} with ${{ matrix.dependencies }} deps, composer v${{ matrix.composer-version}}.x, symfony v${{ matrix.symfony-version-label }})"
     runs-on: "ubuntu-22.04"
 
     strategy:
@@ -28,6 +28,17 @@ jobs:
         composer-version:
           - "2.6"
           - "2.7"
+        symfony-version:
+          - "5.4"
+          - "6.4"
+          - "7.0"
+        include:
+          - symfony-version: 5.4
+            symfony-version-label: 5.x
+          - symfony-version: 6.4
+            symfony-version-label: 6.x
+          - symfony-version: 7.0
+            symfony-version-label: 7.x
 
     steps:
       - name: "Checkout"
@@ -51,6 +62,10 @@ jobs:
       - uses: "ramsey/composer-install@v2"
         with:
           dependency-versions: "${{ matrix.dependencies }}"
+
+      - name: "Change Symfony version"
+        if: ${{ matrix.dependencies != 'locked' }}
+        run: "php .github/symfony-require.php ${{ matrix.symfony-version }} ${{ matrix.dependencies }}"
 
       - name: "Validate Composer dependencies"
         run: "composer validate"
