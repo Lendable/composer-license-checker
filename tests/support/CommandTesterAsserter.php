@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Support\Lendable\ComposerLicenseChecker;
 
 use PHPUnit\Framework\Assert;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 
 final class CommandTesterAsserter
@@ -65,7 +66,7 @@ final class CommandTesterAsserter
      */
     public function foundLicensingIssues(array $issues): self
     {
-        $this->hasStatusCode(1);
+        $this->hasStatusCode(Command::FAILURE);
 
         $expectedOutput = [
             '',
