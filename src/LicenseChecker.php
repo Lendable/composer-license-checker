@@ -98,12 +98,30 @@ final class LicenseChecker extends SingleCommandApplication
             return self::FAILURE;
         }
 
+        \ob_start();
         $config = require $input->getOption('allow-file');
+        $outputBuffer = \ob_get_contents();
+        \ob_end_clean();
+
         if (!$config instanceof LicenseConfiguration) {
             $this->dispatcher->dispatch(
                 new FatalError(
                     \sprintf(
                         'File "%s" must return an instance of %s.',
+                        $allowFile,
+                        LicenseConfiguration::class,
+                    ),
+                ),
+            );
+
+            return self::FAILURE;
+        }
+
+        if ($outputBuffer !== '' && $outputBuffer !== false) {
+            $this->dispatcher->dispatch(
+                new FatalError(
+                    \sprintf(
+                        'File "%s" returned an instance of %s, but also output plain text due to content outside PHP tags.',
                         $allowFile,
                         LicenseConfiguration::class,
                     ),

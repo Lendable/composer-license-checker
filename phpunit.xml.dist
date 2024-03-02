@@ -2,6 +2,8 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          colors="true"
+         beStrictAboutOutputDuringTests="true"
+         failOnRisky="true"
          cacheResultFile="tmp/.phpunit.result.cache"
          bootstrap="tests/bootstrap.php">
 
