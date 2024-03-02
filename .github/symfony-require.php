@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 error_reporting(E_ALL);
-set_error_handler(static fn(int $code, string $message) => throw new \Exception($message));
+set_error_handler(static fn(int $code, string $message): never => throw new \Exception($message));
 
 exec('composer show --locked --format=json symfony/*', output: $output, result_code: $resultCode);
 
