@@ -141,6 +141,8 @@ final class CommandTesterAsserter
     {
         foreach ($this->normalizedStdoutLines() as $line) {
             if (\str_contains($line, $fragment)) {
+                Assert::assertThat(true, Assert::isTrue()); // Ensure an assertion is recorded.
+
                 return $this;
             }
         }
@@ -170,6 +172,8 @@ final class CommandTesterAsserter
                 );
             }
         }
+
+        Assert::assertThat(true, Assert::isTrue()); // Ensure an assertion is recorded.
 
         return $this;
     }
