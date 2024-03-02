@@ -20,7 +20,7 @@ $lowest = $argv[2] === 'lowest';
 $names = [];
 
 foreach ($data['locked'] as $installed) {
-    if (preg_match('~^v[67]\.~', $installed['version']) === 1) {
+    if (preg_match('~^v[567]\.~', $installed['version']) === 1) {
         $names[] = $installed['name'];
     }
 }
