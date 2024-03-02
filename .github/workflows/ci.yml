@@ -79,7 +79,7 @@ jobs:
         run: "composer normalize --dry-run"
 
       - name: "Run security check"
-        if: "${{ matrix.composer-version != '2.1' && matrix.composer-version != '2.2' }}"
+        if: "${{ matrix.composer-version != '2.2' }}"
         run: "composer security:check"
 
       - name: "Check licenses (composer installed.json provider)"
