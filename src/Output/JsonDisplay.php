@@ -36,12 +36,7 @@ final class JsonDisplay implements Display
 
     public function onFatalError(string $message): void
     {
-        $this->output->writeln(
-            \json_encode(
-                ['result' => 'error', 'message' => $message],
-                self::ENCODING_FLAGS,
-            ),
-        );
+        $this->display(['result' => 'error', 'message' => $message]);
     }
 
     public function onPackageWithViolatingLicense(Package $package): void
@@ -64,12 +59,7 @@ final class JsonDisplay implements Display
             $data['trace'] = $this->trace;
         }
 
-        $this->output->writeln(
-            \json_encode(
-                $data,
-                self::ENCODING_FLAGS,
-            ),
-        );
+        $this->display($data);
     }
 
     public function onOutcomeSuccess(): void
@@ -80,16 +70,24 @@ final class JsonDisplay implements Display
             $data['trace'] = $this->trace;
         }
 
+        $this->display($data);
+    }
+
+    public function onTraceInformation(string $message): void
+    {
+        $this->trace[] = $message;
+    }
+
+    /**
+     * @param array<mixed> $data
+     */
+    private function display(array $data): void
+    {
         $this->output->writeln(
             \json_encode(
                 $data,
                 self::ENCODING_FLAGS,
             ),
         );
-    }
-
-    public function onTraceInformation(string $message): void
-    {
-        $this->trace[] = $message;
     }
 }
