@@ -25,14 +25,16 @@ use Symfony\Component\Console\SingleCommandApplication;
 
 final class LicenseChecker extends SingleCommandApplication
 {
-    protected static $defaultDescription = 'Checks licensing of dependencies against a set of rules '.
-    'to ensure compliance with open source licenses and minimize legal risk.';
-
     public function __construct(
         private readonly PackagesProviderLocator $locator,
         private readonly Dispatcher $dispatcher = new Dispatcher(),
     ) {
         parent::__construct();
+
+        $this->setDescription(
+            'Checks licensing of dependencies against a set of rules '.
+            'to ensure compliance with open source licenses and minimize legal risk.',
+        );
     }
 
     protected function configure(): void
