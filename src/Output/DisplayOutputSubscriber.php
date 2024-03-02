@@ -14,9 +14,9 @@ use Lendable\ComposerLicenseChecker\Event\Subscription;
 use Lendable\ComposerLicenseChecker\Event\TraceInformation;
 use Lendable\ComposerLicenseChecker\Event\UnlicensedPackageNotExplicitlyAllowed;
 
-final class DisplayOutputSubscriber implements Subscriber
+final readonly class DisplayOutputSubscriber implements Subscriber
 {
-    public function __construct(private readonly Display $display)
+    public function __construct(private Display $display)
     {
     }
 

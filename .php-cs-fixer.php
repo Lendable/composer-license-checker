@@ -10,7 +10,7 @@ $finder = PhpCsFixer\Finder::create()
 return (new PhpCsFixer\Config())
     ->setRules([
         '@PSR12' => true,
-        '@PHP81Migration' => true,
+        '@PHP82Migration' => true,
         '@DoctrineAnnotation' => true,
         'align_multiline_comment' => true,
         'array_indentation' => true,

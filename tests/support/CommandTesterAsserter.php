@@ -8,9 +8,9 @@ use PHPUnit\Framework\Assert;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 
-final class CommandTesterAsserter
+final readonly class CommandTesterAsserter
 {
-    private function __construct(private readonly SingleCommandApplicationTester|CommandTester $commandTester)
+    private function __construct(private SingleCommandApplicationTester|CommandTester $commandTester)
     {
     }
 

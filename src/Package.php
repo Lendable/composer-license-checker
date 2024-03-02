@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Lendable\ComposerLicenseChecker;
 
-final class Package
+final readonly class Package
 {
     public function __construct(
-        public readonly PackageName $name,
-        public readonly Licenses $licenses,
+        public PackageName $name,
+        public Licenses $licenses,
     ) {
     }
 

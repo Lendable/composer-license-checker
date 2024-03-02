@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Lendable\ComposerLicenseChecker;
 
-final class LicenseConfiguration
+final readonly class LicenseConfiguration
 {
     /**
      * @param list<string> $allowedLicenses
      * @param list<string> $allowedPackagePatterns
      */
     public function __construct(
-        public readonly array $allowedLicenses,
-        public readonly array $allowedPackagePatterns,
-        public readonly bool $ignoreDev,
+        public array $allowedLicenses,
+        public array $allowedPackagePatterns,
+        public bool $ignoreDev,
     ) {
     }
 

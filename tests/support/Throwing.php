@@ -7,9 +7,9 @@ namespace Tests\Support\Lendable\ComposerLicenseChecker;
 /**
  * @template-implements Result<never>
  */
-final class Throwing implements Result
+final readonly class Throwing implements Result
 {
-    private function __construct(private readonly \Throwable $throwable)
+    private function __construct(private \Throwable $throwable)
     {
     }
 
