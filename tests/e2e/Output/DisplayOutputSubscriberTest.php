@@ -18,10 +18,12 @@ use Lendable\ComposerLicenseChecker\Output\DisplayOutputSubscriber;
 use Lendable\ComposerLicenseChecker\Package;
 use Lendable\ComposerLicenseChecker\PackageName;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DisableReturnValueGenerationForTestDoubles;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(DisplayOutputSubscriber::class)]
+#[DisableReturnValueGenerationForTestDoubles]
 final class DisplayOutputSubscriberTest extends TestCase
 {
     private Display&MockObject $display;

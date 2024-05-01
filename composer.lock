@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e61df0373b7c9cc3fd1ed3d46831dc51",
+    "content-hash": "a9c285c560d031f9314bbb97710b3a5e",
     "packages": [
         {
             "name": "psr/container",
@@ -1179,6 +1179,57 @@
                 "source": "https://github.com/justinrainbow/json-schema/tree/v5.2.13"
             },
             "time": "2023-09-26T02:20:38+00:00"
+        },
+        {
+            "name": "lendable/phpunit-extensions",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Lendable/phpunit-extensions.git",
+                "reference": "5337285e55f23aa0cc7ab81f0127b19dee956cec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Lendable/phpunit-extensions/zipball/5337285e55f23aa0cc7ab81f0127b19dee956cec",
+                "reference": "5337285e55f23aa0cc7ab81f0127b19dee956cec",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2",
+                "phpunit/phpunit": "^11.1.2"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": "^2.42.0",
+                "lendable/composer-license-checker": "^1.2.0",
+                "php-cs-fixer/shim": "^3.54.0",
+                "phpstan/phpstan": "^1.10.67",
+                "phpstan/phpstan-deprecation-rules": "^1.1.4",
+                "phpstan/phpstan-phpunit": "^1.3.16",
+                "phpstan/phpstan-strict-rules": "^1.5.3",
+                "rector/rector": "1.0.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lendable\\PHPUnitExtensions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lendable Ltd",
+                    "email": "dev@lendable.co.uk"
+                }
+            ],
+            "description": "Extensions to PHPUnit",
+            "support": {
+                "issues": "https://github.com/Lendable/phpunit-extensions/issues",
+                "source": "https://github.com/Lendable/phpunit-extensions/tree/0.3.0"
+            },
+            "time": "2024-04-18T09:15:59+00:00"
         },
         {
             "name": "localheinz/diff",

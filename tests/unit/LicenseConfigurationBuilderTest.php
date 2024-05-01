@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace Tests\Unit\Lendable\ComposerLicenseChecker;
 
 use Lendable\ComposerLicenseChecker\LicenseConfigurationBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DisableReturnValueGenerationForTestDoubles;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(LicenseConfigurationBuilder::class)]
+#[DisableReturnValueGenerationForTestDoubles]
 final class LicenseConfigurationBuilderTest extends TestCase
 {
     public function test_builds_expected_default_configuration(): void

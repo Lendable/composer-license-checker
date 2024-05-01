@@ -8,8 +8,12 @@ use Lendable\ComposerLicenseChecker\Licenses;
 use Lendable\ComposerLicenseChecker\Package;
 use Lendable\ComposerLicenseChecker\PackageName;
 use Lendable\ComposerLicenseChecker\Packages;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DisableReturnValueGenerationForTestDoubles;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(Packages::class)]
+#[DisableReturnValueGenerationForTestDoubles]
 final class PackagesTest extends TestCase
 {
     public function test_returns_instance_with_sorted_packages(): void

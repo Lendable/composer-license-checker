@@ -9,11 +9,13 @@ use Lendable\ComposerLicenseChecker\Output\JsonDisplay;
 use Lendable\ComposerLicenseChecker\Package;
 use Lendable\ComposerLicenseChecker\PackageName;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DisableReturnValueGenerationForTestDoubles;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[CoversClass(JsonDisplay::class)]
+#[DisableReturnValueGenerationForTestDoubles]
 final class JsonDisplayTest extends TestCase
 {
     private BufferedOutput $bufferedOutput;
