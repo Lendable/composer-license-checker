@@ -7,12 +7,16 @@ namespace Tests\Unit\Lendable\ComposerLicenseChecker\PackagesProvider;
 use Lendable\ComposerLicenseChecker\Exception\FailedProvidingPackages;
 use Lendable\ComposerLicenseChecker\Exception\FailedRunningComposer;
 use Lendable\ComposerLicenseChecker\PackagesProvider\ComposerLicensesPackagesProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DisableReturnValueGenerationForTestDoubles;
 use PHPUnit\Framework\TestCase;
 use Tests\Support\Lendable\ComposerLicenseChecker\Result;
 use Tests\Support\Lendable\ComposerLicenseChecker\Returning;
 use Tests\Support\Lendable\ComposerLicenseChecker\StubComposerRunner;
 use Tests\Support\Lendable\ComposerLicenseChecker\Throwing;
 
+#[CoversClass(ComposerLicensesPackagesProvider::class)]
+#[DisableReturnValueGenerationForTestDoubles]
 final class ComposerLicensesPackagesProviderTest extends TestCase
 {
     public function test_returns_parsed_packages(): void

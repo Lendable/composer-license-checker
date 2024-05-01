@@ -10,7 +10,9 @@ use Lendable\ComposerLicenseChecker\Package;
 use Lendable\ComposerLicenseChecker\PackageName;
 use Lendable\ComposerLicenseChecker\Packages;
 use Lendable\ComposerLicenseChecker\PackagesProvider\ComposerInstalledJsonPackagesProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\DisableReturnValueGenerationForTestDoubles;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Tests\Support\Lendable\ComposerLicenseChecker\PackagesAsserter;
@@ -18,6 +20,8 @@ use Tests\Support\Lendable\ComposerLicenseChecker\PackagesAsserter;
 /**
  * @phpstan-import-type InstalledData from ComposerInstalledJsonPackagesProvider
  */
+#[CoversClass(ComposerInstalledJsonPackagesProvider::class)]
+#[DisableReturnValueGenerationForTestDoubles]
 final class ComposerInstalledJsonPackagesProviderTest extends TestCase
 {
     /**

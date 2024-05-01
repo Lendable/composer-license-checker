@@ -7,9 +7,11 @@ namespace Tests\E2E\Lendable\ComposerLicenseChecker;
 use Lendable\ComposerLicenseChecker\ComposerRunner\SymfonyProcessComposerRunner;
 use Lendable\ComposerLicenseChecker\PackagesProvider;
 use Lendable\ComposerLicenseChecker\PackagesProvider\ComposerLicensesPackagesProvider;
+use PHPUnit\Framework\Attributes\DisableReturnValueGenerationForTestDoubles;
 use Tests\Support\Lendable\ComposerLicenseChecker\CommandTesterAsserter;
 use Tests\Support\Lendable\ComposerLicenseChecker\LicenseConfigurationFileBuilder;
 
+#[DisableReturnValueGenerationForTestDoubles]
 final class ComposerLicensesLicenseCheckerTest extends LicenseCheckerCase
 {
     protected function packagesProvider(): PackagesProvider

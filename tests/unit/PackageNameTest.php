@@ -6,9 +6,13 @@ namespace Tests\Unit\Lendable\ComposerLicenseChecker;
 
 use Lendable\ComposerLicenseChecker\Exception\InvalidPackageName;
 use Lendable\ComposerLicenseChecker\PackageName;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\DisableReturnValueGenerationForTestDoubles;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(PackageName::class)]
+#[DisableReturnValueGenerationForTestDoubles]
 final class PackageNameTest extends TestCase
 {
     public function test_construction(): void

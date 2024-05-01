@@ -7,9 +7,13 @@ namespace Tests\Unit\Lendable\ComposerLicenseChecker;
 use Lendable\ComposerLicenseChecker\Exception\PackagesProviderNotLocated;
 use Lendable\ComposerLicenseChecker\InMemoryPackagesProviderLocator;
 use Lendable\ComposerLicenseChecker\PackagesProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DisableReturnValueGenerationForTestDoubles;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(InMemoryPackagesProviderLocator::class)]
+#[DisableReturnValueGenerationForTestDoubles]
 final class InMemoryPackagesProviderLocatorTest extends TestCase
 {
     private PackagesProvider&MockObject $provider1;
