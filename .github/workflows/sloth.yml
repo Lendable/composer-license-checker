@@ -1,0 +1,14 @@
+name: Sloth
+
+on:
+  pull_request:
+  merge_group:
+
+jobs:
+  sloth:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Sloth
+        uses: lendable/sloth@v0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
