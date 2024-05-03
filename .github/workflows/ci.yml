@@ -10,7 +10,7 @@ on:
 
 jobs:
   ci:
-    name: "Execute (PHP ${{ matrix.php-version }} with ${{ matrix.dependencies }} deps, composer v${{ matrix.composer-version}}.x, symfony v${{ matrix.symfony-version-label }})"
+    name: "Execute (PHP ${{ matrix.php-version }} with ${{ matrix.dependencies }} deps, composer v${{ matrix.composer-version}}.x, symfony v${{ matrix.symfony-version }})"
     runs-on: "ubuntu-22.04"
 
     strategy:
@@ -28,16 +28,9 @@ jobs:
           - "2.6"
           - "2.7"
         symfony-version:
-          - "5.4"
-          - "6.4"
-          - "7.0"
-        include:
-          - symfony-version: 5.4
-            symfony-version-label: 5.x
-          - symfony-version: 6.4
-            symfony-version-label: 6.x
-          - symfony-version: 7.0
-            symfony-version-label: 7.x
+          - "5.4.*"
+          - "6.4.*"
+          - "7.0.*"
 
     steps:
       - name: "Checkout"
@@ -53,18 +46,26 @@ jobs:
           ini-values: memory_limit=-1
           tools: "composer:${{ matrix.composer-version }}"
 
-      - name: "Update Composer platform version"
-        if: ${{ matrix.dependencies != 'locked' && matrix.php-version != '8.2' }}
+      - name: Setup Symfony Flex
+        if: ${{ matrix.dependencies != 'locked' }}
         shell: bash
-        run: "composer config platform.php ${{ matrix.php-version }}"
+        run: |
+          composer global config --no-plugins allow-plugins.symfony/flex true
+          composer global require --no-progress --no-scripts --no-plugins symfony/flex
 
-      - uses: "ramsey/composer-install@v2"
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v3
         with:
           dependency-versions: "${{ matrix.dependencies }}"
+        env:
+          SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
 
-      - name: "Change Symfony version"
+      - name: Remove Symfony Flex
         if: ${{ matrix.dependencies != 'locked' }}
-        run: "php .github/symfony-require.php ${{ matrix.symfony-version }} ${{ matrix.dependencies }}"
+        shell: bash
+        run: |
+          composer global config --no-plugins allow-plugins.symfony/flex false
+          composer global remove symfony/flex
 
       - name: "Validate Composer dependencies"
         run: "composer validate"
