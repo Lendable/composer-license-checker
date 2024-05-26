@@ -70,7 +70,7 @@ final class LicenseConfigurationFileBuilder
     {
         \fwrite($this->resource, $this->buildContent());
 
-        return \stream_get_meta_data($this->resource)['uri'];
+        return \stream_get_meta_data($this->resource)['uri'] ?? throw new \RuntimeException('Failed to get resource uri');
     }
 
     private function buildContent(): string
