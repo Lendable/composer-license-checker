@@ -16,14 +16,14 @@
         "symfony/process": "^5.4 || ^6.0 || ^7.0"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.42.0",
+        "ergebnis/composer-normalize": "^2.43.0",
         "lendable/phpunit-extensions": "^0.3",
-        "php-cs-fixer/shim": "^3.58.1",
-        "phpstan/phpstan": "^1.11.4",
+        "php-cs-fixer/shim": "^3.59.3",
+        "phpstan/phpstan": "^1.11.5",
         "phpstan/phpstan-deprecation-rules": "^1.2.0",
         "phpstan/phpstan-phpunit": "^1.4.0",
         "phpstan/phpstan-strict-rules": "^1.6.0",
-        "phpunit/phpunit": "^11.2.1",
+        "phpunit/phpunit": "^11.2.4",
         "rector/rector": "^1.1.0",
         "symfony/filesystem": "^6.2"
     },
