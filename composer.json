@@ -23,8 +23,8 @@
         "phpstan/phpstan-deprecation-rules": "^1.2.0",
         "phpstan/phpstan-phpunit": "^1.4.0",
         "phpstan/phpstan-strict-rules": "^1.6.0",
-        "phpunit/phpunit": "^11.2.4",
-        "rector/rector": "^1.1.0",
+        "phpunit/phpunit": "^11.2.5",
+        "rector/rector": "^1.1.1",
         "symfony/filesystem": "^6.2"
     },
     "autoload": {
