@@ -6,17 +6,17 @@ namespace Lendable\ComposerLicenseChecker;
 
 use Lendable\ComposerLicenseChecker\Exception\InvalidPackageName;
 
-final class PackageName
+final readonly class PackageName
 {
     /**
      * @var non-empty-string
      */
-    public readonly string $vendor;
+    public string $vendor;
 
     /**
      * @var non-empty-string
      */
-    public readonly string $project;
+    public string $project;
 
     /**
      * @param non-empty-string $packageName
