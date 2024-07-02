@@ -9,9 +9,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class HumanReadableDisplay implements Display
+final readonly class HumanReadableDisplay implements Display
 {
-    private readonly SymfonyStyle $style;
+    private SymfonyStyle $style;
 
     public function __construct(InputInterface $input, OutputInterface $output)
     {
