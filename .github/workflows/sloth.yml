@@ -12,3 +12,5 @@ jobs:
         uses: lendable/sloth@v0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          ignored: |
+            Validate PR title
