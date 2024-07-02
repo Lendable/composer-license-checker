@@ -102,8 +102,7 @@ final class LicenseChecker extends SingleCommandApplication
 
         \ob_start();
         $config = require $input->getOption('allow-file');
-        $outputBuffer = \ob_get_contents();
-        \ob_end_clean();
+        $outputBuffer = \ob_get_clean();
 
         if (!$config instanceof LicenseConfiguration) {
             $this->dispatcher->dispatch(
