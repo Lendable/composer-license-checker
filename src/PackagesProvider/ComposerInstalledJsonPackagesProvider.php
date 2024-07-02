@@ -79,6 +79,10 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
                             throw FailedProvidingPackages::withReason('Key "name" is not a string');
                         }
 
+                        if ($package['name'] === '') {
+                            throw FailedProvidingPackages::withReason('Key "name" is an empty string');
+                        }
+
                         $licenses = $package['license'] ?? [];
 
                         if (!\is_array($licenses) || !\array_is_list($licenses)) {
