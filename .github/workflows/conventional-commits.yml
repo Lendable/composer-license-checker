@@ -1,0 +1,26 @@
+name: Conventional Commits
+
+on:
+  # https://github.com/marketplace/actions/semantic-pull-request#event-triggers
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+  merge_group:
+
+permissions:
+  pull-requests: read
+
+jobs:
+  main:
+    name: Validate PR title
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: benhodgson87/conventional-pull-request-action@v1
+        if: ${{ github.event_name == 'pull_request' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commitlintRulesPath: ".github/commitlint.config.js"
