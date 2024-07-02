@@ -52,7 +52,6 @@ final class LicenseChecker extends SingleCommandApplication
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Path to project root, where composer.json lives',
-                null,
             )->addOption(
                 'provider-id',
                 null,
