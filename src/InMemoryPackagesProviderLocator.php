@@ -11,9 +11,7 @@ final readonly class InMemoryPackagesProviderLocator implements PackagesProvider
     /**
      * @param array<non-empty-string, PackagesProvider> $providers
      */
-    public function __construct(private array $providers)
-    {
-    }
+    public function __construct(private array $providers) {}
 
     /**
      * @return list<non-empty-string>

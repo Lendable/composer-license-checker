@@ -9,9 +9,7 @@ namespace Tests\Support\Lendable\ComposerLicenseChecker;
  */
 final readonly class Throwing implements Result
 {
-    private function __construct(private \Throwable $throwable)
-    {
-    }
+    private function __construct(private \Throwable $throwable) {}
 
     public static function exception(\Throwable $throwable): self
     {

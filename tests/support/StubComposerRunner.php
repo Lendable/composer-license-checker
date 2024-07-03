@@ -11,9 +11,7 @@ final readonly class StubComposerRunner implements ComposerRunner
     /**
      * @param Result<string> $result
      */
-    public function __construct(private Result $result)
-    {
-    }
+    public function __construct(private Result $result) {}
 
     public function licenses(string $projectPath, bool $ignoreDev): string
     {

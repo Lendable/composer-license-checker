@@ -14,13 +14,12 @@ final readonly class Packages implements \Countable, \IteratorAggregate
      */
     public function __construct(
         private array $items,
-    ) {
-    }
+    ) {}
 
     public function sort(): self
     {
         $items = $this->items;
-        \usort($items, static fn (Package $a, Package $b): int => $a->name->toString() <=> $b->name->toString());
+        \usort($items, static fn(Package $a, Package $b): int => $a->name->toString() <=> $b->name->toString());
 
         return new self($items);
     }

@@ -26,9 +26,7 @@ final class LicenseConfigurationFileBuilder
     /**
      * @param resource $resource
      */
-    private function __construct(private readonly mixed $resource)
-    {
-    }
+    private function __construct(private readonly mixed $resource) {}
 
     /**
      * @param resource $resource

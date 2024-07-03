@@ -9,8 +9,7 @@ final readonly class Package
     public function __construct(
         public PackageName $name,
         public Licenses $licenses,
-    ) {
-    }
+    ) {}
 
     public function isUnlicensed(): bool
     {

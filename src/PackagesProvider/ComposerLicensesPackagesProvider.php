@@ -15,9 +15,7 @@ use Lendable\ComposerLicenseChecker\PackagesProvider;
 
 final readonly class ComposerLicensesPackagesProvider implements PackagesProvider
 {
-    public function __construct(private ComposerRunner $composerRunner)
-    {
-    }
+    public function __construct(private ComposerRunner $composerRunner) {}
 
     public function provide(string $projectPath, bool $ignoreDev): Packages
     {
@@ -46,7 +44,7 @@ final readonly class ComposerLicensesPackagesProvider implements PackagesProvide
 
         return new Packages(
             \array_map(
-                static fn (string $name, array $package): Package => new Package(new PackageName($name), new Licenses($package['license'])),
+                static fn(string $name, array $package): Package => new Package(new PackageName($name), new Licenses($package['license'])),
                 \array_keys($data['dependencies']),
                 $data['dependencies'],
             ),

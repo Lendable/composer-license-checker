@@ -14,9 +14,7 @@ final readonly class Returning implements Result
     /**
      * @param T $value
      */
-    private function __construct(private mixed $value)
-    {
-    }
+    private function __construct(private mixed $value) {}
 
     /**
      * @template Y

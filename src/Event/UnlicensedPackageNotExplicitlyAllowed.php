@@ -8,7 +8,5 @@ use Lendable\ComposerLicenseChecker\Package;
 
 final readonly class UnlicensedPackageNotExplicitlyAllowed implements Event
 {
-    public function __construct(public Package $package)
-    {
-    }
+    public function __construct(public Package $package) {}
 }

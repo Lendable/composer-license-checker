@@ -18,9 +18,7 @@ final class LicenseConfigurationBuilder
 
     private bool $ignoreDev = false;
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function addLicenses(string $license, string ...$rest): self
     {

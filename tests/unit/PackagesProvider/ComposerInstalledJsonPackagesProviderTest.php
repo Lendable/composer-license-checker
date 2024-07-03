@@ -321,7 +321,6 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
                 $installedJsonDir = \sprintf('%s%2$svendor%2$scomposer', $projectPath, \DIRECTORY_SEPARATOR);
                 $fs->mkdir($installedJsonDir);
 
-
                 $fs->dumpFile(
                     \sprintf('%s%sinstalled.json', $installedJsonDir, \DIRECTORY_SEPARATOR),
                     \is_string($data) ? $data : \json_encode($data, \JSON_THROW_ON_ERROR),

@@ -31,7 +31,7 @@ final class SingleCommandApplicationTester
         } finally {
             // Seems like Symfony goes to efforts to reset SHELL_VERBOSITY when using ApplicationTester, but not for CommandTester
             // this leaves the env var set and further test case execution will have that SHELL_VERBOSITY setting.
-            if (false === $prevShellVerbosity) {
+            if ($prevShellVerbosity === false) {
                 @\putenv('SHELL_VERBOSITY');
                 unset($_ENV['SHELL_VERBOSITY'], $_SERVER['SHELL_VERBOSITY']);
             } else {
