@@ -14,8 +14,7 @@ final readonly class Licenses implements \IteratorAggregate
      */
     public function __construct(
         private array $licenses,
-    ) {
-    }
+    ) {}
 
     public function toString(): string
     {

@@ -9,9 +9,7 @@ use PHPUnit\Framework\Assert;
 
 final readonly class PackagesAsserter
 {
-    private function __construct(private Packages $packages)
-    {
-    }
+    private function __construct(private Packages $packages) {}
 
     public static function assertThat(Packages $packages): self
     {

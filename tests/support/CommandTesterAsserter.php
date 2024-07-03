@@ -10,9 +10,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 final readonly class CommandTesterAsserter
 {
-    private function __construct(private SingleCommandApplicationTester|CommandTester $commandTester)
-    {
-    }
+    private function __construct(private SingleCommandApplicationTester|CommandTester $commandTester) {}
 
     public static function assertThat(SingleCommandApplicationTester|CommandTester $commandTester): self
     {
@@ -48,13 +46,13 @@ final readonly class CommandTesterAsserter
         $this->successfullyRan();
         $this->hasNormalizedStdout(
             <<<STDOUT
-                
+
                 Composer License Checker
                 ========================
 
                  [OK] All dependencies have allowed licenses.
-                
-                
+
+
                 STDOUT
         );
 
@@ -190,7 +188,7 @@ final readonly class CommandTesterAsserter
     private function normalizedStdoutLines(): array
     {
         return \array_map(
-            static fn (string $line): string => \rtrim($line, " \t"),
+            static fn(string $line): string => \rtrim($line, " \t"),
             \explode("\n", $this->commandTester->getDisplay(true)),
         );
     }

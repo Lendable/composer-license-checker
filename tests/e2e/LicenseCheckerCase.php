@@ -31,8 +31,6 @@ abstract class LicenseCheckerCase extends TestCase
         $this->commandTester = new SingleCommandApplicationTester($command);
     }
 
-    abstract protected function packagesProvider(): PackagesProvider;
-
     public function test_failure_with_non_existent_allowed_licenses_file(): void
     {
         $this->commandTester->execute(['--allow-file' => 'dont_have.pls']);
@@ -267,6 +265,8 @@ abstract class LicenseCheckerCase extends TestCase
         CommandTesterAsserter::assertThat($this->commandTester)
             ->foundNoLicensingIssues();
     }
+
+    abstract protected function packagesProvider(): PackagesProvider;
 
     /**
      * @return resource

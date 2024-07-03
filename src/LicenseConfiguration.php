@@ -14,8 +14,7 @@ final readonly class LicenseConfiguration
         public array $allowedLicenses,
         public array $allowedPackagePatterns,
         public bool $ignoreDev,
-    ) {
-    }
+    ) {}
 
     public function allowsLicenseOfPackage(Package $package): bool
     {

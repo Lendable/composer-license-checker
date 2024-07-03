@@ -30,7 +30,7 @@ final class PackagesTest extends TestCase
             'c/b',
             'c/d',
             'x/y',
-        ], \array_map(static fn (Package $package): string => $package->name->toString(), \iterator_to_array($sorted)));
+        ], \array_map(static fn(Package $package): string => $package->name->toString(), \iterator_to_array($sorted)));
     }
 
     public function test_returns_count(): void

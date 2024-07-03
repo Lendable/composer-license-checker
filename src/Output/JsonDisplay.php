@@ -24,9 +24,7 @@ final class JsonDisplay implements Display
      */
     private array $trace = [];
 
-    public function __construct(public readonly OutputInterface $output)
-    {
-    }
+    public function __construct(public readonly OutputInterface $output) {}
 
     public function onStarted(): void
     {

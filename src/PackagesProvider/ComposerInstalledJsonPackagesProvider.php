@@ -97,7 +97,7 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
                     },
                     $dependencies,
                 ),
-                static fn (?Package $package): bool => $package !== null,
+                static fn(?Package $package): bool => $package !== null,
             ),
         ))->sort();
     }

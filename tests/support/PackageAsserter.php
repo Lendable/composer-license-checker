@@ -11,9 +11,7 @@ use PHPUnit\Framework\Assert;
 
 final readonly class PackageAsserter
 {
-    private function __construct(private Package $package)
-    {
-    }
+    private function __construct(private Package $package) {}
 
     public static function assertThat(Package $package): self
     {

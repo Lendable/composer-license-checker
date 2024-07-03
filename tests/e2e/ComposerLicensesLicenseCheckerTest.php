@@ -14,11 +14,6 @@ use Tests\Support\Lendable\ComposerLicenseChecker\LicenseConfigurationFileBuilde
 #[DisableReturnValueGenerationForTestDoubles]
 final class ComposerLicensesLicenseCheckerTest extends LicenseCheckerCase
 {
-    protected function packagesProvider(): PackagesProvider
-    {
-        return new ComposerLicensesPackagesProvider(new SymfonyProcessComposerRunner());
-    }
-
     public function test_verbose_mode_doesnt_impact_composer_execution(): void
     {
         $handle = $this->createTempFile();
@@ -28,5 +23,10 @@ final class ComposerLicensesLicenseCheckerTest extends LicenseCheckerCase
 
         CommandTesterAsserter::assertThat($this->commandTester)
             ->hasStatusCode(0);
+    }
+
+    protected function packagesProvider(): PackagesProvider
+    {
+        return new ComposerLicensesPackagesProvider(new SymfonyProcessComposerRunner());
     }
 }

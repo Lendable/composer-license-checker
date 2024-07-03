@@ -28,9 +28,7 @@ final readonly class HumanReadableDisplay implements Display
         $this->style->error($message);
     }
 
-    public function onOutcomeFailure(): void
-    {
-    }
+    public function onOutcomeFailure(): void {}
 
     public function onOutcomeSuccess(): void
     {

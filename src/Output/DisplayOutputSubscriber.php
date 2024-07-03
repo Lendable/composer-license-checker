@@ -16,9 +16,7 @@ use Lendable\ComposerLicenseChecker\Event\UnlicensedPackageNotExplicitlyAllowed;
 
 final readonly class DisplayOutputSubscriber implements Subscriber
 {
-    public function __construct(private Display $display)
-    {
-    }
+    public function __construct(private Display $display) {}
 
     public function subscriptions(): iterable
     {
