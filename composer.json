@@ -19,7 +19,7 @@
         "ergebnis/composer-normalize": "^2.43.0",
         "lendable/phpunit-extensions": "^0.3",
         "php-cs-fixer/shim": "^3.59.3",
-        "phpstan/phpstan": "^1.11.6",
+        "phpstan/phpstan": "^1.11.7",
         "phpstan/phpstan-deprecation-rules": "^1.2.0",
         "phpstan/phpstan-phpunit": "^1.4.0",
         "phpstan/phpstan-strict-rules": "^1.6.0",
