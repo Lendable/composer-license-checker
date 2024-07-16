@@ -9,9 +9,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\SingleCommandApplication;
 use Symfony\Component\Console\Tester\CommandTester;
 
-final class SingleCommandApplicationTester
+final readonly class SingleCommandApplicationTester
 {
-    private readonly CommandTester $commandTester;
+    private CommandTester $commandTester;
 
     public function __construct(SingleCommandApplication $command)
     {
