@@ -310,6 +310,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
         $attempts = 0;
 
         do {
+            /** @var non-empty-string $projectPath */
             $projectPath = \sprintf(
                 '%s%s%s',
                 $tempDir,
