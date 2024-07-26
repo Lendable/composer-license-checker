@@ -18,13 +18,13 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.43.0",
         "lendable/phpunit-extensions": "^0.3",
-        "php-cs-fixer/shim": "^3.59.3",
-        "phpstan/phpstan": "^1.11.7",
+        "php-cs-fixer/shim": "^3.60.0",
+        "phpstan/phpstan": "^1.11.8",
         "phpstan/phpstan-deprecation-rules": "^1.2.0",
         "phpstan/phpstan-phpunit": "^1.4.0",
         "phpstan/phpstan-strict-rules": "^1.6.0",
-        "phpunit/phpunit": "^11.2.7",
-        "rector/rector": "^1.2.1",
+        "phpunit/phpunit": "^11.2.8",
+        "rector/rector": "^1.2.2",
         "symfony/filesystem": "^6.2"
     },
     "autoload": {

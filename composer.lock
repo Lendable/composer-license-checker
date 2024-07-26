@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f904593a962d9d3a8f939b28d973a79c",
+    "content-hash": "77847f63126a06f03bd3b381fc3728da",
     "packages": [
         {
             "name": "psr/container",
@@ -1598,16 +1598,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.59.3",
+            "version": "v3.60.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "c855876e64de3431bc9279f27af7be40d11d7613"
+                "reference": "11f328afa9768eed89bacffab02f56263185058c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/c855876e64de3431bc9279f27af7be40d11d7613",
-                "reference": "c855876e64de3431bc9279f27af7be40d11d7613",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/11f328afa9768eed89bacffab02f56263185058c",
+                "reference": "11f328afa9768eed89bacffab02f56263185058c",
                 "shasum": ""
             },
             "require": {
@@ -1644,22 +1644,22 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.59.3"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.60.0"
             },
-            "time": "2024-06-16T14:17:34+00:00"
+            "time": "2024-07-25T09:27:32+00:00"
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.7",
+            "version": "1.11.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "52d2bbfdcae7f895915629e4694e9497d0f8e28d"
+                "reference": "6adbd118e6c0515dd2f36b06cde1d6da40f1b8ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/52d2bbfdcae7f895915629e4694e9497d0f8e28d",
-                "reference": "52d2bbfdcae7f895915629e4694e9497d0f8e28d",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6adbd118e6c0515dd2f36b06cde1d6da40f1b8ec",
+                "reference": "6adbd118e6c0515dd2f36b06cde1d6da40f1b8ec",
                 "shasum": ""
             },
             "require": {
@@ -1704,7 +1704,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-06T11:17:41+00:00"
+            "time": "2024-07-24T07:01:22+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -2179,16 +2179,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.2.7",
+            "version": "11.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "15c7e69dec4a8f246840859e6b430bd2abeb5039"
+                "reference": "a7a29e8d3113806f18f99d670f580a30e8ffff39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/15c7e69dec4a8f246840859e6b430bd2abeb5039",
-                "reference": "15c7e69dec4a8f246840859e6b430bd2abeb5039",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a7a29e8d3113806f18f99d670f580a30e8ffff39",
+                "reference": "a7a29e8d3113806f18f99d670f580a30e8ffff39",
                 "shasum": ""
             },
             "require": {
@@ -2259,7 +2259,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.2.7"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.2.8"
             },
             "funding": [
                 {
@@ -2275,20 +2275,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-10T11:50:09+00:00"
+            "time": "2024-07-18T14:56:37+00:00"
         },
         {
             "name": "rector/rector",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "b38a3eed3ce2046f40c001255e2fec9d2746bacf"
+                "reference": "044e6364017882d1e346da8690eeabc154da5495"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/b38a3eed3ce2046f40c001255e2fec9d2746bacf",
-                "reference": "b38a3eed3ce2046f40c001255e2fec9d2746bacf",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/044e6364017882d1e346da8690eeabc154da5495",
+                "reference": "044e6364017882d1e346da8690eeabc154da5495",
                 "shasum": ""
             },
             "require": {
@@ -2326,7 +2326,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/1.2.1"
+                "source": "https://github.com/rectorphp/rector/tree/1.2.2"
             },
             "funding": [
                 {
@@ -2334,7 +2334,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-16T00:22:54+00:00"
+            "time": "2024-07-25T07:44:34+00:00"
         },
         {
             "name": "sebastian/cli-parser",
