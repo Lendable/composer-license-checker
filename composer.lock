@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "77847f63126a06f03bd3b381fc3728da",
+    "content-hash": "9060583e9398faf4b9657bc6d853c926",
     "packages": [
         {
             "name": "psr/container",
@@ -1598,16 +1598,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.60.0",
+            "version": "v3.61.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "11f328afa9768eed89bacffab02f56263185058c"
+                "reference": "e71ec78d1c47a16b082d155e404fff9ff1fa6052"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/11f328afa9768eed89bacffab02f56263185058c",
-                "reference": "11f328afa9768eed89bacffab02f56263185058c",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/e71ec78d1c47a16b082d155e404fff9ff1fa6052",
+                "reference": "e71ec78d1c47a16b082d155e404fff9ff1fa6052",
                 "shasum": ""
             },
             "require": {
@@ -1644,9 +1644,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.60.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.61.0"
             },
-            "time": "2024-07-25T09:27:32+00:00"
+            "time": "2024-07-31T08:19:08+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -2179,16 +2179,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.2.8",
+            "version": "11.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a7a29e8d3113806f18f99d670f580a30e8ffff39"
+                "reference": "c197bbaaca360efda351369bf1fd9cc1ca6bcbf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a7a29e8d3113806f18f99d670f580a30e8ffff39",
-                "reference": "a7a29e8d3113806f18f99d670f580a30e8ffff39",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c197bbaaca360efda351369bf1fd9cc1ca6bcbf7",
+                "reference": "c197bbaaca360efda351369bf1fd9cc1ca6bcbf7",
                 "shasum": ""
             },
             "require": {
@@ -2259,7 +2259,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.2.8"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.2.9"
             },
             "funding": [
                 {
@@ -2275,7 +2275,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-18T14:56:37+00:00"
+            "time": "2024-07-30T11:09:23+00:00"
         },
         {
             "name": "rector/rector",
