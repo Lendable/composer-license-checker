@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9060583e9398faf4b9657bc6d853c926",
+    "content-hash": "bd88b7f99767b03217cce6f0682b3455",
     "packages": [
         {
             "name": "psr/container",
@@ -1598,16 +1598,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.61.0",
+            "version": "v3.61.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "e71ec78d1c47a16b082d155e404fff9ff1fa6052"
+                "reference": "3ac8e446863e313b51a9466915c9b578409eef9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/e71ec78d1c47a16b082d155e404fff9ff1fa6052",
-                "reference": "e71ec78d1c47a16b082d155e404fff9ff1fa6052",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/3ac8e446863e313b51a9466915c9b578409eef9e",
+                "reference": "3ac8e446863e313b51a9466915c9b578409eef9e",
                 "shasum": ""
             },
             "require": {
@@ -1644,22 +1644,22 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.61.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.61.1"
             },
-            "time": "2024-07-31T08:19:08+00:00"
+            "time": "2024-07-31T14:33:55+00:00"
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.8",
+            "version": "1.11.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "6adbd118e6c0515dd2f36b06cde1d6da40f1b8ec"
+                "reference": "e370bcddadaede0c1716338b262346f40d296f82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6adbd118e6c0515dd2f36b06cde1d6da40f1b8ec",
-                "reference": "6adbd118e6c0515dd2f36b06cde1d6da40f1b8ec",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e370bcddadaede0c1716338b262346f40d296f82",
+                "reference": "e370bcddadaede0c1716338b262346f40d296f82",
                 "shasum": ""
             },
             "require": {
@@ -1704,7 +1704,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-24T07:01:22+00:00"
+            "time": "2024-08-01T16:25:18+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
