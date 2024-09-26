@@ -11,7 +11,7 @@ on:
 jobs:
   ci:
     name: "Execute (PHP ${{ matrix.php-version }} with ${{ matrix.dependencies }} deps, composer v${{ matrix.composer-version}}.x, symfony v${{ matrix.symfony-version }})"
-    runs-on: "ubuntu-22.04"
+    runs-on: "ubuntu-24.04"
 
     strategy:
       matrix:
