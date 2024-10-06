@@ -22,6 +22,7 @@ jobs:
         php-version:
           - "8.2"
           - "8.3"
+          - "8.4"
         composer-version:
           - "2.4"
           - "2.5"
@@ -88,7 +89,7 @@ jobs:
         run: "composer code-style:check"
 
       - name: "Run PHPStan"
-        if: ${{ matrix.dependencies == 'locked' }}
+        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.3' }}
         run: "composer phpstan"
 
       - name: "Run Rector"
