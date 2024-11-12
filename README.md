@@ -14,7 +14,7 @@ composer require --dev lendable/composer-license-checker
 
 ## Usage
 
-Create a configuration file in your project root, `.allowed-licenses.php` (or you can use the the option `-a / --allow-file` to specify the location of the configuration).
+Create a configuration file in your project root, `.allowed-licenses.php` (or you can use the option `-a / --allow-file` to specify the location of the configuration).
 
 ```php
 <?php
