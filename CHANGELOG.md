@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.2](https://github.com/Lendable/composer-license-checker/compare/1.2.1...1.2.2) (2024-11-29)
+
+
+### Fixes / Maintenance
+
+* Bump minimum `symfony/process` version ([#387](https://github.com/Lendable/composer-license-checker/issues/387)) ([2e6787f](https://github.com/Lendable/composer-license-checker/commit/2e6787fedee3dc8775a07180d4a165d0bfe79e3f))
+* **deps:** Allow PHP 8.4 ([#394](https://github.com/Lendable/composer-license-checker/issues/394)) ([27b6ecc](https://github.com/Lendable/composer-license-checker/commit/27b6eccad305347eb9d69097a2f11473f775589f))
+
 ## [1.2.1](https://github.com/Lendable/composer-license-checker/compare/1.2.0...1.2.1) (2024-07-02)
 
 
