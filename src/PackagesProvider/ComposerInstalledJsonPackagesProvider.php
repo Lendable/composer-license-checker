@@ -89,6 +89,18 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
                             throw FailedProvidingPackages::withReason('Key "license" is not a list');
                         }
 
+                        foreach ($licenses as $license) {
+                            if (!\is_string($license)) {
+                                throw FailedProvidingPackages::withReason('Key "license" contains a non-string value');
+                            }
+
+                            if (\trim($license) === '') {
+                                throw FailedProvidingPackages::withReason('Key "license" contains an empty value');
+                            }
+                        }
+
+                        /** @var list<non-empty-string> $licenses */
+
                         /** @var PackageData $package */
                         return new Package(
                             new PackageName($package['name']),
