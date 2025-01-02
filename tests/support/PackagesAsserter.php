@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Support\Lendable\ComposerLicenseChecker;
 
+use Lendable\ComposerLicenseChecker\Package;
 use Lendable\ComposerLicenseChecker\Packages;
 use PHPUnit\Framework\Assert;
 
@@ -25,6 +26,8 @@ final readonly class PackagesAsserter
         $iterator->attachIterator(new \IteratorIterator($this->packages));
 
         foreach ($iterator as [$expected, $actual]) {
+            /** @var Package $expected */
+            /** @var Package $actual */
             PackageAsserter::assertThat($actual)->equals($expected);
         }
 
