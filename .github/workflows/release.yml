@@ -19,6 +19,10 @@ jobs:
     runs-on: ubuntu-24.04
     name: Release Automation
     steps:
+      - uses: step-security/harden-runner@446798f8213ac2e75931c1b0769676d927801858 # v2.10.3
+        with:
+          egress-policy: audit
+
       - uses: actions/create-github-app-token@v1
         id: generate-token
         with:
