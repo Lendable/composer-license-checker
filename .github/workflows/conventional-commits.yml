@@ -18,6 +18,10 @@ jobs:
     name: Validate PR title
     runs-on: ubuntu-24.04
     steps:
+      - uses: step-security/harden-runner@446798f8213ac2e75931c1b0769676d927801858 # v2.10.3
+        with:
+          egress-policy: audit
+
       - uses: benhodgson87/conventional-pull-request-action@v1
         if: ${{ github.event_name == 'pull_request' }}
         env:
