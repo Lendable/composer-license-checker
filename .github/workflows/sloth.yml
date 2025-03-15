@@ -10,7 +10,10 @@ jobs:
     steps:
       - uses: step-security/harden-runner@446798f8213ac2e75931c1b0769676d927801858 # v2.10.3
         with:
-          egress-policy: audit
+          disable-sudo: true
+          egress-policy: block
+          allowed-endpoints: |
+            api.github.com:443
 
       - name: Sloth
         uses: lendable/sloth@v0
