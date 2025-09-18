@@ -43,7 +43,7 @@ jobs:
           show-progress: false
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401" # v2
+        uses: "shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f" # v2
         with:
           coverage: "pcov"
           php-version: "${{ matrix.php-version }}"

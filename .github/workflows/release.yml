@@ -19,13 +19,13 @@ jobs:
     runs-on: ubuntu-24.04
     name: Release Automation
     steps:
-      - uses: actions/create-github-app-token@df432ceedc7162793a195dd1713ff69aefc7379e # v2
+      - uses: actions/create-github-app-token@67018539274d69449ef7c02e8e71183d1719ab42 # v2
         id: generate-token
         with:
           app-id: ${{ secrets.LENDABOT_APP_ID }}
           private-key: ${{ secrets.LENDABOT_APP_PRIVATE_KEY }}
 
-      - uses: googleapis/release-please-action@a02a34c4d625f9be7cb89156071d8567266a2445 # v4
+      - uses: googleapis/release-please-action@c2a5a2bd6a758a0937f1ddb1e8950609867ed15c # v4
         id: release
         with:
           token: ${{ steps.generate-token.outputs.token }}
