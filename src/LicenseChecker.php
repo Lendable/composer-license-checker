@@ -37,6 +37,7 @@ final class LicenseChecker extends SingleCommandApplication
         );
     }
 
+    #[\Override]
     protected function configure(): void
     {
         $this
@@ -73,6 +74,7 @@ final class LicenseChecker extends SingleCommandApplication
             );
     }
 
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {

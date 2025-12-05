@@ -13,7 +13,7 @@ return RectorConfig::configure()
     ->withPHPStanConfigs([__DIR__.'/phpstan-rector.neon'])
     ->withCache(__DIR__.'/tmp/rector', FileCacheStorage::class)
     ->withPreparedSets(codeQuality: true)
-    ->withPhpSets(php82: true)
+    ->withPhpSets(php83: true)
     ->withSets(
         [
             PHPUnitSetList::PHPUNIT_100,

@@ -17,6 +17,7 @@ use Lendable\ComposerLicenseChecker\PackagesProvider;
  */
 final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
 {
+    #[\Override]
     public function provide(string $projectPath, bool $ignoreDev): Packages
     {
         $installedJson = \sprintf(

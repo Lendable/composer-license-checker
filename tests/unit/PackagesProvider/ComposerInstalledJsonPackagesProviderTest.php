@@ -29,6 +29,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
      */
     private string $projectPath;
 
+    #[\Override]
     protected function tearDown(): void
     {
         parent::tearDown();

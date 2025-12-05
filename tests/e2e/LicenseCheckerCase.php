@@ -19,6 +19,7 @@ abstract class LicenseCheckerCase extends TestCase
 
     protected string $path = 'tests'.\DIRECTORY_SEPARATOR.'data'.\DIRECTORY_SEPARATOR.'default'.\DIRECTORY_SEPARATOR;
 
+    #[\Override]
     protected function setUp(): void
     {
         $command = new LicenseChecker(

@@ -24,11 +24,13 @@ final readonly class Packages implements \Countable, \IteratorAggregate
         return new self($items);
     }
 
+    #[\Override]
     public function count(): int
     {
         return \count($this->items);
     }
 
+    #[\Override]
     public function getIterator(): \Traversable
     {
         yield from $this->items;

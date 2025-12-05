@@ -28,6 +28,7 @@ final readonly class Returning implements Result
         return new self($value);
     }
 
+    #[\Override]
     public function provide(): mixed
     {
         return $this->value;

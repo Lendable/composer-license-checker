@@ -18,23 +18,28 @@ final readonly class HumanReadableDisplay implements Display
         $this->style = new SymfonyStyle($input, $output);
     }
 
+    #[\Override]
     public function onStarted(): void
     {
         $this->style->title('Composer License Checker');
     }
 
+    #[\Override]
     public function onFatalError(string $message): void
     {
         $this->style->error($message);
     }
 
+    #[\Override]
     public function onOutcomeFailure(): void {}
 
+    #[\Override]
     public function onOutcomeSuccess(): void
     {
         $this->style->success('All dependencies have allowed licenses.');
     }
 
+    #[\Override]
     public function onPackageWithViolatingLicense(Package $package): void
     {
         if ($package->licenses->isDisjunctive()) {
@@ -56,6 +61,7 @@ final readonly class HumanReadableDisplay implements Display
         }
     }
 
+    #[\Override]
     public function onUnlicensedPackageNotExplicitlyAllowed(Package $package): void
     {
         $this->style->error(
@@ -66,6 +72,7 @@ final readonly class HumanReadableDisplay implements Display
         );
     }
 
+    #[\Override]
     public function onTraceInformation(string $message): void
     {
         $this->style->writeln($message, OutputInterface::VERBOSITY_VERBOSE);

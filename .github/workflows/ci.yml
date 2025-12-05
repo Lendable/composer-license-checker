@@ -20,7 +20,6 @@ jobs:
           - "locked"
           - "highest"
         php-version:
-          - "8.2"
           - "8.3"
           - "8.4"
         composer-version:
@@ -87,7 +86,7 @@ jobs:
         run: "composer license:check -- --provider-id=licenses -v"
 
       - name: "Run coding style"
-        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.2' }}
+        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.3' }}
         run: "composer code-style:check"
 
       - name: "Run PHPStan"
@@ -95,7 +94,7 @@ jobs:
         run: "composer phpstan"
 
       - name: "Run Rector"
-        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.2' }}
+        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.3' }}
         run: "composer rector:check"
 
       - name: "Unit tests"

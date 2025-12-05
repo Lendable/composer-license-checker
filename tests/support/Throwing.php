@@ -16,6 +16,7 @@ final readonly class Throwing implements Result
         return new self($throwable);
     }
 
+    #[\Override]
     public function provide(): never
     {
         throw $this->throwable;

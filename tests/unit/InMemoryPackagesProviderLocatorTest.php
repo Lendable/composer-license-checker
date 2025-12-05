@@ -22,6 +22,7 @@ final class InMemoryPackagesProviderLocatorTest extends TestCase
 
     private InMemoryPackagesProviderLocator $locator;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->provider1 = $this->createMock(PackagesProvider::class);

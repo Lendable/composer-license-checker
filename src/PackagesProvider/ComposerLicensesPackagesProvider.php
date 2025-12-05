@@ -17,6 +17,7 @@ final readonly class ComposerLicensesPackagesProvider implements PackagesProvide
 {
     public function __construct(private ComposerRunner $composerRunner) {}
 
+    #[\Override]
     public function provide(string $projectPath, bool $ignoreDev): Packages
     {
         try {

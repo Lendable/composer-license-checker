@@ -10,6 +10,7 @@ use Symfony\Component\Process\Process;
 
 final class SymfonyProcessComposerRunner implements ComposerRunner
 {
+    #[\Override]
     public function licenses(string $projectPath, bool $ignoreDev): string
     {
         $process = Process::fromShellCommandline(

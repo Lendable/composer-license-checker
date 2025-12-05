@@ -18,6 +18,7 @@ final readonly class DisplayOutputSubscriber implements Subscriber
 {
     public function __construct(private Display $display) {}
 
+    #[\Override]
     public function subscriptions(): iterable
     {
         yield new Subscription(Started::class, $this->onStarted(...));

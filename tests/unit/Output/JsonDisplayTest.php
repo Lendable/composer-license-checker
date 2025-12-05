@@ -20,6 +20,7 @@ final class JsonDisplayTest extends TestCase
 {
     private BufferedOutput $bufferedOutput;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

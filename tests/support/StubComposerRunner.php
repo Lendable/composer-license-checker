@@ -13,6 +13,7 @@ final readonly class StubComposerRunner implements ComposerRunner
      */
     public function __construct(private Result $result) {}
 
+    #[\Override]
     public function licenses(string $projectPath, bool $ignoreDev): string
     {
         return $this->result->provide();

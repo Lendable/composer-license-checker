@@ -30,6 +30,7 @@ final class DisplayOutputSubscriberTest extends TestCase
 
     private Dispatcher $dispatcher;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
