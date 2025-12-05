@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/Lendable/composer-license-checker/compare/1.2.2...1.3.0) (2025-12-05)
+
+
+### Features
+
+* Drop PHP 8.2, allow PHP 8.5 ([#441](https://github.com/Lendable/composer-license-checker/issues/441)) ([b98fe59](https://github.com/Lendable/composer-license-checker/commit/b98fe590cf4847e031eaa7a0120a8b519b848993))
+
 ## [1.2.2](https://github.com/Lendable/composer-license-checker/compare/1.2.1...1.2.2) (2024-11-29)
 
 
