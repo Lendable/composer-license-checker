@@ -32,6 +32,11 @@ jobs:
           - "7.0.*"
           - "7.1.*"
           - "7.2.*"
+        exclude:
+          - php-version: "8.4"
+            composer-version: "2.2"
+          - php-version: "8.5"
+            composer-version: "2.2"
 
     steps:
       - name: "Checkout"
