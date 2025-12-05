@@ -26,17 +26,20 @@ final class JsonDisplay implements Display
 
     public function __construct(public readonly OutputInterface $output) {}
 
+    #[\Override]
     public function onStarted(): void
     {
         $this->violations = [];
         $this->trace = [];
     }
 
+    #[\Override]
     public function onFatalError(string $message): void
     {
         $this->display(['result' => 'error', 'message' => $message]);
     }
 
+    #[\Override]
     public function onPackageWithViolatingLicense(Package $package): void
     {
         /** @var non-empty-string $licences */
@@ -44,11 +47,13 @@ final class JsonDisplay implements Display
         $this->violations[$licences][] = $package->name->toString();
     }
 
+    #[\Override]
     public function onUnlicensedPackageNotExplicitlyAllowed(Package $package): void
     {
         $this->violations['UNLICENSED'][] = $package->name->toString();
     }
 
+    #[\Override]
     public function onOutcomeFailure(): void
     {
         $data = ['result' => 'failure', 'violations' => $this->violations];
@@ -60,6 +65,7 @@ final class JsonDisplay implements Display
         $this->display($data);
     }
 
+    #[\Override]
     public function onOutcomeSuccess(): void
     {
         $data = ['result' => 'success'];
@@ -71,6 +77,7 @@ final class JsonDisplay implements Display
         $this->display($data);
     }
 
+    #[\Override]
     public function onTraceInformation(string $message): void
     {
         $this->trace[] = $message;

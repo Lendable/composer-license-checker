@@ -25,6 +25,7 @@ final class ComposerLicensesLicenseCheckerTest extends LicenseCheckerCase
             ->hasStatusCode(0);
     }
 
+    #[\Override]
     protected function packagesProvider(): PackagesProvider
     {
         return new ComposerLicensesPackagesProvider(new SymfonyProcessComposerRunner());

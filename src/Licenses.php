@@ -26,6 +26,7 @@ final readonly class Licenses implements \IteratorAggregate
         return $this->licenses === [];
     }
 
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->licenses);

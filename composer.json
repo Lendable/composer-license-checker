@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
+        "php": "~8.3.0 || ~8.4.0 || ~8.5.0",
         "composer-runtime-api": "^2.2",
         "symfony/console": "^5.4 || ^6.0 || ^7.0",
         "symfony/process": "^5.4.46 || ^6.4.14 || ^7.1.7"
@@ -47,7 +47,7 @@
             "ergebnis/composer-normalize": true
         },
         "platform": {
-            "php": "8.2.13"
+            "php": "8.3"
         },
         "sort-packages": true
     },

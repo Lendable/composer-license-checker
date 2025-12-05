@@ -10,6 +10,7 @@ use PHPUnit\Framework\Attributes\DisableReturnValueGenerationForTestDoubles;
 #[DisableReturnValueGenerationForTestDoubles]
 final class ComposerInstalledJsonLicenseCheckerTest extends LicenseCheckerCase
 {
+    #[\Override]
     protected function packagesProvider(): ComposerInstalledJsonPackagesProvider
     {
         return new ComposerInstalledJsonPackagesProvider();

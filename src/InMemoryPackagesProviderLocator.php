@@ -16,11 +16,13 @@ final readonly class InMemoryPackagesProviderLocator implements PackagesProvider
     /**
      * @return list<non-empty-string>
      */
+    #[\Override]
     public function ids(): array
     {
         return \array_keys($this->providers);
     }
 
+    #[\Override]
     public function locate(string $id): PackagesProvider
     {
         return $this->providers[$id] ?? throw PackagesProviderNotLocated::withId($id);
