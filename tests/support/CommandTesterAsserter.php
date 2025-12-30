@@ -53,7 +53,7 @@ final readonly class CommandTesterAsserter
                  [OK] All dependencies have allowed licenses.
 
 
-                STDOUT
+                STDOUT,
         );
 
         return $this;
