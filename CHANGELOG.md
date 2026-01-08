@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0](https://github.com/Lendable/composer-license-checker/compare/1.3.0...1.4.0) (2026-01-08)
+
+
+### Features
+
+* Require PHP 8.4 ([#445](https://github.com/Lendable/composer-license-checker/issues/445)) ([b1c9200](https://github.com/Lendable/composer-license-checker/commit/b1c92008799b2d871ad76ef033619c4ba87543a3))
+
+
+### Fixes / Maintenance
+
+* **deps:** Allow symfony 8 ([#444](https://github.com/Lendable/composer-license-checker/issues/444)) ([be0d11e](https://github.com/Lendable/composer-license-checker/commit/be0d11e4d914c1909277477b4160cd90d03d06ce))
+
 ## [1.3.0](https://github.com/Lendable/composer-license-checker/compare/1.2.2...1.3.0) (2025-12-05)
 
 
