@@ -22,7 +22,7 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
     {
         $installedJson = \sprintf(
             '%s%2$svendor%2$scomposer%2$sinstalled.json',
-            \realpath(\rtrim($projectPath, \DIRECTORY_SEPARATOR)),
+            (string) \realpath(\rtrim($projectPath, \DIRECTORY_SEPARATOR)),
             \DIRECTORY_SEPARATOR,
         );
 
@@ -57,10 +57,11 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
             }
 
             /** @var list<string> $devDependencies */
+            /** @var array<string, int<0, max>> $skipPackages */
             $skipPackages = \array_flip($devDependencies);
         }
 
-        return (new Packages(
+        return new Packages(
             \array_filter(
                 \array_map(
                     static function (mixed $package) use ($skipPackages): ?Package {
@@ -72,12 +73,12 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
                             throw FailedProvidingPackages::withReason('Missing "name" key for package');
                         }
 
-                        if (isset($skipPackages[$package['name']])) {
-                            return null;
-                        }
-
                         if (!\is_string($package['name'])) {
                             throw FailedProvidingPackages::withReason('Key "name" is not a string');
+                        }
+
+                        if (isset($skipPackages[$package['name']])) {
+                            return null;
                         }
 
                         if ($package['name'] === '') {
@@ -91,6 +92,7 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
                         }
 
                         /** @var PackageData $package */
+                        /** @var list<non-empty-string> $licenses */
                         return new Package(
                             new PackageName($package['name']),
                             new Licenses($licenses),
@@ -100,6 +102,6 @@ final class ComposerInstalledJsonPackagesProvider implements PackagesProvider
                 ),
                 static fn(?Package $package): bool => $package !== null,
             ),
-        ))->sort();
+        )->sort();
     }
 }

@@ -68,7 +68,7 @@ final class LicenseConfigurationFileBuilder
     {
         \fwrite($this->resource, $this->buildContent());
 
-        return \stream_get_meta_data($this->resource)['uri'];
+        return \stream_get_meta_data($this->resource)['uri'] ?? throw new \RuntimeException('Could not fetch meta');
     }
 
     private function buildContent(): string

@@ -34,7 +34,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
     {
         parent::tearDown();
 
-        (new Filesystem())->remove($this->projectPath);
+        new Filesystem()->remove($this->projectPath);
     }
 
     /**
@@ -131,7 +131,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
     {
         $this->setUpTemporaryProjectWithInstalledJson($data);
 
-        $actual = (new ComposerInstalledJsonPackagesProvider())->provide($this->projectPath, $ignoreDev);
+        $actual = new ComposerInstalledJsonPackagesProvider()->provide($this->projectPath, $ignoreDev);
 
         PackagesAsserter::assertThat($actual)->equals($expected);
     }
@@ -139,7 +139,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
     public function test_throws_if_installed_json_missing(): void
     {
         $this->setUpTemporaryProjectWithInstalledJson([]);
-        (new Filesystem())->remove($this->projectPath.'/vendor/composer/installed.json');
+        new Filesystem()->remove($this->projectPath.'/vendor/composer/installed.json');
 
         $this->expectExceptionObject(
             FailedProvidingPackages::withReason(
@@ -147,22 +147,22 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
             ),
         );
 
-        (new ComposerInstalledJsonPackagesProvider())->provide($this->projectPath, false);
+        new ComposerInstalledJsonPackagesProvider()->provide($this->projectPath, false);
     }
 
     public function test_throws_if_installed_json_not_readable(): void
     {
         $this->setUpTemporaryProjectWithInstalledJson([]);
 
-        (new Filesystem())->chmod($this->projectPath.'/vendor/composer/installed.json', 0o222);
+        new Filesystem()->chmod($this->projectPath.'/vendor/composer/installed.json', 0o222);
 
         $this->expectExceptionObject(
             FailedProvidingPackages::withReason(
-                \sprintf('File "%s" is not readable', \realpath($this->projectPath.'/vendor/composer/installed.json')),
+                \sprintf('File "%s" is not readable', (string) \realpath($this->projectPath.'/vendor/composer/installed.json')),
             ),
         );
 
-        (new ComposerInstalledJsonPackagesProvider())->provide($this->projectPath, false);
+        new ComposerInstalledJsonPackagesProvider()->provide($this->projectPath, false);
     }
 
     public function test_throws_if_installed_json_contains_non_json(): void
@@ -171,7 +171,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
 
         $this->expectExceptionObject(FailedProvidingPackages::withReason('Decoding failed "Syntax error"'));
 
-        (new ComposerInstalledJsonPackagesProvider())->provide($this->projectPath, false);
+        new ComposerInstalledJsonPackagesProvider()->provide($this->projectPath, false);
     }
 
     public function test_throws_if_installed_json_contains_json_which_is_not_an_array(): void
@@ -180,7 +180,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
 
         $this->expectExceptionObject(FailedProvidingPackages::withReason('Decoded data in unexpected format'));
 
-        (new ComposerInstalledJsonPackagesProvider())->provide($this->projectPath, false);
+        new ComposerInstalledJsonPackagesProvider()->provide($this->projectPath, false);
     }
 
     /**
@@ -298,7 +298,7 @@ final class ComposerInstalledJsonPackagesProviderTest extends TestCase
 
         $this->expectExceptionObject($expectedException);
 
-        (new ComposerInstalledJsonPackagesProvider())->provide($this->projectPath, true);
+        new ComposerInstalledJsonPackagesProvider()->provide($this->projectPath, true);
     }
 
     /**

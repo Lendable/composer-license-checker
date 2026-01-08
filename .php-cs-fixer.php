@@ -11,7 +11,7 @@ return (new PhpCsFixer\Config())
     ->setRules([
         '@PER-CS2.0' => true,
         '@PER-CS2.0:risky' => true,
-        '@PHP83Migration' => true,
+        '@PHP84Migration' => true,
         '@DoctrineAnnotation' => true,
         'align_multiline_comment' => true,
         'array_indentation' => true,
