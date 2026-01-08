@@ -29,13 +29,10 @@ final readonly class LicenseConfiguration
 
     public function allowsPackage(string $package): bool
     {
-        foreach ($this->allowedPackagePatterns as $pattern) {
-            if (\preg_match($pattern, $package) === 1) {
-                return true;
-            }
-        }
-
-        return false;
+        return \array_any(
+            $this->allowedPackagePatterns,
+            static fn($pattern): bool => \preg_match($pattern, $package) === 1,
+        );
     }
 
     private function allowsLicense(string $license): bool

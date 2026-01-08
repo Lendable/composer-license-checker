@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "~8.3.0 || ~8.4.0 || ~8.5.0",
+        "php": "~8.4.0 || ~8.5.0",
         "composer-runtime-api": "^2.2",
         "symfony/console": "^5.4 || ^6.0 || ^7.0",
         "symfony/process": "^5.4.46 || ^6.4.14 || ^7.1.7"
@@ -19,12 +19,12 @@
         "ergebnis/composer-normalize": "^2.43.0",
         "lendable/phpunit-extensions": "^0.3",
         "php-cs-fixer/shim": "^3.61.1",
-        "phpstan/phpstan": "^1.11.9",
-        "phpstan/phpstan-deprecation-rules": "^1.2.0",
-        "phpstan/phpstan-phpunit": "^1.4.0",
-        "phpstan/phpstan-strict-rules": "^1.6.0",
+        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
         "phpunit/phpunit": "^11.3.0",
-        "rector/rector": "^1.2.2",
+        "rector/rector": "^2.0",
         "symfony/filesystem": "^6.2"
     },
     "autoload": {
@@ -47,7 +47,7 @@
             "ergebnis/composer-normalize": true
         },
         "platform": {
-            "php": "8.3"
+            "php": "8.4"
         },
         "sort-packages": true
     },

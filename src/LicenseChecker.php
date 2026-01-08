@@ -153,7 +153,7 @@ final class LicenseChecker extends SingleCommandApplication
         $noDev = $config->ignoreDev || $input->getOption('no-dev') === true;
 
         $this->dispatcher->dispatch(new TraceInformation(\sprintf('Checking project at: %s', $path)));
-        $this->dispatcher->dispatch(new TraceInformation(\sprintf('Using allow file: %s', \realpath($allowFile))));
+        $this->dispatcher->dispatch(new TraceInformation(\sprintf('Using allow file: %s', (string) \realpath($allowFile))));
         $this->dispatcher->dispatch(new TraceInformation(\sprintf('Using provider with id: %s', $providerId)));
         $this->dispatcher->dispatch(new TraceInformation(\sprintf('With dev dependencies: %s', $noDev ? 'no' : 'yes')));
 

@@ -15,7 +15,7 @@ final class LicenseConfigurationBuilderTest extends TestCase
 {
     public function test_builds_expected_default_configuration(): void
     {
-        $configuration = (new LicenseConfigurationBuilder())->build();
+        $configuration = new LicenseConfigurationBuilder()->build();
 
         self::assertSame([], $configuration->allowedLicenses);
         self::assertSame([], $configuration->allowedPackagePatterns);
@@ -24,7 +24,7 @@ final class LicenseConfigurationBuilderTest extends TestCase
 
     public function test_builds_expected_configuration(): void
     {
-        $configuration = (new LicenseConfigurationBuilder())
+        $configuration = new LicenseConfigurationBuilder()
             ->addLicenses('MIT', 'WTFPL')
             ->addAllowedVendor('someone')
             ->addAllowedPackage('other/person')
@@ -39,7 +39,7 @@ final class LicenseConfigurationBuilderTest extends TestCase
 
     public function test_license_can_be_removed(): void
     {
-        $configuration = (new LicenseConfigurationBuilder())
+        $configuration = new LicenseConfigurationBuilder()
             ->addLicenses('MIT', 'WTFPL', 'LGPL')
             ->removeLicenses('WTFPL')
             ->build();

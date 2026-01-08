@@ -20,11 +20,9 @@ jobs:
           - "locked"
           - "highest"
         php-version:
-          - "8.3"
           - "8.4"
           - "8.5"
         composer-version:
-          - "2.2"
           - "2.9"
         symfony-version:
           - "5.4.*"
@@ -32,11 +30,6 @@ jobs:
           - "7.0.*"
           - "7.1.*"
           - "7.2.*"
-        exclude:
-          - php-version: "8.4"
-            composer-version: "2.2"
-          - php-version: "8.5"
-            composer-version: "2.2"
 
     steps:
       - name: "Checkout"
@@ -90,7 +83,7 @@ jobs:
         run: "composer license:check -- --provider-id=licenses -v"
 
       - name: "Run coding style"
-        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.3' }}
+        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.4' }}
         run: "composer code-style:check"
 
       - name: "Run PHPStan"
@@ -98,7 +91,7 @@ jobs:
         run: "composer phpstan"
 
       - name: "Run Rector"
-        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.3' }}
+        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.4' }}
         run: "composer rector:check"
 
       - name: "Unit tests"
