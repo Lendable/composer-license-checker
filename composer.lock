@@ -1336,16 +1336,16 @@
         },
         {
             "name": "lendable/phpunit-extensions",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lendable/phpunit-extensions.git",
-                "reference": "153d9664901a191242501fda90a35d2d942c3db5"
+                "reference": "054f4cf314818b083c56542b916fa8cb8df18bda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lendable/phpunit-extensions/zipball/153d9664901a191242501fda90a35d2d942c3db5",
-                "reference": "153d9664901a191242501fda90a35d2d942c3db5",
+                "url": "https://api.github.com/repos/Lendable/phpunit-extensions/zipball/054f4cf314818b083c56542b916fa8cb8df18bda",
+                "reference": "054f4cf314818b083c56542b916fa8cb8df18bda",
                 "shasum": ""
             },
             "require": {
@@ -1353,14 +1353,14 @@
                 "phpunit/phpunit": "^11.1"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.42.0",
-                "lendable/composer-license-checker": "^1.2.0",
-                "php-cs-fixer/shim": "^3.54.0",
-                "phpstan/phpstan": "^1.10.67",
-                "phpstan/phpstan-deprecation-rules": "^1.1.4",
-                "phpstan/phpstan-phpunit": "^1.3.16",
-                "phpstan/phpstan-strict-rules": "^1.5.5",
-                "rector/rector": "1.0.4"
+                "ergebnis/composer-normalize": "^2.43.0",
+                "lendable/composer-license-checker": "^1.2.1",
+                "php-cs-fixer/shim": "^3.59.3",
+                "phpstan/phpstan": "^1.11.7",
+                "phpstan/phpstan-deprecation-rules": "^1.2.0",
+                "phpstan/phpstan-phpunit": "^1.4.0",
+                "phpstan/phpstan-strict-rules": "^1.6.0",
+                "rector/rector": "1.2.1"
             },
             "type": "library",
             "autoload": {
@@ -1381,9 +1381,9 @@
             "description": "Extensions to PHPUnit",
             "support": {
                 "issues": "https://github.com/Lendable/phpunit-extensions/issues",
-                "source": "https://github.com/Lendable/phpunit-extensions/tree/0.3.1"
+                "source": "https://github.com/Lendable/phpunit-extensions/tree/0.3.2"
             },
-            "time": "2024-05-01T10:57:41+00:00"
+            "time": "2026-01-09T16:05:21+00:00"
         },
         {
             "name": "localheinz/diff",
@@ -1803,11 +1803,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.33",
+            "version": "2.1.34",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9e800e6bee7d5bd02784d4c6069b48032d16224f",
-                "reference": "9e800e6bee7d5bd02784d4c6069b48032d16224f",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/070ba754a949fcade788e16e8dc5a5935b7cf2ee",
+                "reference": "070ba754a949fcade788e16e8dc5a5935b7cf2ee",
                 "shasum": ""
             },
             "require": {
@@ -1852,7 +1852,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-05T10:24:31+00:00"
+            "time": "2026-01-19T19:52:16+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -2339,16 +2339,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.5.46",
+            "version": "11.5.48",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "75dfe79a2aa30085b7132bb84377c24062193f33"
+                "reference": "fe3665c15e37140f55aaf658c81a2eb9030b6d89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/75dfe79a2aa30085b7132bb84377c24062193f33",
-                "reference": "75dfe79a2aa30085b7132bb84377c24062193f33",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fe3665c15e37140f55aaf658c81a2eb9030b6d89",
+                "reference": "fe3665c15e37140f55aaf658c81a2eb9030b6d89",
                 "shasum": ""
             },
             "require": {
@@ -2362,7 +2362,7 @@
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.2",
-                "phpunit/php-code-coverage": "^11.0.11",
+                "phpunit/php-code-coverage": "^11.0.12",
                 "phpunit/php-file-iterator": "^5.1.0",
                 "phpunit/php-invoker": "^5.0.1",
                 "phpunit/php-text-template": "^4.0.1",
@@ -2420,7 +2420,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.46"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.48"
             },
             "funding": [
                 {
@@ -2444,25 +2444,25 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-06T08:01:15+00:00"
+            "time": "2026-01-16T16:26:27+00:00"
         },
         {
             "name": "rector/rector",
-            "version": "2.3.0",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "f7166355dcf47482f27be59169b0825995f51c7d"
+                "reference": "07cbbe28bd60251b96b18d42e514779b0e2faa83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/f7166355dcf47482f27be59169b0825995f51c7d",
-                "reference": "f7166355dcf47482f27be59169b0825995f51c7d",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/07cbbe28bd60251b96b18d42e514779b0e2faa83",
+                "reference": "07cbbe28bd60251b96b18d42e514779b0e2faa83",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.1.33"
+                "phpstan/phpstan": "^2.1.34"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -2496,7 +2496,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/2.3.0"
+                "source": "https://github.com/rectorphp/rector/tree/2.3.2"
             },
             "funding": [
                 {
@@ -2504,7 +2504,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-25T22:00:18+00:00"
+            "time": "2026-01-20T01:11:51+00:00"
         },
         {
             "name": "sebastian/cli-parser",
