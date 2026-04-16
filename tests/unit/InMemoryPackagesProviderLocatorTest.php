@@ -26,7 +26,10 @@ final class InMemoryPackagesProviderLocatorTest extends TestCase
     protected function setUp(): void
     {
         $this->provider1 = $this->createMock(PackagesProvider::class);
+        $this->provider1->expects($this->never())->method(self::anything());
+
         $this->provider2 = $this->createMock(PackagesProvider::class);
+        $this->provider2->expects($this->never())->method(self::anything());
 
         $this->locator = new InMemoryPackagesProviderLocator([
             'first' => $this->provider1,
