@@ -19,12 +19,12 @@
         "ergebnis/composer-normalize": "^2.50.0",
         "lendable/phpunit-extensions": "^0.5",
         "php-cs-fixer/shim": "^3.94.2",
-        "phpstan/phpstan": "^2.1.46",
+        "phpstan/phpstan": "^2.1.50",
         "phpstan/phpstan-deprecation-rules": "^2.0.4",
         "phpstan/phpstan-phpunit": "^2.0.16",
         "phpstan/phpstan-strict-rules": "^2.0.10",
-        "phpunit/phpunit": "^13.1.5",
-        "rector/rector": "^2.4.1",
+        "phpunit/phpunit": "^13.1.6",
+        "rector/rector": "^2.4.2",
         "symfony/filesystem": "^6.2"
     },
     "autoload": {
