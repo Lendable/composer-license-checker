@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Sloth
-        uses: lendable/sloth@c4a89bf8c6c41c5c0d69b05344e18481ea62993d # v1
+        uses: lendable/sloth@dbff4bbe34557fd3bd3865387f900d92034b9259 # v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ignored: |
