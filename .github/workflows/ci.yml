@@ -24,6 +24,7 @@ jobs:
           - "8.5"
         composer-version:
           - "2.9"
+          - "2.10"
         symfony-version:
           - "5.4.*"
           - "6.4.*"
