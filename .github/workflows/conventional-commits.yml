@@ -18,7 +18,7 @@ jobs:
     name: Validate PR title
     runs-on: ubuntu-24.04
     steps:
-      - uses: benhodgson87/conventional-pull-request-action@37a91250e08f8f957f25fb29160dcf46a6debc99 # v2
+      - uses: benhodgson87/conventional-pull-request-action@5cc233b5bbe95b3293e9e464ded984ed47755abe # v2
         if: ${{ github.event_name == 'pull_request' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
