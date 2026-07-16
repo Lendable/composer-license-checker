@@ -24,7 +24,7 @@
         "phpstan/phpstan-phpunit": "^2.0.18",
         "phpstan/phpstan-strict-rules": "^2.0.11",
         "phpunit/phpunit": "^13.2.4",
-        "rector/rector": "^2.5.4",
+        "rector/rector": "^2.5.5",
         "symfony/filesystem": "^6.2"
     },
     "autoload": {
