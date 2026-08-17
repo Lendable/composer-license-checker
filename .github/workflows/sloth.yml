@@ -7,6 +7,9 @@ on:
 jobs:
   sloth:
     runs-on: ubuntu-24.04
+    permissions:
+      checks: read
+      contents: read
     steps:
       - name: Sloth
         uses: lendable/sloth@v1
