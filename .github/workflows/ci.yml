@@ -45,22 +45,13 @@ jobs:
           persist-credentials: false
           show-progress: false
 
-      - name: "Install zizmor"
-        shell: bash
-        env:
-          ZIZMOR_SHA256: "dd96df044a6e8538d5f423790f453bdd03d49e5b2bcc38214acc41a2f1297839"
-          ZIZMOR_VERSION: "1.29.0"
-        run: |
-          set -euo pipefail
-          archive="$RUNNER_TEMP/zizmor.tar.gz"
-          curl --proto '=https' --tlsv1.2 -fsSL "https://github.com/zizmorcore/zizmor/releases/download/v${ZIZMOR_VERSION}/zizmor-x86_64-unknown-linux-gnu.tar.gz" -o "$archive"
-          echo "${ZIZMOR_SHA256}  ${archive}" | sha256sum --check
-          tar -xzf "$archive" -C "$RUNNER_TEMP"
-
       - name: "Run zizmor"
-        env:
-          GH_TOKEN: "${{ github.token }}"
-        run: '"$RUNNER_TEMP/zizmor" --format github .'
+        uses: zizmorcore/zizmor-action@3dc1ecc9bcb9e94e9b2c709687979e1298497054 # v0.6.2
+        with:
+          inputs: "."
+          version: "1.29.0"
+          advanced-security: false
+          annotations: true
 
   ci:
     name: "Execute (PHP ${{ matrix.php-version }} with ${{ matrix.dependencies }} deps, composer v${{ matrix.composer-version}}.x, symfony v${{ matrix.symfony-version }})"
