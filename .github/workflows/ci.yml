@@ -9,6 +9,27 @@ on:
   pull_request:
 
 jobs:
+  lint-actionlint:
+    name: "Lint workflows"
+    runs-on: "ubuntu-24.04"
+    permissions:
+      contents: read
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          show-progress: false
+
+      - name: "Install actionlint"
+        id: actionlint
+        run: bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.12/scripts/download-actionlint.bash) 1.7.12
+
+      - name: "Run actionlint"
+        run: |
+          echo "::add-matcher::.github/actionlint-matcher.json"
+          trap 'echo "::remove-matcher owner=actionlint::"' EXIT
+          "${{ steps.actionlint.outputs.executable }}" -color
+
   ci:
     name: "Execute (PHP ${{ matrix.php-version }} with ${{ matrix.dependencies }} deps, composer v${{ matrix.composer-version}}.x, symfony v${{ matrix.symfony-version }})"
     runs-on: "ubuntu-24.04"
