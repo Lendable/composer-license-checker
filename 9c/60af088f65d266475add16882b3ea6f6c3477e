@@ -1,0 +1,27 @@
+composer.lock
+  s_942462f0d59097::t_9cb3d359f1c5db 7,3855
+composer.json
+  s_942462f0d59097::t_5b448cacdc30ac 13
+.github/workflows/ci.yml
+  s_942462f0d59097::t_fc02816ce35048 46
+tests/unit/PackagesProvider/ComposerLicensesPackagesProviderTest.php
+  s_942462f0d59097::t_58c5a84a9ab853 63-64
+tests/unit/PackagesProvider/ComposerInstalledJsonPackagesProviderTest.php
+  s_942462f0d59097::t_31345c8bba4f61 172-173
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "9c60af088f65d266475add16882b3ea6f6c3477e",
+  "prompts": {},
+  "sessions": {
+    "s_942462f0d59097": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d9a98201-3051-4c36-8b76-e3ee6f6f42c9",
+        "model": "claude-fable-5"
+      },
+      "human_author": null
+    }
+  }
+}
