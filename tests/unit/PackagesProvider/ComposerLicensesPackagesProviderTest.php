@@ -60,7 +60,8 @@ final class ComposerLicensesPackagesProviderTest extends TestCase
     {
         $provider = $this->createProvider(Returning::value('[invalid, "json"]'));
 
-        $this->expectExceptionObject(FailedProvidingPackages::withReason('Decoding failed "Syntax error"'));
+        $this->expectException(FailedProvidingPackages::class);
+        $this->expectExceptionMessageMatches('/^Failed to provide packages: Decoding failed "Syntax error[^"]*"$/');
 
         $provider->provide('path', false);
     }
