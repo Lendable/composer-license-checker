@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/Lendable/composer-license-checker/compare/1.4.0...1.4.1) (2026-09-03)
+
+
+### Fixes / Maintenance
+
+* **deps:** Allow PHP 8.6 ([#500](https://github.com/Lendable/composer-license-checker/issues/500)) ([ca59671](https://github.com/Lendable/composer-license-checker/commit/ca59671ae422d8069cfd3e612ef1f1fa10667f0d))
+
 ## [1.4.0](https://github.com/Lendable/composer-license-checker/compare/1.3.0...1.4.0) (2026-01-08)
 
 
