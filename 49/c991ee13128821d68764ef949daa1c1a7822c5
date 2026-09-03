@@ -1,0 +1,27 @@
+tests/unit/PackagesProvider/ComposerLicensesPackagesProviderTest.php
+  s_942462f0d59097::t_58c5a84a9ab853 63-65
+tests/unit/PackagesProvider/ComposerInstalledJsonPackagesProviderTest.php
+  s_942462f0d59097::t_31345c8bba4f61 172-174
+.github/workflows/ci.yml
+  s_942462f0d59097::t_fc02816ce35048 46
+composer.json
+  s_942462f0d59097::t_5b448cacdc30ac 13
+composer.lock
+  s_942462f0d59097::t_9cb3d359f1c5db 7,3855
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "49c991ee13128821d68764ef949daa1c1a7822c5",
+  "prompts": {},
+  "sessions": {
+    "s_942462f0d59097": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d9a98201-3051-4c36-8b76-e3ee6f6f42c9",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marcin Michalski <marcin.michalski@lendable.co.uk>"
+    }
+  }
+}
