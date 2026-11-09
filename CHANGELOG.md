@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/Lendable/composer-license-checker/compare/1.4.1...1.4.2) (2026-11-09)
+
+
+### Fixes / Maintenance
+
+* **sec-auto:** Fix security issue in symfony/string via version upgrade from 8.0.11 to 8.0.13 ([#492](https://github.com/Lendable/composer-license-checker/issues/492)) ([63431a9](https://github.com/Lendable/composer-license-checker/commit/63431a9e8e31bcd65776ed3abca1d9e1789296a5))
+
 ## [1.4.1](https://github.com/Lendable/composer-license-checker/compare/1.4.0...1.4.1) (2026-09-03)
 
 
