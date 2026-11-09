@@ -9,6 +9,27 @@ on:
   pull_request:
 
 jobs:
+  lint-actionlint:
+    name: "Lint workflows"
+    runs-on: "ubuntu-24.04"
+    permissions:
+      contents: read
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          show-progress: false
+
+      - name: "Install actionlint"
+        id: actionlint
+        run: bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.12/scripts/download-actionlint.bash) 1.7.12
+
+      - name: "Run actionlint"
+        run: |
+          echo "::add-matcher::.github/actionlint-matcher.json"
+          trap 'echo "::remove-matcher owner=actionlint::"' EXIT
+          "${{ steps.actionlint.outputs.executable }}" -color
+
   ci:
     name: "Execute (PHP ${{ matrix.php-version }} with ${{ matrix.dependencies }} deps, composer v${{ matrix.composer-version}}.x, symfony v${{ matrix.symfony-version }})"
     runs-on: "ubuntu-24.04"
@@ -22,6 +43,7 @@ jobs:
         php-version:
           - "8.4"
           - "8.5"
+          - "8.6"
         composer-version:
           - "2.9"
           - "2.10"
@@ -34,12 +56,12 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           show-progress: false
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240" # v2
+        uses: "shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962" # 2.40.0
         with:
           coverage: "pcov"
           php-version: "${{ matrix.php-version }}"
