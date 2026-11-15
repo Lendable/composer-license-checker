@@ -4,12 +4,14 @@ on:
   pull_request:
   merge_group:
 
+permissions:
+  actions: read # Lets Sloth ignore check runs cancelled by a newer run.
+  checks: read
+  contents: read
+
 jobs:
   sloth:
     runs-on: ubuntu-24.04
-    permissions:
-      checks: read
-      contents: read
     steps:
       - name: Sloth
         uses: lendable/sloth@v1
