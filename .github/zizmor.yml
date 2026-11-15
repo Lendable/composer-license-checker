@@ -1,0 +1,7 @@
+# Lendable-owned actions may be pinned by ref (for example a major tag) instead of a commit digest.
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        "Lendable/*": ref-pin
+        "lendable/*": ref-pin
