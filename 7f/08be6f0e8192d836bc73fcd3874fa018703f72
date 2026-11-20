@@ -1,0 +1,19 @@
+.github/workflows/composer-cache.yml
+  s_61e05a20cc1d61::t_034f60f240468f 16-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7f08be6f0e8192d836bc73fcd3874fa018703f72",
+  "prompts": {},
+  "sessions": {
+    "s_61e05a20cc1d61": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3a57d6e8-4dec-4a39-8131-11ca32d71eb6",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marcin Michalski <evulmastah@gmail.com>"
+    }
+  }
+}
