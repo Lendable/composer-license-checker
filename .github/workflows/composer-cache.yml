@@ -1,0 +1,126 @@
+name: "Composer cache"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "composer-cache-${{ github.ref }}"
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - ".github/workflows/composer-cache.yml"
+      - "**/composer.json"
+      - "**/composer.lock"
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+env:
+  COMPOSER_MAX_PARALLEL_HTTP: "4"
+
+jobs:
+  warm:
+    name: "Warm (PHP ${{ matrix.php-version }} with ${{ matrix.dependencies }} deps)"
+    runs-on: "ubuntu-24.04"
+
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        dependencies:
+          - "lowest"
+          - "locked"
+          - "highest"
+        php-version:
+          - "8.4"
+          - "8.5"
+          - "8.6"
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          show-progress: false
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962" # 2.40.0
+        with:
+          coverage: "pcov"
+          php-version: "${{ matrix.php-version }}"
+          ini-values: memory_limit=-1
+          tools: "composer:2.10"
+
+      - name: Setup Symfony Flex
+        if: ${{ matrix.dependencies != 'locked' }}
+        shell: bash
+        run: |
+          composer global config --no-plugins allow-plugins.symfony/flex true
+          composer global require --no-progress --no-scripts --no-plugins symfony/flex
+
+      - name: "Warm Composer cache for Symfony 5.4"
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+        env:
+          SYMFONY_REQUIRE: "5.4.*"
+
+      - name: "Reset dependency files after Symfony 5.4"
+        if: ${{ matrix.dependencies != 'locked' }}
+        run: |
+          rm -rf vendor
+          git restore composer.json composer.lock
+
+      - name: "Warm Composer cache for Symfony 6.4"
+        if: ${{ matrix.dependencies != 'locked' }}
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+        env:
+          SYMFONY_REQUIRE: "6.4.*"
+
+      - name: "Reset dependency files after Symfony 6.4"
+        if: ${{ matrix.dependencies != 'locked' }}
+        run: |
+          rm -rf vendor
+          git restore composer.json composer.lock
+
+      - name: "Warm Composer cache for Symfony 7.4"
+        if: ${{ matrix.dependencies != 'locked' }}
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+        env:
+          SYMFONY_REQUIRE: "7.4.*"
+
+      - name: "Reset dependency files after Symfony 7.4"
+        if: ${{ matrix.dependencies != 'locked' }}
+        run: |
+          rm -rf vendor
+          git restore composer.json composer.lock
+
+      - name: "Warm Composer cache for Symfony 8.0"
+        if: ${{ matrix.dependencies != 'locked' }}
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+        env:
+          SYMFONY_REQUIRE: "8.0.*"
+
+      - name: "Reset dependency files after Symfony 8.0"
+        if: ${{ matrix.dependencies != 'locked' }}
+        run: |
+          rm -rf vendor
+          git restore composer.json composer.lock
+
+      - name: "Warm Composer cache for Symfony 8.1"
+        if: ${{ matrix.dependencies != 'locked' }}
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+        env:
+          SYMFONY_REQUIRE: "8.1.*"
