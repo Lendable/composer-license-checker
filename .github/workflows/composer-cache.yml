@@ -13,8 +13,8 @@ on:
       - "main"
     paths:
       - ".github/workflows/composer-cache.yml"
-      - "composer.json"
-      - "composer.lock"
+      - "**/composer.json"
+      - "**/composer.lock"
   schedule:
     - cron: "0 6 * * 1"
   workflow_dispatch:
